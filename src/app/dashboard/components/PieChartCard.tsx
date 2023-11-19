@@ -1,7 +1,8 @@
-import DashBoardCard from "@/app/dashboard/components/DashBoardCard";
-import React from "react";
+'use client'
+import ContainerCard from "@/components/ContainerCard";
+import React, {useState} from "react";
 import {Box, Flex, Heading, Text} from "@radix-ui/themes";
-import SimpleSelect from "@/components/SimpleSelect";
+import BasicSelect from "@/components/BasicSelect";
 import PieChart from "@/components/charts/PieChart";
 import IconWithStackedHeadings from "@/components/IconWithStackedHeadings";
 
@@ -28,26 +29,49 @@ interface Props {
     legendData: LegendData[];
 }
 
-const PieChartCard = ({chartData, legendData}: Props) => (
-    <DashBoardCard>
-        <Flex direction="column" p="6" gap="4">
-            <Box className="md:self-end">
-                <SimpleSelect/>
-            </Box>
-            <Flex className="flex-1" justify="between" align="center">
-                <Box>
-                    <PieChart data={chartData}/>
+const PieChartCard = ({chartData, legendData}: Props) => {
+
+    //To be moved to store
+    const [selectedOption, setSelectedOption] = useState<string>('disbursements');
+    const handleSelectChange = (value: string) => {
+        setSelectedOption(value)
+    }
+
+    const selectOptions = [
+        {value: 'disbursements', label: 'Disbursement'},
+        {value: 'collections', label: 'Collections'},
+    ];
+
+    return (
+        <ContainerCard>
+            <Flex direction="column" p="6" gap="4">
+                <Box className="md:self-end">
+                    <BasicSelect
+                        options={selectOptions}
+                        onSelectChange={handleSelectChange}
+                        defaultValue={selectedOption}
+                        className={`px-5 py-7 font-semibold`}
+                    />
                 </Box>
-                <Flex direction="column">
-                    <Text>Total Disbursements</Text>
-                    <Heading>GHS 135,000.00 </Heading>
+                <Flex className="flex-1" justify="between" align="center">
+                    <Box>
+                        <PieChart data={chartData}/>
+                    </Box>
+                    <Flex direction="column">
+                        <Text>Total Disbursements</Text>
+                        <Heading>GHS 135,000.00 </Heading>
+                    </Flex>
+                </Flex>
+                <Flex gap="6">
+                    {legendData.map(item => <IconWithStackedHeadings key={item.title} {...item} />)}
                 </Flex>
             </Flex>
-            <Flex gap="6">
-                {legendData.map(item => <IconWithStackedHeadings key={item.title} {...item} />)}
-            </Flex>
-        </Flex>
-    </DashBoardCard>
-);
+        </ContainerCard>
+    )
+
+
+}
+
+
 
 export default PieChartCard;

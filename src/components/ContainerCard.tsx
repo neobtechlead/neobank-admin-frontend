@@ -1,7 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import {Box} from "@radix-ui/themes";
 
-const DashBoardCard = ({children}: PropsWithChildren) => {
+const ContainerCard = ({children}: PropsWithChildren) => {
     return (
         <Box className="w-full bg-[#FCFCFC] border rounded-2xl shadow-sm">
             {children}
@@ -10,4 +10,4 @@ const DashBoardCard = ({children}: PropsWithChildren) => {
     );
 };
 
-export default DashBoardCard;
+export default ContainerCard;

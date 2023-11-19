@@ -7,7 +7,7 @@ import EllipseGreen from "@/assets/svgs/EllipseG.svg"
 import EllipseRed from "@/assets/svgs/EllipseR.svg"
 import DashboardCardItem from "@/app/dashboard/components/DashBoardCardItem";
 import PieChartCard from "@/app/dashboard/components/PieChartCard";
-import TableCard from "@/components/TableCard";
+import DashBoardTable from "@/app/dashboard/components/DashBoardTable";
 
 const clientsData = [
     {label: "Merchants", totalCounts: "84", icon: StoreFront},
@@ -39,6 +39,112 @@ const pieChartLegendData = [
     {title: "Failed Disbursement", content: "GHS 56,500", icon: EllipseRed},
 ]
 
+const sampleCustomerData = {
+    columns: [
+        {key: 'firstName', label: 'First Name'},
+        {key: 'lastName', label: 'Last Name'},
+        {key: 'phoneNumber', label: 'Phone Number'},
+        {key: 'mobileNetwork', label: 'Mobile Network'},
+    ],
+    rows: [
+        {firstName: 'John', lastName: 'Doe', phoneNumber: '123-456-7890', mobileNetwork: 'Verizon'},
+        {firstName: 'Jane', lastName: 'Doe', phoneNumber: '987-654-3210', mobileNetwork: 'AT&T'},
+        {firstName: 'Alice', lastName: 'Smith', phoneNumber: '555-123-4567', mobileNetwork: 'T-Mobile'},
+        {firstName: 'Bob', lastName: 'Johnson', phoneNumber: '444-555-6666', mobileNetwork: 'Sprint'},
+        {firstName: 'Eva', lastName: 'Williams', phoneNumber: '777-888-9999', mobileNetwork: 'Verizon'},
+        {firstName: 'Charlie', lastName: 'Brown', phoneNumber: '123-987-6543', mobileNetwork: 'AT&T'},
+        {firstName: 'Olivia', lastName: 'Davis', phoneNumber: '111-222-3333', mobileNetwork: 'T-Mobile'},
+        {firstName: 'Daniel', lastName: 'Lee', phoneNumber: '333-444-5555', mobileNetwork: 'Sprint'},
+        {firstName: 'Sophia', lastName: 'Taylor', phoneNumber: '666-777-8888', mobileNetwork: 'Verizon'}
+    ],
+};
+
+const sampleMerchantData = {
+    columns: [
+        {key: 'businessName', label: 'Merchant Business Name'},
+        {key: 'tradingName', label: 'Trading Name'},
+        {key: 'merchantID', label: 'Merchant ID'},
+        {key: 'merchantAddress', label: 'Merchant Address'},
+        {key: 'country', label: 'Country'},
+    ],
+    rows: [
+        {
+            businessName: 'ABC Electronics',
+            tradingName: 'ABC Electronics Trading',
+            merchantID: 'MID123456',
+            merchantAddress: '123 Main Street, Cityville, USA',
+            country: 'United States',
+        },
+        {
+            businessName: 'XYZ Clothing',
+            tradingName: 'XYZ Fashion Outlet',
+            merchantID: 'MID789012',
+            merchantAddress: '456 High Street, Townsville, Canada',
+            country: 'Canada',
+        },
+        {
+            businessName: 'Tech Solutions Ltd.',
+            tradingName: 'Tech Solutions',
+            merchantID: 'MID345678',
+            merchantAddress: '789 Tech Park, Innovation City, Australia',
+            country: 'Australia',
+        },
+        {
+            businessName: 'Green Groceries',
+            tradingName: 'Fresh Foods',
+            merchantID: 'MID901234',
+            merchantAddress: '101 Organic Lane, Greensburg, UK',
+            country: 'United Kingdom',
+        },
+        {
+            businessName: 'Global Imports',
+            tradingName: 'Worldwide Goods',
+            merchantID: 'MID567890',
+            merchantAddress: '567 Import Street, International City, Germany',
+            country: 'Germany',
+        },
+        {
+            businessName: 'Fashion Trends Inc.',
+            tradingName: 'Trendy Styles',
+            merchantID: 'MID234567',
+            merchantAddress: '890 Fashion Avenue, Paris, France',
+            country: 'France',
+        },
+        {
+            businessName: 'Food Haven',
+            tradingName: 'Delicious Eats',
+            merchantID: 'MID890123',
+            merchantAddress: '321 Gourmet Lane, Foodtown, Italy',
+            country: 'Italy',
+        },
+        {
+            businessName: 'Sports Gear Outlet',
+            tradingName: 'Athlete Choice',
+            merchantID: 'MID456789',
+            merchantAddress: '654 Sportswear Street, Fitness City, Spain',
+            country: 'Spain',
+        },
+        {
+            businessName: 'Home Essentials',
+            tradingName: 'Cozy Living',
+            merchantID: 'MID012345',
+            merchantAddress: '987 Homeware Road, Comfort Town, Brazil',
+            country: 'Brazil',
+        },
+        {
+            businessName: 'Gadget Emporium',
+            tradingName: 'Tech Gadgets',
+            merchantID: 'MID678901',
+            merchantAddress: '543 Gizmo Lane, Techtopia, Japan',
+            country: 'Japan',
+        },
+    ],
+};
+
+
+
+
+
 
 const DashBoardOverViewPage = () => {
     return (
@@ -49,10 +155,10 @@ const DashBoardOverViewPage = () => {
             </Flex>
             <Flex gap="6">
                 <PieChartCard chartData={pieChartData} legendData={pieChartLegendData}/>
-                <TableCard href="/" description="Last 10 registered customers"/>
+                <DashBoardTable href="/" description="Last 10 registered customers" data={sampleCustomerData}/>
             </Flex>
             <Flex gap="6">
-                <TableCard href="/" description="Last 10 merchants onboarded"/>
+                <DashBoardTable href="/" description="Last 10 merchants onboarded" data={sampleMerchantData}/>
             </Flex>
         </Flex>
     );
