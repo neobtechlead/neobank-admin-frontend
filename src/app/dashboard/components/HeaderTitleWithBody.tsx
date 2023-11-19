@@ -1,6 +1,5 @@
 import React from 'react';
-import {Flex, Text} from "@radix-ui/themes";
-import TitledHeading from "@/components/TitledHeading";
+import {Flex, Heading, Text} from "@radix-ui/themes";
 
 interface Props {
     title: string
@@ -10,7 +9,7 @@ interface Props {
 const HeaderTitleWithBody = ({title, body}: Props) => {
     return (
         <Flex direction="column" justify="center" className="ml-24 h-36">
-            <TitledHeading>{title}</TitledHeading>
+            <Heading>{title}</Heading>
             <Text>{body}</Text>
         </Flex>
     );

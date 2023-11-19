@@ -1,11 +1,10 @@
 import React from 'react';
-import {Flex} from "@radix-ui/themes";
-import TitledHeading from "@/components/TitledHeading";
+import {Flex, Heading} from "@radix-ui/themes";
 
 const OverViewTitle = () => {
     return (
         <Flex direction="column" justify="center" className="ml-24 h-24">
-            <TitledHeading className="text-white">Good Morning Admin!</TitledHeading>
+            <Heading className="text-white">Good Morning Admin!</Heading>
         </Flex>
     );
 };

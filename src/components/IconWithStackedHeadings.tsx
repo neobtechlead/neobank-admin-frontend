@@ -1,7 +1,6 @@
 import React from 'react';
-import {Flex, Text} from "@radix-ui/themes";
+import {Flex, Heading, Text} from "@radix-ui/themes";
 import Image from "next/image";
-import TitledHeading from "@/components/TitledHeading";
 
 interface Props {
     icon: string,
@@ -17,7 +16,7 @@ const IconWithStackedHeadings = ({icon, title, content}: Props) => {
             <Image src={icon} alt={title}/>
             <Flex direction="column" gap="2">
                 <Text>{title}</Text>
-                <TitledHeading>{content}</TitledHeading>
+                <Heading>{content}</Heading>
             </Flex>
 
         </Flex>

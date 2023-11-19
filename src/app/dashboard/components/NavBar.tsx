@@ -19,7 +19,7 @@ const NavBar = () => {
             <Flex justify="between" gap="4">
                 {navBarItems.map(({href, label, icon}) => <Link key={href} href={href}>
                     <Container
-                        className={`px-5 h-full pt-7 ${href === pathName ? "border-b-4 border-purple-900 font-black" : ""}`}>
+                        className={`px-5 h-full pt-6 ${href === pathName ? "border-b-4 border-purple-900 font-black" : ""}`}>
                         <IconWithLabel label={label} icon={icon}/>
                     </Container>
 

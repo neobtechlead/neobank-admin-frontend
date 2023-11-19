@@ -1,7 +1,7 @@
 import {Crimson_Pro, Poppins, Roboto, Source_Sans_3} from "next/font/google";
 
 export const PoppinsFont = Poppins({
-    weight: ['400', '600', '700'],
+    weight: ["400", "500", "600", "700", "800", "900"],
     style: ['normal', 'italic'],
     subsets: ['latin'],
     display: 'swap',
@@ -10,7 +10,7 @@ export const PoppinsFont = Poppins({
 })
 
 export const RobotoFont = Roboto({
-    weight: ['400', '700', '900'],
+    weight: ["100", "300", "400", "500", "700", "900"],
     style: ['normal', 'italic'],
     subsets: ['latin'],
     display: 'swap',
@@ -20,7 +20,7 @@ export const RobotoFont = Roboto({
 })
 
 export const CrimsonProFont = Crimson_Pro({
-    weight: ['400', '700', '900'],
+    weight: ["400", "500", "600", "700", "800", "900"],
     style: ['normal', 'italic'],
     subsets: ['latin'],
     display: 'swap',
@@ -30,7 +30,7 @@ export const CrimsonProFont = Crimson_Pro({
 
 
 export const SourceSans3Font = Source_Sans_3({
-    weight: ['400', '700', '900'],
+    weight: ["400", "500", "600", "700", "800", "900"],
     style: ['normal', 'italic'],
     subsets: ['latin'],
     display: 'swap',

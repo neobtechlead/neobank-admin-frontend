@@ -3,11 +3,11 @@ import React from 'react';
 import {Flex} from "@radix-ui/themes";
 import StoreFront from "@/assets/svgs/BadgeStoreFront.svg"
 import UserThree from "@/assets/svgs/BadgeUserThree.svg"
-import DashBoardCard from "@/app/dashboard/components/DashBoardCard";
 import EllipseGreen from "@/assets/svgs/EllipseG.svg"
 import EllipseRed from "@/assets/svgs/EllipseR.svg"
 import DashboardCardItem from "@/app/dashboard/components/DashBoardCardItem";
 import PieChartCard from "@/app/dashboard/components/PieChartCard";
+import TableCard from "@/components/TableCard";
 
 const clientsData = [
     {label: "Merchants", totalCounts: "84", icon: StoreFront},
@@ -42,16 +42,17 @@ const pieChartLegendData = [
 
 const DashBoardOverViewPage = () => {
     return (
-        <Flex direction="column" gap="6" mt="7" px="7">
+        <Flex direction="column" gap="6" mt="7" px="6">
             <Flex gap="6">{clientsData.map(
                 item => <DashboardCardItem key={item.label} {...item}/>
             )}
             </Flex>
             <Flex gap="6">
                 <PieChartCard chartData={pieChartData} legendData={pieChartLegendData}/>
-                <DashBoardCard>
-                </DashBoardCard>
-
+                <TableCard href="/" description="Last 10 registered customers"/>
+            </Flex>
+            <Flex gap="6">
+                <TableCard href="/" description="Last 10 merchants onboarded"/>
             </Flex>
         </Flex>
     );

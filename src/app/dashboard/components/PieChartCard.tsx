@@ -1,9 +1,8 @@
 import DashBoardCard from "@/app/dashboard/components/DashBoardCard";
 import React from "react";
-import {Box, Flex, Text} from "@radix-ui/themes";
+import {Box, Flex, Heading, Text} from "@radix-ui/themes";
 import SimpleSelect from "@/components/SimpleSelect";
 import PieChart from "@/components/charts/PieChart";
-import TitledHeading from "@/components/TitledHeading";
 import IconWithStackedHeadings from "@/components/IconWithStackedHeadings";
 
 
@@ -41,7 +40,7 @@ const PieChartCard = ({chartData, legendData}: Props) => (
                 </Box>
                 <Flex direction="column">
                     <Text>Total Disbursements</Text>
-                    <TitledHeading>GHS 135,000.00 </TitledHeading>
+                    <Heading>GHS 135,000.00 </Heading>
                 </Flex>
             </Flex>
             <Flex gap="6">
