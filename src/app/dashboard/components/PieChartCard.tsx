@@ -5,24 +5,9 @@ import {Box, Flex, Heading, Text} from "@radix-ui/themes";
 import BasicSelect from "@/components/BasicSelect";
 import PieChart from "@/components/charts/PieChart";
 import IconWithStackedHeadings from "@/components/IconWithStackedHeadings";
+import {ChartData} from "chart.js";
+import {LegendData} from "@/utils/types/chart";
 
-
-interface ChartData {
-    labels: string[];
-    datasets: {
-        label: string;
-        data: number[];
-        backgroundColor: string[];
-        borderColor: string[];
-        borderWidth: number;
-    }[];
-}
-
-interface LegendData {
-    title: string;
-    content: string;
-    icon: string;
-}
 
 interface Props {
     chartData: ChartData;
