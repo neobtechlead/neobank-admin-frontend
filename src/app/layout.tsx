@@ -3,6 +3,7 @@ import './globals.css'
 import React from 'react'
 import type {Metadata} from 'next'
 import {Theme} from "@radix-ui/themes";
+import RQueryProvider from "@/api/RQueryProvider";
 
 
 export const metadata: Metadata = {
@@ -18,9 +19,12 @@ export default function RootLayout({
     return (
         <html lang="en">
         <body>
-        <Theme accentColor="purple">
-            {children}
-        </Theme>
+        <RQueryProvider>
+            <Theme accentColor="purple">
+                {children}
+            </Theme>
+        </RQueryProvider>
+
 
         </body>
         </html>

@@ -15,7 +15,6 @@ interface Props {
 
 }
 
-
 const CustomSelect = ({
                           options,
                           defaultValue,
@@ -41,8 +40,9 @@ const CustomSelect = ({
             ...defaultStyles,
             color: color,
             fontWeight: 'bold',
-            padding: padding,
+            height: '100%',
             border: `${borderStyle}`,
+            padding: padding,
             boxShadow: 'none',
             '&:hover': {
                 border: `${borderStyle}`
