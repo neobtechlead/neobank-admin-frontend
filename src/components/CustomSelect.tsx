@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Select from 'react-select';
 
@@ -54,6 +55,7 @@ const CustomSelect = ({
 
     return (
         <Select
+            instanceId={1} //hack to fix the hydration error
             options={options}
             defaultValue={defaultValue}
             placeholder={placeholder}
