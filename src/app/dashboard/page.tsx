@@ -47,15 +47,15 @@ const sampleCustomerData = {
         {key: 'mobileNetwork', label: 'Mobile Network'},
     ],
     rows: [
-        {firstName: 'John', lastName: 'Doe', phoneNumber: '123-456-7890', mobileNetwork: 'Verizon'},
-        {firstName: 'Jane', lastName: 'Doe', phoneNumber: '987-654-3210', mobileNetwork: 'AT&T'},
-        {firstName: 'Alice', lastName: 'Smith', phoneNumber: '555-123-4567', mobileNetwork: 'T-Mobile'},
-        {firstName: 'Bob', lastName: 'Johnson', phoneNumber: '444-555-6666', mobileNetwork: 'Sprint'},
-        {firstName: 'Eva', lastName: 'Williams', phoneNumber: '777-888-9999', mobileNetwork: 'Verizon'},
-        {firstName: 'Charlie', lastName: 'Brown', phoneNumber: '123-987-6543', mobileNetwork: 'AT&T'},
-        {firstName: 'Olivia', lastName: 'Davis', phoneNumber: '111-222-3333', mobileNetwork: 'T-Mobile'},
-        {firstName: 'Daniel', lastName: 'Lee', phoneNumber: '333-444-5555', mobileNetwork: 'Sprint'},
-        {firstName: 'Sophia', lastName: 'Taylor', phoneNumber: '666-777-8888', mobileNetwork: 'Verizon'}
+        {id: "1", firstName: 'John', lastName: 'Doe', phoneNumber: '123-456-7890', mobileNetwork: 'Verizon'},
+        {id: "1", firstName: 'Jane', lastName: 'Doe', phoneNumber: '987-654-3210', mobileNetwork: 'AT&T'},
+        {id: "1", firstName: 'Alice', lastName: 'Smith', phoneNumber: '555-123-4567', mobileNetwork: 'T-Mobile'},
+        {id: "1", firstName: 'Bob', lastName: 'Johnson', phoneNumber: '444-555-6666', mobileNetwork: 'Sprint'},
+        {id: "1", firstName: 'Eva', lastName: 'Williams', phoneNumber: '777-888-9999', mobileNetwork: 'Verizon'},
+        {id: "1", firstName: 'Charlie', lastName: 'Brown', phoneNumber: '123-987-6543', mobileNetwork: 'AT&T'},
+        {id: "1", firstName: 'Olivia', lastName: 'Davis', phoneNumber: '111-222-3333', mobileNetwork: 'T-Mobile'},
+        {id: "1", firstName: 'Daniel', lastName: 'Lee', phoneNumber: '333-444-5555', mobileNetwork: 'Sprint'},
+        {id: "1", firstName: 'Sophia', lastName: 'Taylor', phoneNumber: '666-777-8888', mobileNetwork: 'Verizon'}
     ],
 };
 
@@ -69,6 +69,7 @@ const sampleMerchantData = {
     ],
     rows: [
         {
+            id: "1",
             businessName: 'ABC Electronics',
             tradingName: 'ABC Electronics Trading',
             merchantID: 'MID123456',
@@ -76,6 +77,7 @@ const sampleMerchantData = {
             country: 'United States',
         },
         {
+            id: "1",
             businessName: 'XYZ Clothing',
             tradingName: 'XYZ Fashion Outlet',
             merchantID: 'MID789012',
@@ -83,6 +85,7 @@ const sampleMerchantData = {
             country: 'Canada',
         },
         {
+            id: "1",
             businessName: 'Tech Solutions Ltd.',
             tradingName: 'Tech Solutions',
             merchantID: 'MID345678',
@@ -90,6 +93,7 @@ const sampleMerchantData = {
             country: 'Australia',
         },
         {
+            id: "1",
             businessName: 'Green Groceries',
             tradingName: 'Fresh Foods',
             merchantID: 'MID901234',
@@ -97,6 +101,7 @@ const sampleMerchantData = {
             country: 'United Kingdom',
         },
         {
+            id: "1",
             businessName: 'Global Imports',
             tradingName: 'Worldwide Goods',
             merchantID: 'MID567890',
@@ -104,6 +109,7 @@ const sampleMerchantData = {
             country: 'Germany',
         },
         {
+            id: "1",
             businessName: 'Fashion Trends Inc.',
             tradingName: 'Trendy Styles',
             merchantID: 'MID234567',
@@ -111,6 +117,7 @@ const sampleMerchantData = {
             country: 'France',
         },
         {
+            id: "1",
             businessName: 'Food Haven',
             tradingName: 'Delicious Eats',
             merchantID: 'MID890123',
@@ -118,6 +125,7 @@ const sampleMerchantData = {
             country: 'Italy',
         },
         {
+            id: "1",
             businessName: 'Sports Gear Outlet',
             tradingName: 'Athlete Choice',
             merchantID: 'MID456789',
@@ -125,6 +133,7 @@ const sampleMerchantData = {
             country: 'Spain',
         },
         {
+            id: "1",
             businessName: 'Home Essentials',
             tradingName: 'Cozy Living',
             merchantID: 'MID012345',
@@ -132,6 +141,7 @@ const sampleMerchantData = {
             country: 'Brazil',
         },
         {
+            id: "1",
             businessName: 'Gadget Emporium',
             tradingName: 'Tech Gadgets',
             merchantID: 'MID678901',

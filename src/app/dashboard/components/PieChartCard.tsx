@@ -2,11 +2,11 @@
 import ContainerCard from "@/components/ContainerCard";
 import React, {useState} from "react";
 import {Box, Flex, Heading, Text} from "@radix-ui/themes";
-import BasicSelect from "@/components/BasicSelect";
 import PieChart from "@/components/charts/PieChart";
 import IconWithStackedHeadings from "@/components/IconWithStackedHeadings";
 import {ChartData} from "chart.js";
 import {LegendData} from "@/utils/types/chart";
+import CustomSelect from "@/components/CustomSelect";
 
 
 interface Props {
@@ -31,12 +31,12 @@ const PieChartCard = ({chartData, legendData}: Props) => {
         <ContainerCard>
             <Flex direction="column" p="6" gap="4">
                 <Box className="md:self-end">
-                    <BasicSelect
+                    <CustomSelect
+                        defaultValue={selectOptions[0]}
                         options={selectOptions}
-                        onSelectChange={handleSelectChange}
-                        defaultValue={selectedOption}
-                        className={`px-5 py-7 font-semibold`}
-                    />
+                        color="#211F26"
+                        onSelectChange={setSelectedOption}/>
+
                 </Box>
                 <Flex className="flex-1" justify="between" align="center">
                     <Box>

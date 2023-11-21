@@ -1,8 +1,9 @@
+'use client'
 import React from 'react';
-import {Box, Flex} from "@radix-ui/themes";
 import BasicTable from "@/components/BasicTable";
 import ContainerCard from "@/components/ContainerCard";
 import {ITable} from "@/utils/types/table";
+import {useRouter} from "next/navigation";
 
 
 interface Props {
@@ -12,15 +13,18 @@ interface Props {
 
 
 const MerchantTable = ({data}: Props) => {
-    return (
-        <Box p="6">
-            <Flex direction="column" gap="2">
-                <ContainerCard>
-                    <BasicTable data={data} isTableRowClickable={true}/>
-                </ContainerCard>
-            </Flex>
 
-        </Box>
+    const router = useRouter()
+
+    const handleRowClick = (id: string) => {
+        router.push(`/merchants/${id}`)
+
+    }
+
+    return (
+                <ContainerCard>
+                    <BasicTable data={data} isTableRowClickable={true} onRowClick={handleRowClick}/>
+                </ContainerCard>
     );
 };
 
