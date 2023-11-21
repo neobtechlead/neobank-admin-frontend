@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {Flex} from "@radix-ui/themes";
+import {Box, Flex} from "@radix-ui/themes";
 import StoreFront from "@/assets/svgs/BadgeStoreFront.svg"
 import UserThree from "@/assets/svgs/BadgeUserThree.svg"
 import EllipseGreen from "@/assets/svgs/EllipseG.svg"
@@ -8,6 +8,7 @@ import EllipseRed from "@/assets/svgs/EllipseR.svg"
 import DashboardCardItem from "@/app/dashboard/components/DashBoardCardItem";
 import PieChartCard from "@/app/dashboard/components/PieChartCard";
 import DashBoardTable from "@/app/dashboard/components/DashBoardTable";
+import useCustomerData from "@/api/hooks/useCustomerData";
 
 const clientsData = [
     {label: "Merchants", totalCounts: "84", icon: StoreFront},
@@ -157,6 +158,10 @@ const sampleMerchantData = {
 
 
 const DashBoardOverViewPage = () => {
+
+    const {data: customerData, isLoading: isCustomerLoading, error: customerError} = useCustomerData();
+    if (isCustomerLoading) return <Box>Loading</Box>
+
     return (
         <Flex direction="column" gap="6" mt="7" px="6">
             <Flex gap="6">{clientsData.map(

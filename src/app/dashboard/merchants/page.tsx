@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react';
+import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import MerchantTable from "@/app/dashboard/merchants/components/MerchantTable";
 import LinkIcon from "@/components/LinkIcon";
@@ -9,6 +9,8 @@ import PlusIcon from "@/assets/svgs/Plus.svg"
 import CustomSelect from "@/components/CustomSelect";
 import {color} from "@/utils/constants";
 import Pagination from "@/components/Pagination";
+import useCustomerData from "@/api/hooks/useCustomerData";
+import useMerchantStore from "@/stores/merchant";
 
 
 const sampleMerchantData = {
@@ -115,22 +117,24 @@ const sampleMerchantData = {
     ],
 };
 
-const selectOptions = [
-    {value: 'newest', label: 'Newest'},
-    {value: 'oldest', label: 'Oldest'},
-];
-
-const rowCounts = [10, 20, 30].map(size => ({label: `${size}`, value: `${size}`}))
 
 const MerchantPage = () => {
 
-    //To be moved to store
-    const [selectedOption, setSelectedOption] = useState<string>('newest');
-    const handleSelectChange = (value: string) => {
-        setSelectedOption(value)
-    }
 
-    const [rowCount, setRowCount] = useState<string>("10")
+    const {data, isLoading, error} = useCustomerData()
+    const {
+        orderBy,
+        selectedOrderBy,
+        orderByChange,
+        pageSizeChange,
+        selectedPageSize,
+        pageSizes
+    } = useMerchantStore();
+
+    if (isLoading) return <Box>Loading...</Box>
+    if (error) return <Box>Error.</Box>
+
+
     return (
         <Box p="5">
             <Flex direction="column" gap="5">
@@ -141,11 +145,11 @@ const MerchantPage = () => {
                             icon={PlusIcon}
                             onClick={() => {
                             }}
-                            className="bg-darkPurple-900"
+                            bgColor={color.darkPurple}
                         />
-                        <CustomSelect options={selectOptions}
-                                      defaultValue={selectOptions[0]}
-                                      onSelectChange={setSelectedOption}/>
+                        <CustomSelect options={orderBy}
+                                      defaultValue={selectedOrderBy}
+                                      onSelectChange={orderByChange}/>
 
 
                     </Flex>
@@ -154,11 +158,11 @@ const MerchantPage = () => {
                 <Flex justify="between" align="center">
                     <Box>
                         <CustomSelect
-                            defaultValue={rowCounts[0]}
-                            options={rowCounts}
+                            defaultValue={selectedPageSize}
+                            options={pageSizes}
                             padding="0"
                             color={color.darkGray}
-                            onSelectChange={setRowCount}
+                            onSelectChange={pageSizeChange}
                         />
                     </Box>
                     <Pagination/>

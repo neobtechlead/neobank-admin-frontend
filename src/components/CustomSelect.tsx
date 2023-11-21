@@ -4,9 +4,9 @@ import Select from 'react-select';
 
 
 interface Props {
-    defaultValue: { value: string; label: string };
+    defaultValue: { value: string | number; label: string };
     options: { value: string; label: string }[];
-    onSelectChange?: (value: string) => void;
+    onSelectChange?: (value: any) => void
     placeholder?: string,
     backgroundColor?: string,
     padding?: string,
@@ -19,6 +19,7 @@ const CustomSelect = ({
                           options,
                           defaultValue,
                           placeholder = "",
+                          onSelectChange,
                           backgroundColor = "#652D90",
                           color = "#652D90",
                           padding = "8px"
@@ -57,6 +58,7 @@ const CustomSelect = ({
         <Select
             instanceId={1} //hack to fix the hydration error
             options={options}
+            onChange={onSelectChange}
             defaultValue={defaultValue}
             placeholder={placeholder}
             styles={customStyles}

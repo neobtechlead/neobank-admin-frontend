@@ -1,7 +1,6 @@
 import axios from "axios";
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = "http://localhost:8080"
+axios.defaults.baseURL = "http://localhost:8083"
 axios.interceptors.request.use((request) => {
     request.headers.set("token", "TEST")
     return request;

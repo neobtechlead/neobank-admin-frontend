@@ -8,16 +8,26 @@ interface Props {
     label: string,
     icon: string,
     onClick: () => void,
-    className?: string
+    bgColor?: string
 }
 
-const ButtonWithIcon = ({label, icon, className = "", onClick}: Props) => {
+const ButtonWithIcon = ({label, icon, bgColor, onClick}: Props) => {
     return (
-        <Button style={{backgroundColor: color.darkPurple, height: '100%'}}
-                onClick={onClick}>
+
+        <Button
+            style={{
+                backgroundColor: bgColor || color.darkPurple,
+                height: '100%',
+                cursor: 'pointer',
+                transition: 'box-shadow 0.3s ease', // Add a smooth transition for the shadow
+            }}
+            onClick={onClick}
+
+        >
             <Image src={icon} alt={label} priority={true}/>
             {label}
         </Button>
+
     );
 };
 
