@@ -26,12 +26,14 @@ const config: Config = {
                     950: "#E6E6E6"
                 },
                 orange: {
+                    900: "#FFEDED",
                     910: "#FFE9D5",
                     920: "#F29339"
                 },
                 darkPurple: {
                     900: "#652D90"
-                }
+                },
+
 
             }
         },

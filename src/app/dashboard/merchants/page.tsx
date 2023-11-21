@@ -7,6 +7,8 @@ import CaretRight from "@/assets/svgs/CaretRight.svg";
 import ButtonWithIcon from "@/components/ButtonWithIcon";
 import PlusIcon from "@/assets/svgs/Plus.svg"
 import CustomSelect from "@/components/CustomSelect";
+import {color} from "@/utils/constants";
+import Pagination from "@/components/Pagination";
 
 
 const sampleMerchantData = {
@@ -118,6 +120,8 @@ const selectOptions = [
     {value: 'oldest', label: 'Oldest'},
 ];
 
+const rowCounts = [10, 20, 30].map(size => ({label: `${size}`, value: `${size}`}))
+
 const MerchantPage = () => {
 
     //To be moved to store
@@ -125,9 +129,11 @@ const MerchantPage = () => {
     const handleSelectChange = (value: string) => {
         setSelectedOption(value)
     }
+
+    const [rowCount, setRowCount] = useState<string>("10")
     return (
         <Box p="5">
-            <Flex direction="column" gap="4">
+            <Flex direction="column" gap="5">
                 <Flex justify="end">
                     <Flex gap="3" align="stretch">
                         <ButtonWithIcon
@@ -145,6 +151,18 @@ const MerchantPage = () => {
                     </Flex>
                 </Flex>
                 <MerchantTable data={sampleMerchantData}/>
+                <Flex justify="between" align="center">
+                    <Box>
+                        <CustomSelect
+                            defaultValue={rowCounts[0]}
+                            options={rowCounts}
+                            padding="0"
+                            color={color.darkGray}
+                            onSelectChange={setRowCount}
+                        />
+                    </Box>
+                    <Pagination/>
+                </Flex>
             </Flex>
         </Box>
     );

@@ -42,3 +42,10 @@ export const navBarItems = [
 
 
 ]
+
+
+export const color = {
+    darkGray: "#211F26",
+    darkPurple: "#652D90",
+    neutralGrey: "#808191"
+}

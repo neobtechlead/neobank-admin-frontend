@@ -1,6 +1,6 @@
-// CustomSelect.js
 import React from 'react';
 import Select from 'react-select';
+
 
 interface Props {
     defaultValue: { value: string; label: string };
@@ -13,6 +13,7 @@ interface Props {
 
 
 }
+
 
 const CustomSelect = ({
                           options,

@@ -12,7 +12,7 @@ interface Props {
 const DashboardCardItem = ({label, totalCounts, icon}: Props) => (
     <ContainerCard>
         <Flex direction="column" align="start" gap="2" p="6">
-            <Flex justify="center" align="center" className="bg-[#FFEDED] w-10 h-10 rounded-full">
+            <Flex justify="center" align="center" className="bg-orange-900 w-10 h-10 rounded-full">
                 <Image src={icon} alt={label}/>
             </Flex>
             <Text className="text-grey-800 font-bold">{label}</Text>
