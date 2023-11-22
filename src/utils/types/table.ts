@@ -6,7 +6,8 @@ export interface IColumn {
 }
 
 export interface IRow {
-    id: string;
+    id?: string;
+    externalId?: string;
     [key: string]: string | number | ReactNode;
 }
 

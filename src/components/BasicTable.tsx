@@ -28,7 +28,7 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
             {data.rows.map((row, rowIndex) => (
                 <Table.Row
                     key={rowIndex}
-                    onClick={isTableRowClickable && onRowClick ? () => onRowClick(row.id) : undefined}
+                    onClick={isTableRowClickable && onRowClick ? () => onRowClick(row.id || row.externalId) : undefined}
                     className={`hover:bg-gray-100 transition-all duration-300 ease-in-out ${
                         isTableRowClickable ? 'hover:cursor-pointer' : ''
                     }`}

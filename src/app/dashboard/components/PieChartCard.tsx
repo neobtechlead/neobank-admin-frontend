@@ -14,11 +14,14 @@ import {color} from "@/utils/constants";
 interface Props {
     chartData: ChartData;
     legendData: LegendData[];
+    metaData?: { label: string, value: string }
 }
 
-const PieChartCard = ({chartData, legendData}: Props) => {
+const PieChartCard = ({chartData, legendData, metaData}: Props) => {
 
     const {selectedTransactionType, transactionTypes, onTransactionTypeChange} = useDashBoardStore()
+
+    console.log(metaData?.value)
 
 
     return (
@@ -37,8 +40,8 @@ const PieChartCard = ({chartData, legendData}: Props) => {
                         <PieChart data={chartData}/>
                     </Box>
                     <Flex direction="column">
-                        <Text>Total Disbursements</Text>
-                        <Heading>GHS 135,000.00 </Heading>
+                        <Text>{metaData?.label}</Text>
+                        <Heading>{metaData?.value}</Heading>
                     </Flex>
                 </Flex>
                 <Flex gap="6">
@@ -50,7 +53,6 @@ const PieChartCard = ({chartData, legendData}: Props) => {
 
 
 }
-
 
 
 export default PieChartCard;
