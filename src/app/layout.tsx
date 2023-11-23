@@ -1,9 +1,10 @@
-import React from 'react'
+import '@radix-ui/themes/styles.css';
 import './globals.css'
+import React from 'react'
 import type {Metadata} from 'next'
-import {Inter} from 'next/font/google'
+import {Theme} from "@radix-ui/themes";
+import RQueryProvider from "@/api/RQueryProvider";
 
-const inter = Inter({subsets: ['latin']})
 
 export const metadata: Metadata = {
     title: 'NEO BANK ADMIN',
@@ -17,8 +18,14 @@ export default function RootLayout({
 }) {
     return (
         <html lang="en">
-        <body className={inter.className}>
-        {children}
+        <body>
+        <RQueryProvider>
+            <Theme accentColor="purple">
+                {children}
+            </Theme>
+        </RQueryProvider>
+
+
         </body>
         </html>
     )

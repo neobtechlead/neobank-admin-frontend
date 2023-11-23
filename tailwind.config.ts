@@ -8,7 +8,12 @@ const config: Config = {
         "./node_modules/tailwind-datepicker-react/dist/**/*.js",
     ],
     theme: {
+
         extend: {
+            fontFamily: {
+                poppins: ["var(--poppins)"],
+                crimsonPro: ["var(--crimson)"]
+            },
             backgroundImage: {
                 'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
                 'gradient-conic':
@@ -16,13 +21,20 @@ const config: Config = {
             },
             colors: {
                 grey: {
+                    800: "#808191",
                     900: "#4F4F4F",
                     950: "#E6E6E6"
                 },
                 orange: {
+                    900: "#FFEDED",
                     910: "#FFE9D5",
                     920: "#F29339"
                 },
+                darkPurple: {
+                    900: "#652D90"
+                },
+
+
             }
         },
     },
