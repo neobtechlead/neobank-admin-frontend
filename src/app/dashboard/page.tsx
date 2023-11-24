@@ -8,6 +8,7 @@ import useCustomerData, {mapDataToCustomerTable} from "@/api/hooks/useCustomerDa
 import useMerchantData, {mapDataToMerchantTable} from "@/api/hooks/useMerchantData";
 import useDashBoardStats, {mapDataToCard, mapDataToPieChart} from "@/api/hooks/useDashBoardStats";
 import useDashBoardStore from "@/stores/dashboard";
+import DashBoardSkeleton from "@/app/dashboard/loading";
 
 
 const DashBoardOverViewPage = () => {
@@ -40,9 +41,8 @@ const DashBoardOverViewPage = () => {
     }
 
 
-    if (isCustomerLoading || isMerchantLoading || isStatsLoading) return <Box>Loading</Box>
+    if (isCustomerLoading || isMerchantLoading || isStatsLoading) return <DashBoardSkeleton/>
     if (customerError || merchantError || statsError) return <Box>Error</Box>
-
 
     return (
         <Flex direction="column" gap="6" mt="7" px="6">
@@ -53,11 +53,11 @@ const DashBoardOverViewPage = () => {
             <Flex gap="6">
                 <PieChartCard chartData={populateChart().chartData} legendData={populateChart().legendData}
                               metaData={populateChart().metaData}/>
-                <DashBoardTable href="/" description="Last 10 registered customers"
+                <DashBoardTable href="/dashboard/customers" description="Last 10 registered customers"
                                 data={mapDataToCustomerTable(customerData!)}/>
             </Flex>
             <Flex gap="6">
-                <DashBoardTable href="/" description="Last 10 merchants onboarded"
+                <DashBoardTable href="/dashboard/merchants" description="Last 10 merchants onboarded"
                                 data={mapDataToMerchantTable(merchantData!)}/>
             </Flex>
         </Flex>

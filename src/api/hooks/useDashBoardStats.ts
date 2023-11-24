@@ -7,12 +7,14 @@ import EllipseGreen from "@/assets/svgs/EllipseG.svg";
 import EllipseRed from "@/assets/svgs/EllipseR.svg";
 import {formatCurrency} from "@/utils/functions";
 
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
+
 
 const useDashBoardStats = () => {
     return useQuery({
         queryKey: ["dashBoardStats"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<DashBoardStats>>("/api/temp/stats")
+            const response = await http.get<APIResponse<DashBoardStats>>(`${BASE_URL}/stats`)
             return response.data?.data
         },
     })

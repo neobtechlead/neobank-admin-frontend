@@ -4,6 +4,9 @@ import {APIResponse, Customer} from "@/utils/types/dto";
 import {IRow, ITable} from "@/utils/types/table";
 
 
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
+
+
 const columns = [
     {key: 'firstName', label: 'First Name'},
     {key: 'lastName', label: 'Last Name'},
@@ -15,7 +18,7 @@ const useCustomerData = () => {
     return useQuery({
         queryKey: ["customers"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<Customer[]>>("/api/temp/customers")
+            const response = await http.get<APIResponse<Customer[]>>(`${BASE_URL}/customers`)
             return response.data?.data
         },
     })

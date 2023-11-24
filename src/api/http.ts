@@ -1,8 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "http://localhost:8083"
 axios.interceptors.request.use((request) => {
-    request.headers.set("token", "TEST")
+    request.headers.set("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`)
     return request;
 
 })
