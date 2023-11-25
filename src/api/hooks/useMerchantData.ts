@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import {APIResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
-import {IRow, ITable} from "@/utils/types/table";
+import type {APIResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
 
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_MERCHANT_BASE_URL}`
@@ -36,6 +36,7 @@ export const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITabl
     const rows: IRow[] = content.map((item: Merchant) => {
 
         const rowData: IRow = {};
+
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {

@@ -1,7 +1,7 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import {APIResponse, Customer, CustomersResponse} from "@/utils/types/dto";
-import {IRow, ITable} from "@/utils/types/table";
+import type {APIResponse, Customer, CustomersResponse} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
 
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`

@@ -4,18 +4,18 @@ import {Box, Flex} from "@radix-ui/themes";
 import MerchantTable from "@/app/dashboard/merchants/components/MerchantTable";
 import LinkIcon from "@/components/LinkIcon";
 import CaretRight from "@/assets/svgs/CaretRight.svg";
-import ButtonWithIcon from "@/components/ButtonWithIcon";
 import PlusIcon from "@/assets/svgs/Plus.svg"
 import CustomSelect from "@/components/CustomSelect";
 import {color} from "@/utils/constants";
 import {Pagination} from "@/components/pagination";
 import useMerchantStore from "@/stores/merchant";
 import useMerchantData from "@/api/hooks/useMerchantData";
-import {IRow, ITable} from "@/utils/types/table";
-import {Merchant, PaginatedResponse} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
+import type {Merchant, PaginatedResponse} from "@/utils/types/dto";
 import MerchantSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import {useRouter} from "next/navigation";
+import ButtonWithIcon from "@/components/ButtonWithIcon";
 
 
 const columns = [
@@ -34,12 +34,11 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
     const rows: IRow[] = content.map((item: Merchant) => {
         const externalId = item.externalId || "";
 
-        const rowData: IRow = {};
-
-
+        const rowData: IRow = {id: externalId}; //id is not truncated externalId
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
+            console.log(externalId)
             if (key === 'address') rowData[key] = item.address?.city
             else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
@@ -55,7 +54,7 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
 };
 
 
-const MerchantPage = () => {
+const MerchantsPage = () => {
     const {
         orderByOptions,
         selectedOrderBy,
@@ -104,14 +103,14 @@ const MerchantPage = () => {
                     <Flex gap="3" align="stretch">
                         <ButtonWithIcon
                             label="Create New Merchant"
+                            onClick={() => router.push("/merchants")}
                             icon={PlusIcon}
-                            onClick={() => {
-                                //click handler logic
-                            }}
-                            bgColor={color.darkPurple}
                         />
-                        <CustomSelect options={orderByOptions} defaultValue={selectedOrderBy}
-                                      onSelectChange={orderByChange}/>
+                        <CustomSelect
+                            options={orderByOptions}
+                            defaultValue={selectedOrderBy}
+                            onSelectChange={orderByChange}
+                        />
                     </Flex>
                 </Flex>
                 <MerchantTable data={mappedData}/>
@@ -136,4 +135,4 @@ const MerchantPage = () => {
     );
 };
 
-export default MerchantPage;
+export default MerchantsPage;
