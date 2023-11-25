@@ -36,7 +36,7 @@ export const mapDataToCustomerTable = (data: CustomersResponse): ITable => {
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            if (key === 'mobileNetwork') rowData[key] = "MTN"
+            if (key === 'mobileNetwork') rowData[key] = "MTN" //To be removed awaiting backend changes
             // @ts-ignore
             else rowData[key] = item[key] || "";
         });

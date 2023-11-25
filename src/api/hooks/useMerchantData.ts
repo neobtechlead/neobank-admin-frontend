@@ -48,9 +48,6 @@ export const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITabl
             else rowData[key] = item[key] || "";
         });
 
-        console.log(rowData)
-
-
         return rowData;
     });
 
