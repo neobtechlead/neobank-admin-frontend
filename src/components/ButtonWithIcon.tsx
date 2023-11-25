@@ -19,10 +19,9 @@ const ButtonWithIcon = ({label, icon, bgColor, onClick}: Props) => {
                 backgroundColor: bgColor || color.darkPurple,
                 height: '100%',
                 cursor: 'pointer',
-                transition: 'box-shadow 0.3s ease', // Add a smooth transition for the shadow
+                transition: 'box-shadow 0.3s ease',
             }}
             onClick={onClick}
-
         >
             <Image src={icon} alt={label} priority={true}/>
             {label}

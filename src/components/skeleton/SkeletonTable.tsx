@@ -1,6 +1,6 @@
 import React from 'react';
 import {Table} from "@radix-ui/themes";
-import SkeletonLoader from "@/components/SkeletonLoader";
+import Skeleton from "@/components/skeleton/Skeleton";
 
 interface Props {
     columns: number[]
@@ -14,7 +14,7 @@ const SkeletonTable = ({columns, rows}: Props) => {
             <Table.Header>
                 <Table.Row>
                     {columns.map((column) => (
-                        <Table.ColumnHeaderCell key={column}><SkeletonLoader/></Table.ColumnHeaderCell>
+                        <Table.ColumnHeaderCell key={column}><Skeleton/></Table.ColumnHeaderCell>
                     ))}
                 </Table.Row>
             </Table.Header>
@@ -24,7 +24,7 @@ const SkeletonTable = ({columns, rows}: Props) => {
                         key={row}
                     >
                         {columns.map((column) => (
-                            <Table.Cell key={column}><SkeletonLoader/></Table.Cell>
+                            <Table.Cell key={column}><Skeleton/></Table.Cell>
                         ))}
                     </Table.Row>
                 ))}

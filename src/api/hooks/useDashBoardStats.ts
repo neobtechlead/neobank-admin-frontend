@@ -14,7 +14,7 @@ const useDashBoardStats = () => {
     return useQuery({
         queryKey: ["dashBoardStats"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<DashBoardStats>>(`${BASE_URL}/stats`)
+            const response = await http.get<APIResponse<DashBoardStats>>(`${BASE_URL}/reports/stats`)
             return response.data?.data
         },
     })

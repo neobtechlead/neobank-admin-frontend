@@ -1,7 +1,7 @@
 import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
-import SkeletonLoader from "@/components/SkeletonLoader";
-import SkeletonTable from "@/components/SkeletonTable";
+import SkeletonTable from "@/components/skeleton/SkeletonTable";
+import SkeletonText from "@/components/skeleton/SkeletonText";
 
 //Skeleton placeholder whilst page is loading
 const MerchantSkeleton = () => {
@@ -10,16 +10,16 @@ const MerchantSkeleton = () => {
             <Flex direction="column" gap="5">
                 <Flex justify="end">
                     <Flex gap="3" align="stretch">
-                        <SkeletonLoader/>
-                        <SkeletonLoader/>
+                        <SkeletonText/>
+                        <SkeletonText/>
                     </Flex>
                 </Flex>
                 <SkeletonTable columns={[1, 2, 3, 4, 5]} rows={[1, 2, 3, 4, 5]}/>
                 <Flex justify="between" align="center">
                     <Box>
-                        <SkeletonLoader/>
+                        <SkeletonText/>
                     </Box>
-                    <SkeletonLoader/>
+                    <SkeletonText/>
                 </Flex>
             </Flex>
         </Box>

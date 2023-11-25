@@ -1,9 +1,9 @@
 import React from 'react';
-import {Box, Flex, Heading, Text} from "@radix-ui/themes";
+import {Box, Flex} from "@radix-ui/themes";
 import ContainerCard from "@/components/ContainerCard";
-import SkeletonLoader from "@/components/SkeletonLoader";
-import Link from "next/link";
-import SkeletonTable from "@/components/SkeletonTable";
+import SkeletonLoader from "@/components/skeleton/Skeleton";
+import SkeletonTable from "@/components/skeleton/SkeletonTable";
+import SkeletonText from "@/components/skeleton/SkeletonText";
 
 const arrayMapper = [1, 2]
 
@@ -17,8 +17,8 @@ const DashBoardSkeleton = () => {
                         <Flex justify="center" align="center" className="bg-orange-900 w-10 h-10 rounded-full">
                             <SkeletonLoader/>
                         </Flex>
-                        <Text className="text-grey-800 font-bold bg-grey-900"><SkeletonLoader/></Text>
-                        <Text className="font-black text-3xl"><SkeletonLoader/></Text>
+                        <SkeletonText/>
+                        <SkeletonText/>
                     </Flex>
                 </ContainerCard>)}
             </Flex>
@@ -26,24 +26,22 @@ const DashBoardSkeleton = () => {
                 <ContainerCard>
                     <Flex direction="column" p="6" gap="4">
                         <Box className="md:self-end">
-                            <SkeletonLoader/>
+                            <SkeletonText/>
 
                         </Box>
                         <Flex className="flex-1" justify="between" align="center">
-                            <Box>
-                                <SkeletonLoader/>
-                            </Box>
+                            <SkeletonText/>
                             <Flex direction="column">
-                                <SkeletonLoader/>
-                                <SkeletonLoader/>
+                                <SkeletonText/>
+                                <SkeletonText/>
                             </Flex>
                         </Flex>
                         <Flex gap="6">
                             {arrayMapper.map(item => <Flex key={item} align="center" justify="center" gap="2">
-                                <SkeletonLoader/>
+                                <SkeletonText/>
                                 <Flex direction="column" gap="2">
-                                    <Text><SkeletonLoader/></Text>
-                                    <Heading><SkeletonLoader/></Heading>
+                                    <SkeletonText/>
+                                    <SkeletonText/>
                                 </Flex>
 
                             </Flex>)}
@@ -53,8 +51,8 @@ const DashBoardSkeleton = () => {
 
                 <ContainerCard>
                     <Flex justify="between" align="center" className="border-b text-sm p-4">
-                        <Text className="font-bold"><SkeletonLoader/></Text>
-                        <Link href="" className="text-sm font-semibold text-[#652D90] hover:underline"><SkeletonLoader/></Link>
+                        <SkeletonText/>
+                        <SkeletonText/>
                     </Flex>
                     <SkeletonTable columns={[1, 2, 3, 4]} rows={[1, 2, 3, 4, 5]}/>
                 </ContainerCard>
@@ -62,8 +60,8 @@ const DashBoardSkeleton = () => {
             <Flex gap="6">
                 <ContainerCard>
                     <Flex justify="between" align="center" className="border-b text-sm p-4">
-                        <Text className="font-bold"><SkeletonLoader/></Text>
-                        <Link href="" className="text-sm font-semibold text-[#652D90] hover:underline"><SkeletonLoader/></Link>
+                        <SkeletonText/>
+                        <SkeletonText/>
                     </Flex>
                     <SkeletonTable columns={[1, 2, 3, 4, 5]} rows={[1, 2, 3, 4, 5]}/>
                 </ContainerCard>

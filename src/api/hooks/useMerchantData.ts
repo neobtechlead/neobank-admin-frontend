@@ -16,7 +16,6 @@ const columns = [
 
 ]
 
-
 const useMerchantData = (page = 0, size = 10, order = "desc") => {
     return useQuery({
         queryKey: ["merchants", page, size, order],

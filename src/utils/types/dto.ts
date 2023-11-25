@@ -1,12 +1,3 @@
-export interface Customer {
-    id?: string;
-    firstName?: string;
-    lastName?: string;
-    phoneNumber?: string;
-    mobileNetwork?: string;
-
-}
-
 
 export interface APIResponse<T> {
     httpStatusCode: number,
@@ -94,4 +85,28 @@ export interface PaginatedResponse<T> {
     first?: boolean;
     numberOfElements?: number;
 }
+
+export interface Customer {
+    externalId?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
+    accountNumber?: string | null;
+    email?: string | null;
+    status?: string;
+}
+
+export interface MetaData {
+    pageNo?: number;
+    pageSize?: number;
+    totalElements?: number;
+    totalPages?: number;
+    last?: boolean;
+}
+
+export interface CustomersResponse {
+    data: Customer[];
+    metaData?: MetaData;
+}
+
 

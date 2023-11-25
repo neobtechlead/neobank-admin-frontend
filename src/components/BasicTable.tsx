@@ -12,11 +12,24 @@ interface Props {
 const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
 
 
+    const getCellClass = (isLast: boolean, isFirst: boolean) => {
+        if (isFirst) {
+            return 'text-left'
+        } else if (isLast) {
+            return 'text-right'
+        } else {
+            return 'text-center'
+        }
+    }
+
+
     const renderTableHeader = () => (
         <Table.Header>
             <Table.Row>
-                {data.columns.map((column) => (
-                    <Table.ColumnHeaderCell key={column.key}>{column.label}</Table.ColumnHeaderCell>
+                {data.columns.map((column, columnIndex) => (
+                    <Table.ColumnHeaderCell
+                        className={getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}
+                        key={column.key}>{column.label}</Table.ColumnHeaderCell>
                 ))}
             </Table.Row>
         </Table.Header>
@@ -33,8 +46,9 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
                         isTableRowClickable ? 'hover:cursor-pointer' : ''
                     }`}
                 >
-                    {data.columns.map((column) => (
-                        <Table.Cell key={column.key}>{row[column.key]}</Table.Cell>
+                    {data.columns.map((column, columnIndex) => (
+                        <Table.Cell className={getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}
+                                    key={column.key}>{row[column.key]}</Table.Cell>
                     ))}
                 </Table.Row>
             ))}

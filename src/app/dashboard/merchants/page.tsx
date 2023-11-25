@@ -14,6 +14,8 @@ import useMerchantData from "@/api/hooks/useMerchantData";
 import {IRow, ITable} from "@/utils/types/table";
 import {Merchant, PaginatedResponse} from "@/utils/types/dto";
 import MerchantSkeleton from "@/app/dashboard/merchants/loading";
+import ErrorPage from "@/app/error";
+import {useRouter} from "next/navigation";
 
 
 const columns = [
@@ -68,9 +70,12 @@ const MerchantPage = () => {
         pageSizes
     } = useMerchantStore();
 
+    const router = useRouter()
+
     const pageSize = parseInt(selectedPageSize.value)
     const orderBy = selectedOrderBy.value
     const {data, isLoading, error} = useMerchantData(pageNumber, pageSize, orderBy);
+
 
     const mappedData = useMemo(() => {
         if (!data) return {columns, rows: []};
@@ -78,7 +83,7 @@ const MerchantPage = () => {
         return mapDataToMerchantTable(data);
     }, [data]);
 
-    // Updating pagination information on data change
+    // Updating pagination information in store on data change
     useEffect(() => {
         if (data) {
             const {last, first, totalElements, numberOfElements, pageable: {offset}} = data
@@ -89,7 +94,7 @@ const MerchantPage = () => {
 
 
     if (isLoading) return <MerchantSkeleton/>;
-    if (error) return <Box>Error</Box>;
+    if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
 
 
     return (

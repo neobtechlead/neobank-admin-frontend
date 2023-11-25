@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {Box, Flex} from "@radix-ui/themes";
+import {Flex} from "@radix-ui/themes";
 import DashboardCardItem from "@/app/dashboard/components/DashBoardCardItem";
 import PieChartCard from "@/app/dashboard/components/PieChartCard";
 import DashBoardTable from "@/app/dashboard/components/DashBoardTable";
@@ -9,11 +9,14 @@ import useMerchantData, {mapDataToMerchantTable} from "@/api/hooks/useMerchantDa
 import useDashBoardStats, {mapDataToCard, mapDataToPieChart} from "@/api/hooks/useDashBoardStats";
 import useDashBoardStore from "@/stores/dashboard";
 import DashBoardSkeleton from "@/app/dashboard/loading";
+import ErrorPage from "@/app/error";
+import {useRouter} from "next/navigation";
 
 
 const DashBoardOverViewPage = () => {
 
     const {selectedTransactionType} = useDashBoardStore()
+    const router = useRouter()
 
     const {
         data: customerData,
@@ -31,7 +34,7 @@ const DashBoardOverViewPage = () => {
     const {
         data: stats,
         isLoading: isStatsLoading,
-        error: statsError
+        error: statsError,
     } = useDashBoardStats();
 
 
@@ -42,7 +45,7 @@ const DashBoardOverViewPage = () => {
 
 
     if (isCustomerLoading || isMerchantLoading || isStatsLoading) return <DashBoardSkeleton/>
-    if (customerError || merchantError || statsError) return <Box>Error</Box>
+    if (customerError || merchantError || statsError) return <ErrorPage onRetry={() => router.refresh()}/>
 
     return (
         <Flex direction="column" gap="6" mt="7" px="6">
