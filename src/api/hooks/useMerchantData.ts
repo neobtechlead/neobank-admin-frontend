@@ -4,7 +4,7 @@ import type {APIResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
 import type {IRow, ITable} from "@/utils/types/table";
 
 
-const BASE_URL = `${process.env.NEXT_PUBLIC_MERCHANT_BASE_URL}`
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
 const columns = [

@@ -28,7 +28,7 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
             <Table.Row>
                 {data.columns.map((column, columnIndex) => (
                     <Table.ColumnHeaderCell
-                        className={getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}
+                        className={`bg-gray-100 ${getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}`}
                         key={column.key}>{column.label}</Table.ColumnHeaderCell>
                 ))}
             </Table.Row>

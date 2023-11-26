@@ -34,7 +34,7 @@ export const mapDataToCard = ({totalCustomers, totalMerchants}: DashBoardStats) 
 
 
 export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats) => {
-    console.log(stats)
+
 
     const {
         successfulDisbursementsValue,

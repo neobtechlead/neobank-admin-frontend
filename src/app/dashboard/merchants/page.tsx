@@ -16,6 +16,7 @@ import MerchantSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import {useRouter} from "next/navigation";
 import ButtonWithIcon from "@/components/ButtonWithIcon";
+import EmptyMerchantPage from "@/app/dashboard/merchants/components/EmptyMerchantPage";
 
 
 const columns = [
@@ -38,7 +39,6 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            console.log(externalId)
             if (key === 'address') rowData[key] = item.address?.city
             else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
@@ -94,6 +94,9 @@ const MerchantsPage = () => {
 
     if (isLoading) return <MerchantSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
+
+    //if empty row
+    if (mappedData.rows.length === 0) return <EmptyMerchantPage/>
 
 
     return (
