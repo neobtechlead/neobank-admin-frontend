@@ -48,7 +48,7 @@ const DashBoardOverViewPage = () => {
     if (customerError || merchantError || statsError) return <ErrorPage onRetry={() => router.refresh()}/>
 
     return (
-        <Flex direction="column" gap="6" mt="7" px="6">
+        <Flex direction="column" gap="6" my="7" px="6">
             <Flex gap="6">{mapDataToCard(stats!).map(
                 item => <DashboardCardItem key={item.label} {...item}/>
             )}

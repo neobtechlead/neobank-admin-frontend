@@ -21,9 +21,6 @@ const PieChartCard = ({chartData, legendData, metaData}: Props) => {
 
     const {selectedTransactionType, transactionTypes, onTransactionTypeChange} = useDashBoardStore()
 
-    console.log(metaData?.value)
-
-
     return (
         <ContainerCard>
             <Flex direction="column" p="6" gap="4">

@@ -1,9 +1,16 @@
-import React, {PropsWithChildren} from 'react';
+import React, {ReactNode} from 'react';
 import {Box} from "@radix-ui/themes";
 
-const ContainerCard = ({children}: PropsWithChildren) => {
+
+interface Props {
+    bgColor?: string,
+    children: ReactNode
+
+}
+
+const ContainerCard = ({bgColor = "bg-[#FCFCFC]", children}: Props) => {
     return (
-        <Box className="w-full bg-[#FCFCFC] border rounded-2xl shadow-sm">
+        <Box className={`w-full ${bgColor}  border rounded-2xl shadow-sm overflow-hidden`}>
             {children}
         </Box>
 

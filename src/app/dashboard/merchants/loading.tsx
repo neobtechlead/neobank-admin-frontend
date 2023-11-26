@@ -3,7 +3,6 @@ import {Box, Flex} from "@radix-ui/themes";
 import SkeletonTable from "@/components/skeleton/SkeletonTable";
 import SkeletonText from "@/components/skeleton/SkeletonText";
 
-//Skeleton placeholder whilst page is loading
 const MerchantSkeleton = () => {
     return (
         <Box p="5">

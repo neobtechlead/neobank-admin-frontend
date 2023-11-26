@@ -7,7 +7,6 @@ import CardSkeleton from "@/components/skeleton/CardSkeleton";
 import TableCardSkeleton from "@/components/skeleton/TableCardSkeleton";
 
 
-//Skeleton placeholder whilst page is loading
 const DashBoardSkeleton = () => {
     return (
         <Flex direction="column" gap="6" mt="7" px="6">

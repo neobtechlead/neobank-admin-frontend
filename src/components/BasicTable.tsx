@@ -12,23 +12,12 @@ interface Props {
 const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
 
 
-    const getCellClass = (isLast: boolean, isFirst: boolean) => {
-        if (isFirst) {
-            return 'text-left'
-        } else if (isLast) {
-            return 'text-right'
-        } else {
-            return 'text-center'
-        }
-    }
-
-
     const renderTableHeader = () => (
         <Table.Header>
-            <Table.Row>
+            <Table.Row align="center" className="bg-neutral-100">
                 {data.columns.map((column, columnIndex) => (
                     <Table.ColumnHeaderCell
-                        className={`bg-gray-100 ${getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}`}
+                        justify="center"
                         key={column.key}>{column.label}</Table.ColumnHeaderCell>
                 ))}
             </Table.Row>
@@ -39,7 +28,7 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
     const renderTableBody = () => (
         <Table.Body>
             {data.rows.map((row, rowIndex) => (
-                <Table.Row
+                <Table.Row align="center"
                     key={rowIndex}
                     onClick={isTableRowClickable && onRowClick ? () => onRowClick(row.id || row.externalId) : undefined}
                     className={`hover:bg-gray-100 transition-all duration-300 ease-in-out ${
@@ -47,8 +36,7 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
                     }`}
                 >
                     {data.columns.map((column, columnIndex) => (
-                        <Table.Cell className={getCellClass(columnIndex === data.columns.length - 1, columnIndex === 0)}
-                                    key={column.key}>{row[column.key]}</Table.Cell>
+                        <Table.Cell justify="center" key={column.key}>{row[column.key]}</Table.Cell>
                     ))}
                 </Table.Row>
             ))}
