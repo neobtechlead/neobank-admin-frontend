@@ -1,20 +1,3 @@
-export interface Customer {
-    id?: string;
-    firstName?: string;
-    lastName?: string;
-    phoneNumber?: string;
-    mobileNetwork?: string;
-
-}
-
-export interface Merchant {
-    externalId?: string;
-    businessName?: string;
-    tradingName?: string;
-    merchantAddress?: string;
-    country?: string;
-}
-
 
 export interface APIResponse<T> {
     httpStatusCode: number,
@@ -35,3 +18,95 @@ export interface DashBoardStats {
     totalMerchants: number;
     totalCustomers: number;
 }
+
+
+interface Address {
+    externalId?: string;
+    zipCode?: string;
+    city?: string;
+    country?: string;
+    poBox?: string | null;
+    state?: string;
+    streetAddress?: string;
+    digitalAddress?: string | null;
+}
+
+interface MerchantAccountHolder {
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    roles?: string[];
+}
+
+export interface Merchant {
+    businessName?: string;
+    externalId?: string;
+    descriptionOfService?: string;
+    tradingName?: string;
+    liveEnvironmentKey?: string;
+    sandboxEnvironmentKey?: string;
+    neobankAccountNumber?: string;
+    neobankAccountExternalId?: string;
+    phoneNumber?: string;
+    address?: Address;
+    merchantAccountHolders?: MerchantAccountHolder[];
+    certificateOfRegistration?: string;
+    certificateOfIncorporation?: string;
+    taxClearanceCertificate?: string;
+    constitutionByeLaws?: string;
+}
+
+interface Pageable {
+    pageNumber?: number;
+    pageSize?: number;
+    sort?: {
+        empty?: boolean;
+        sorted?: boolean;
+        unsorted?: boolean;
+    };
+    offset?: number;
+    paged?: boolean;
+    unpaged?: boolean;
+}
+
+export interface PaginatedResponse<T> {
+    content: T[];
+    pageable: Pageable;
+    last?: boolean;
+    totalElements?: number;
+    totalPages?: number;
+    size?: number;
+    number?: number;
+    sort?: {
+        empty?: boolean;
+        sorted?: boolean;
+        unsorted?: boolean;
+    };
+    first?: boolean;
+    numberOfElements?: number;
+}
+
+export interface Customer {
+    externalId?: string;
+    firstName?: string;
+    lastName?: string;
+    phoneNumber?: string;
+    accountNumber?: string | null;
+    email?: string | null;
+    status?: string;
+}
+
+export interface MetaData {
+    pageNo?: number;
+    pageSize?: number;
+    totalElements?: number;
+    totalPages?: number;
+    last?: boolean;
+}
+
+export interface CustomersResponse {
+    data: Customer[];
+    metaData?: MetaData;
+}
+
+

@@ -1,18 +1,21 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import {APIResponse, DashBoardStats} from "@/utils/types/dto";
+import type {APIResponse, DashBoardStats} from "@/utils/types/dto";
 import StoreFront from "@/assets/svgs/BadgeStoreFront.svg";
 import UserThree from "@/assets/svgs/BadgeUserThree.svg";
 import EllipseGreen from "@/assets/svgs/EllipseG.svg";
 import EllipseRed from "@/assets/svgs/EllipseR.svg";
 import {formatCurrency} from "@/utils/functions";
+import {color} from "@/utils/constants"
+
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
 const useDashBoardStats = () => {
     return useQuery({
         queryKey: ["dashBoardStats"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<DashBoardStats>>("/api/temp/stats")
+            const response = await http.get<APIResponse<DashBoardStats>>(`${BASE_URL}/reports/stats`)
             return response.data?.data
         },
     })
@@ -31,7 +34,7 @@ export const mapDataToCard = ({totalCustomers, totalMerchants}: DashBoardStats) 
 
 
 export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats) => {
-    console.log(stats)
+
 
     const {
         successfulDisbursementsValue,
@@ -47,32 +50,25 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
         disbursements: {
             legendData: [
                 {
-                    title: "Successful Disbursements",
+                    title: "Successful",
                     content: `GHS ${formatCurrency(successfulDisbursementsValue)}`,
                     icon: EllipseGreen
                 },
                 {
-                    title: "Failed Disbursements",
+                    title: "Failed",
                     content: `GHS ${formatCurrency(failedDisbursementsValue)}`,
                     icon: EllipseRed
                 },
             ],
 
             chartData: {
-                labels: ['Successful Disbursements', 'Failed Disbursements'],
+                labels: ['Successful', 'Failed'],
                 datasets: [
                     {
                         label: '',
                         data: [successfulDisbursementsValue, failedDisbursementsValue],
-                        backgroundColor: [
-                            '#3BB33B',
-                            '#DC4040',
-                        ],
-                        borderColor: [
-                            '#3BB33B',
-                            '#DC4040',
-
-                        ],
+                        backgroundColor: [color.chartGreen, color.chartRed],
+                        borderColor: [color.white, color.white],
                         borderWidth: 1,
                     },
                 ],
@@ -86,34 +82,29 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
         collections: {
             legendData: [
                 {
-                    title: "Successful Collections",
+                    title: "Successful",
                     content: `GHS ${formatCurrency(successfulCollectionsValue)}`,
                     icon: EllipseGreen
                 },
                 {
-                    title: "Failed Collections",
+                    title: "Failed",
                     content: `GHS ${formatCurrency(failedCollectionsValue)}`,
                     icon: EllipseRed
                 },
             ],
 
             chartData: {
-                labels: ['Successful Collections', 'Failed Collections'],
+                labels: ['Successful', 'Failed'],
                 datasets: [
                     {
                         label: '',
                         data: [successfulCollectionsValue, failedCollectionsValue],
-                        backgroundColor: [
-                            '#3BB33B',
-                            '#DC4040',
-                        ],
-                        borderColor: [
-                            '#3BB33B',
-                            '#DC4040',
-
-                        ],
+                        backgroundColor: [color.chartGreen, color.chartRed],
+                        borderColor: [color.white, color.white],
                         borderWidth: 1,
+
                     },
+
                 ],
             },
             metaData: {label: "Total Collections", value: `GHS ${formatCurrency(totalCollectionsValue)}`}

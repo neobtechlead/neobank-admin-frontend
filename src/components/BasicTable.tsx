@@ -14,9 +14,11 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
 
     const renderTableHeader = () => (
         <Table.Header>
-            <Table.Row>
-                {data.columns.map((column) => (
-                    <Table.ColumnHeaderCell key={column.key}>{column.label}</Table.ColumnHeaderCell>
+            <Table.Row align="center" className="bg-neutral-100">
+                {data.columns.map((column, columnIndex) => (
+                    <Table.ColumnHeaderCell
+                        justify="center"
+                        key={column.key}>{column.label}</Table.ColumnHeaderCell>
                 ))}
             </Table.Row>
         </Table.Header>
@@ -26,15 +28,15 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
     const renderTableBody = () => (
         <Table.Body>
             {data.rows.map((row, rowIndex) => (
-                <Table.Row
+                <Table.Row align="center"
                     key={rowIndex}
                     onClick={isTableRowClickable && onRowClick ? () => onRowClick(row.id || row.externalId) : undefined}
                     className={`hover:bg-gray-100 transition-all duration-300 ease-in-out ${
                         isTableRowClickable ? 'hover:cursor-pointer' : ''
                     }`}
                 >
-                    {data.columns.map((column) => (
-                        <Table.Cell key={column.key}>{row[column.key]}</Table.Cell>
+                    {data.columns.map((column, columnIndex) => (
+                        <Table.Cell justify="center" key={column.key}>{row[column.key]}</Table.Cell>
                     ))}
                 </Table.Row>
             ))}

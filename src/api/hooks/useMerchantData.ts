@@ -1,22 +1,28 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import {APIResponse, Merchant} from "@/utils/types/dto";
-import {IRow, ITable} from "@/utils/types/table";
+import type {APIResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
 
 
-const dashBoardColumns = [
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
+
+
+const columns = [
     {key: 'businessName', label: 'Merchant Business Name'},
-    {key: 'tradingName', label: 'Trading Name'},
+    {key: 'tradingName', label: 'Merchant Trading Name'},
     {key: 'externalId', label: 'Merchant ID'},
     {key: 'address', label: 'Merchant Address'},
     {key: 'country', label: 'Country'},
+
 ]
 
-const useMerchantData = () => {
+const useMerchantData = (page = 0, size = 10, order = "desc") => {
     return useQuery({
-        queryKey: ["merchants"],
+        queryKey: ["merchants", page, size, order],
         queryFn: async () => {
-            const response = await http.get<APIResponse<Merchant[]>>("/api/temp/merchants")
+            const response = await http.get<APIResponse<PaginatedResponse<Merchant>>>(`${BASE_URL}/merchants`, {
+                params: {page, size, order}
+            })
             return response.data?.data
         },
     })
@@ -25,20 +31,25 @@ const useMerchantData = () => {
 export default useMerchantData;
 
 
-export const mapDataToMerchantTable = (data: Merchant[]): ITable => {
-    const rows: IRow[] = data.map((item: Merchant) => {
-        const externalId = item.externalId || ""; // Assuming 'id' is always present in the Customer Data
-        const rowData: IRow = {externalId};
+export const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
+    const {content} = data
+    const rows: IRow[] = content.map((item: Merchant) => {
 
-        const columnKeys = dashBoardColumns.map(item => item.key)
+        const rowData: IRow = {};
+
+        const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            // @ts-ignore
-            rowData[key] = item[key] || "";
+            if (key === 'address') rowData[key] = item.address?.city
+            else if (key === 'country') rowData[key] = item.address?.country
+            else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;
     });
 
-    return {columns: dashBoardColumns, rows};
+    return {columns, rows};
 };
+
+

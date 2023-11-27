@@ -1,33 +1,27 @@
-'use client'
 import React from 'react';
-import {Button} from "@radix-ui/themes";
 import Image from "next/image";
-import {color} from "@/utils/constants";
+
 
 interface Props {
-    label: string,
-    icon: string,
-    onClick: () => void,
-    bgColor?: string
+    label: string;
+    icon?: string;
+    onClick: () => void;
+    className?: string;
 }
 
-const ButtonWithIcon = ({label, icon, bgColor, onClick}: Props) => {
+const ButtonWithIcon = ({label, icon, onClick, className}: Props) => {
     return (
-
-        <Button
-            style={{
-                backgroundColor: bgColor || color.darkPurple,
-                height: '100%',
-                cursor: 'pointer',
-                transition: 'box-shadow 0.3s ease', // Add a smooth transition for the shadow
-            }}
+        <button
+            className={`flex items-center  font-black px-4 py-2 bg-darkPurple-900 hover:bg-purple-800 text-white rounded-sm ${className}`}
             onClick={onClick}
-
         >
-            <Image src={icon} alt={label} priority={true}/>
+            {icon && (
+                <div className="mr-2 font-bold">
+                    <Image src={icon} alt=""/>
+                </div>
+            )}
             {label}
-        </Button>
-
+        </button>
     );
 };
 

@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import {Box, Flex} from "@radix-ui/themes";
+import {Flex} from "@radix-ui/themes";
 import DashboardCardItem from "@/app/dashboard/components/DashBoardCardItem";
 import PieChartCard from "@/app/dashboard/components/PieChartCard";
 import DashBoardTable from "@/app/dashboard/components/DashBoardTable";
@@ -8,11 +8,15 @@ import useCustomerData, {mapDataToCustomerTable} from "@/api/hooks/useCustomerDa
 import useMerchantData, {mapDataToMerchantTable} from "@/api/hooks/useMerchantData";
 import useDashBoardStats, {mapDataToCard, mapDataToPieChart} from "@/api/hooks/useDashBoardStats";
 import useDashBoardStore from "@/stores/dashboard";
+import DashBoardSkeleton from "@/app/dashboard/loading";
+import ErrorPage from "@/app/error";
+import {useRouter} from "next/navigation";
 
 
 const DashBoardOverViewPage = () => {
 
     const {selectedTransactionType} = useDashBoardStore()
+    const router = useRouter()
 
     const {
         data: customerData,
@@ -30,7 +34,7 @@ const DashBoardOverViewPage = () => {
     const {
         data: stats,
         isLoading: isStatsLoading,
-        error: statsError
+        error: statsError,
     } = useDashBoardStats();
 
 
@@ -40,12 +44,11 @@ const DashBoardOverViewPage = () => {
     }
 
 
-    if (isCustomerLoading || isMerchantLoading || isStatsLoading) return <Box>Loading</Box>
-    if (customerError || merchantError || statsError) return <Box>Error</Box>
-
+    if (isCustomerLoading || isMerchantLoading || isStatsLoading) return <DashBoardSkeleton/>
+    if (customerError || merchantError || statsError) return <ErrorPage onRetry={() => router.refresh()}/>
 
     return (
-        <Flex direction="column" gap="6" mt="7" px="6">
+        <Flex direction="column" gap="6" my="7" px="6">
             <Flex gap="6">{mapDataToCard(stats!).map(
                 item => <DashboardCardItem key={item.label} {...item}/>
             )}
@@ -53,11 +56,11 @@ const DashBoardOverViewPage = () => {
             <Flex gap="6">
                 <PieChartCard chartData={populateChart().chartData} legendData={populateChart().legendData}
                               metaData={populateChart().metaData}/>
-                <DashBoardTable href="/" description="Last 10 registered customers"
+                <DashBoardTable href="/dashboard/customers" description="Last 10 registered customers"
                                 data={mapDataToCustomerTable(customerData!)}/>
             </Flex>
             <Flex gap="6">
-                <DashBoardTable href="/" description="Last 10 merchants onboarded"
+                <DashBoardTable href="/dashboard/merchants" description="Last 10 merchants onboarded"
                                 data={mapDataToMerchantTable(merchantData!)}/>
             </Flex>
         </Flex>

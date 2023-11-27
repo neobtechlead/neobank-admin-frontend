@@ -1,7 +1,10 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import {APIResponse, Customer} from "@/utils/types/dto";
-import {IRow, ITable} from "@/utils/types/table";
+import type {APIResponse, Customer, CustomersResponse} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
+
+
+const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
 const columns = [
@@ -15,7 +18,7 @@ const useCustomerData = () => {
     return useQuery({
         queryKey: ["customers"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<Customer[]>>("/api/temp/customers")
+            const response = await http.get<APIResponse<CustomersResponse>>(`${BASE_URL}/customers`)
             return response.data?.data
         },
     })
@@ -24,16 +27,17 @@ const useCustomerData = () => {
 export default useCustomerData;
 
 
-export const mapDataToCustomerTable = (data: Customer[]): ITable => {
-    const rows: IRow[] = data.map((item: Customer) => {
-        const id = item.id || ""; // Assuming 'id' is always present in the Customer Data
-        const rowData: IRow = {id};
+export const mapDataToCustomerTable = (data: CustomersResponse): ITable => {
+    const {data: customers, metaData} = data
+    const rows: IRow[] = customers.map((item: Customer) => {
+
+        const rowData: IRow = {};
 
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            // @ts-ignore
-            rowData[key] = item[key] || "";
+            if (key === 'mobileNetwork') rowData[key] = "MTN" //To be removed awaiting backend changes
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;
