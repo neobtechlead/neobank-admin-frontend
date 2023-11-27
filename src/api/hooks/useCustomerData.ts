@@ -37,8 +37,7 @@ export const mapDataToCustomerTable = (data: CustomersResponse): ITable => {
 
         columnKeys.forEach((key) => {
             if (key === 'mobileNetwork') rowData[key] = "MTN" //To be removed awaiting backend changes
-            // @ts-ignore
-            else rowData[key] = item[key] || "";
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;

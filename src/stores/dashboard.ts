@@ -1,6 +1,6 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
-import {ISelect} from "@/utils/types/misc";
+import type ISelect from "@/utils/types/select";
 
 interface IDashBoardStore {
     selectedTransactionType: ISelect

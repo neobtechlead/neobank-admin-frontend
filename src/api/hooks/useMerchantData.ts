@@ -40,13 +40,10 @@ export const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITabl
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-
-
             if (key === 'address') rowData[key] = item.address?.city
             else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
-            // @ts-ignore
-            else rowData[key] = item[key] || "";
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;

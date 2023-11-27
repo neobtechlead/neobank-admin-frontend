@@ -1,6 +1,7 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
-import type {ISelect, PageInfo} from "@/utils/types/misc";
+import type ISelect from "@/utils/types/select";
+import type PageInfo from "@/utils/types/pagination"
 
 
 interface IMerchantStore {

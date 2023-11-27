@@ -4,7 +4,7 @@ import {Flex} from "@radix-ui/themes";
 import CaretRight from "@/assets/svgs/CaretRight.svg";
 import CaretLeft from "@/assets/svgs/CaretLeft.svg";
 import {PaginationButton, PaginationPageRange} from "@/components/pagination";
-import type {PageInfo} from "@/utils/types/misc";
+import type {PageInfo} from "@/utils/types/select";
 
 interface Props {
     decrementPageNumber: () => void
