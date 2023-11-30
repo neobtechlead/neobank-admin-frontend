@@ -110,3 +110,16 @@ export interface CustomersResponse {
 }
 
 
+export interface Users {
+    firstName: string;
+    lastName: string;
+    email: string;
+    externalId: string;
+    phoneNumber: string;
+    userExternalId: string;
+    roles: string[];
+    accountType: string;
+    merchant: Merchant;
+}
+
+
