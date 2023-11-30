@@ -1,25 +1,10 @@
 import {create} from 'zustand'
 import {persist} from 'zustand/middleware'
 import type ISelect from "@/utils/types/select";
-import type PageInfo from "@/utils/types/pagination"
+import type {IPageStore} from "@/utils/types/storeInterface";
 
 
-interface IMerchantStore {
-    pageNumber: number,
-    orderByOptions: ISelect[],
-    pageSizes: ISelect[],
-    selectedOrderBy: ISelect,
-    selectedPageSize: ISelect,
-    pagination: PageInfo
-    updatePagination: (param: PageInfo) => void
-    orderByChange: (value: ISelect) => any
-    pageSizeChange: (value: ISelect) => any
-    incrementPageNumber: () => void
-    decrementPageNumber: () => void
-
-}
-
-const useMerchantStore = create<IMerchantStore>()(
+const useMerchantStore = create<IPageStore>()(
         persist(
             (set, get) => ({
                 pageSizes: [
