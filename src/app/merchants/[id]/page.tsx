@@ -1,12 +1,20 @@
 'use client'
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import TitledHeader from "@/components/TitledHeader";
 import AvatarSection from "@/components/AvatarSection";
 import BalanceSection from "@/app/merchants/components/BalanceSection";
 import BasicInfoSection from "@/app/merchants/components/BasicInfoSection";
-import {BasicInfoItem, DocInfoItem} from "@/utils/types/misc";
+import {MappedDataMerchantInfo} from "@/utils/types/misc";
 import DocumentInfoSection from "@/app/merchants/components/DocumentInfoSection";
+import useGetMerchantInfo, {
+    mapDataToBasicInfo,
+    mapDataToDocInfo,
+    mapDataToHeaderInfo
+} from "@/api/hooks/useGetMerchantInfo";
+import MerchantSkeleton from "@/app/merchants/loading";
+import ErrorPage from "@/app/error";
+import useGetAccountBalance from "@/api/hooks/useGetAccountBalance";
 
 
 interface Props {
@@ -17,79 +25,43 @@ interface Props {
 }
 
 
-const basicInfo: BasicInfoItem[][] = [
-    [{
-        label: "Trading Name",
-        value: "Complete Farmer"
-    },
-        {
-            label: "Residential Address",
-            value: "Airport-west, Accra-Ghana"
-        }],
-    [{
-        label: "Country",
-        value: "Ghana"
-    },
-        {
-            label: "Region",
-            value: "Greater Accra"
-        }],
-    [
-        {
-            label: "Zip Code",
-            value: "00233"
-        },
-        {
-            label: "Street",
-            value: "Airport West",
-        }],
-    [
-        {
-            label: "Email Addresss",
-            value: "Complete Farmer",
-            editable: true
-        },
-        {
-            label: "Phone Number",
-            value: "+233555555555",
-            editable: true
-        }],
-
-    [
-        {
-            label: "Description of service",
-            value: "This is a test description"
-        },
-    ]
-
-
-]
-
-const docInfo: DocInfoItem[] = [
-    {href: "/test", label: "Certificate of registration"},
-    {href: "/test", label: "Certificate of incorporation"},
-    {href: "/test", label: "Tax clearance certificate"},
-    {href: "/test", label: "Director's National ID"},
-    {href: "/test", label: "Id Type Passport", canDownload: false},
-    {href: "/test", label: "Constitution Bye/Laws"},
-]
-
 const Merchant = ({params: {id}}: Props) => {
+
+    const {data, isLoading, error} = useGetMerchantInfo(id);
+
+    const {data: balanceData, isLoading: isBalanceLoading, error: balanceError} = useGetAccountBalance(id);
+
+
+    const mappedData: MappedDataMerchantInfo = useMemo(() => {
+        if (!data) return {basicInfo: [[]], docInfo: [], headerInfo: {}};
+        const basicInfo = mapDataToBasicInfo(data);
+        const docInfo = mapDataToDocInfo(data)
+        const headerInfo = mapDataToHeaderInfo(data)
+        return {basicInfo, docInfo, headerInfo}
+
+    }, [data]);
+
+
+    if (isLoading || isBalanceLoading) return <MerchantSkeleton/>
+    if (error || balanceError) return <ErrorPage onRetry={() => {
+    }}/>
+
+
 
 
     return (
         <Box>
             <TitledHeader title="Merchant Information"/>
             <Flex direction="column">
-                <Flex justify="between" align="center" className="py-6 px-14">
-                    <AvatarSection name="Complete Farmer" email="completefarmer@cf.com"/>
-                    <BalanceSection balance="GHS 450,000.00"/>
+                <Flex justify="between" align="center" className="py-6 px-14 bg-grey-850 border-b">
+                    <AvatarSection name={mappedData.headerInfo?.businessName!} email={mappedData.headerInfo?.email!}/>
+                    <BalanceSection balance={balanceData?.actualBalance!}/>
                 </Flex>
                 <Box className="py-6 px-14">
-                    <BasicInfoSection data={basicInfo}/>
+                    <BasicInfoSection data={mappedData.basicInfo!}/>
                 </Box>
                 <Box className="mb-8 py-6 px-14 ">
-                    <DocumentInfoSection data={docInfo}/>
+                    <DocumentInfoSection data={mappedData.docInfo!}/>
                 </Box>
             </Flex>
         </Box>

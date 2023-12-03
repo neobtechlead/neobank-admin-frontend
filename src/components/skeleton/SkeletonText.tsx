@@ -1,11 +1,15 @@
 import Skeleton from "@/components/skeleton/Skeleton";
 
-const SkeletonText = () => {
+interface Props {
+    width?: number
+}
+
+const SkeletonText = ({width = 100}: Props) => {
     return (
         <div
             style={{
                 display: 'block',
-                width: 100,
+                width: width,
             }}
         >
             <Skeleton/>

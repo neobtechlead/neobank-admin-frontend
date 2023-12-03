@@ -12,7 +12,7 @@ import useMerchantStore from "@/stores/merchant";
 import useMerchantData from "@/api/hooks/useMerchantData";
 import type {IRow, ITable} from "@/utils/types/table";
 import type {Merchant, PaginatedResponse} from "@/utils/types/dto";
-import MerchantSkeleton from "@/app/dashboard/merchants/loading";
+import MerchantsSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import {useRouter} from "next/navigation";
 import ButtonWithIcon from "@/components/ButtonWithIcon";
@@ -91,7 +91,7 @@ const MerchantsPage = () => {
     }, [data])
 
 
-    if (isLoading) return <MerchantSkeleton/>;
+    if (isLoading) return <MerchantsSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
 
     //if empty row

@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, PaginatedResponse, Users} from "@/utils/types/dto";
+import type {APIResponse, PaginatedResponse, User} from "@/utils/types/dto";
 import type {IRow, ITable} from "@/utils/types/table";
 
 
@@ -21,7 +21,7 @@ const useGetUsersData = (page = 0, size = 10) => {
     return useQuery({
         queryKey: ["merchants", page, size],
         queryFn: async () => {
-            const response = await http.get<APIResponse<PaginatedResponse<Users>>>(`${BASE_URL}/merchants/users`, {
+            const response = await http.get<APIResponse<PaginatedResponse<User>>>(`${BASE_URL}/merchants/users`, {
                 params: {page, size}
             })
             return response.data?.data
@@ -32,10 +32,10 @@ const useGetUsersData = (page = 0, size = 10) => {
 export default useGetUsersData;
 
 
-export const mapDataToUsersTable = (data: PaginatedResponse<Users>): ITable => {
+export const mapDataToUsersTable = (data: PaginatedResponse<User>): ITable => {
     const {content} = data
-    const rows: IRow[] = content.map((item: Users) => {
-        const externalId = item.externalId || "";
+    const rows: IRow[] = content.map((item: User) => {
+        const externalId = item.userExternalId || "";
 
         const rowData: IRow = {externalId};
         const columnKeys = columns.map(item => item.key)

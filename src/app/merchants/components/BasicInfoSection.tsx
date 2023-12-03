@@ -20,7 +20,7 @@ const BasicInfoSection = ({data}: BasicInfoCardProps) => {
                     {data.map((item, index) => (
                         <Box key={index} className="grid grid-cols-2">
                             {item.map((el) => (
-                                <Flex key={el.value} className="py-5" align="start">
+                                <Flex key={el.value} className="py-5" align="start" gap="2">
                                     <VStackLabelWithText label={el.label} description={el.value}/>
                                     {el.editable ? <EditButton onClick={() => {
                                     }}/> : null}

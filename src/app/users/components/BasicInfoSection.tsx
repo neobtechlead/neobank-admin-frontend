@@ -18,7 +18,7 @@ const BasicInfoSection = ({data}: BasicInfoCardProps) => {
                 </Box>
                 <Flex direction="column" className="p-5 bg-white">
                     {data.map((item, index) => (
-                        <Box key={index} className="grid grid-cols-2">
+                        <Box key={index} className="grid grid-cols-3">
                             {item.map((el) => (
                                 <Flex key={el.value} className="py-5" align="start">
                                     <VStackLabelWithText label={el.label} description={el.value}/>

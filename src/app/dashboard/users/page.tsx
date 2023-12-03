@@ -2,7 +2,6 @@
 import React, {useEffect, useMemo} from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import {useRouter} from "next/navigation";
-import MerchantSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import EmptyMerchantPage from "@/app/dashboard/merchants/components/EmptyMerchantPage";
 import CustomSelect from "@/components/CustomSelect";

@@ -17,9 +17,9 @@ const DocumentInfoSection = ({data}: Props) => {
                     <Text className="font-black">Document Information</Text>
                 </Box>
                 <Box className="grid grid-cols-3 gap-5 p-5 bg-white">
-                    {data.map(({label, href, canDownload}) => (
+                    {data.map(({label, href, value, canDownload}) => (
                         <Box key={href} className="my-5">
-                            <DocumentWithDownload label={label} href={href} canDownload={canDownload}/>
+                            {value && <DocumentWithDownload label={label} href={href} canDownload={canDownload}/>}
                         </Box>
                     ))}
                     <CertOfRegistrationCard href="#"/>
