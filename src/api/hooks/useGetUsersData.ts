@@ -35,13 +35,13 @@ export default useGetUsersData;
 export const mapDataToUsersTable = (data: PaginatedResponse<Users>): ITable => {
     const {content} = data
     const rows: IRow[] = content.map((item: Users) => {
+        const externalId = item.externalId || "";
 
-        const rowData: IRow = {};
+        const rowData: IRow = {externalId};
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
             if (key === 'merchant') rowData[key] = item.merchant?.businessName
-            else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'role') rowData[key] = item.roles?.[0]
             else rowData[key] = (item as any)[key] ?? ""
         });

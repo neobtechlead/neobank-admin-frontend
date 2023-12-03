@@ -12,6 +12,7 @@ import usersStore from "@/stores/user";
 import useGetUsersData, {mapDataToUsersTable} from "@/api/hooks/useGetUsersData";
 import SearchFilter from "@/components/SearchFilter";
 import UserTable from "@/app/dashboard/users/components/UserTable";
+import UsersSkeleton from "@/app/dashboard/users/loading";
 
 const UserPage = () => {
     const {
@@ -47,7 +48,7 @@ const UserPage = () => {
     }, [data])
 
 
-    if (isLoading) return <MerchantSkeleton/>;
+    if (isLoading) return <UsersSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
 
     //if empty row

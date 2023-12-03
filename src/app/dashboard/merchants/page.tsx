@@ -43,8 +43,7 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
             else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
             else if (key === 'icon') rowData[key] = <LinkIcon href={`/merchants/${externalId}`} icon={CaretRight}/>
-            // @ts-ignore
-            else rowData[key] = item[key]
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;

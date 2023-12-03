@@ -1,5 +1,5 @@
 import ISelect from "@/utils/types/select";
-import PageInfo from "@/utils/types/pagination";
+import PageInfo from "@/utils/types/paginationInfo";
 
 export interface IPageStore {
     pageNumber: number,

@@ -106,7 +106,7 @@ export interface MetaData {
 
 export interface CustomersResponse {
     data: Customer[];
-    metaData?: MetaData;
+    metaData: MetaData;
 }
 
 

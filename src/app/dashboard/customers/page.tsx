@@ -42,7 +42,7 @@ const CustomerPage = () => {
     useEffect(() => {
         if (data) {
             const {metaData: {last, totalElements, pageNo, pageSize}} = data as CustomersResponse
-            const [offset, numberOfElements, first] = calculatePageInfo(pageNo, pageSize, totalElements);
+            const [offset, numberOfElements, first] = calculatePageInfo(pageNo!, pageSize!, totalElements!);
             updatePagination({last, first, offset, totalElements, numberOfElements})
         }
 
