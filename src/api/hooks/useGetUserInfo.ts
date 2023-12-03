@@ -21,7 +21,6 @@ export default useGetUserInfo;
 
 
 export const mapDataToBasicUserInfo = (data: User): BasicInfoItem[][] => {
-    console.log(data)
     return [
         [
             {field: 'nationalId', label: 'National ID', value: data.nationalId ?? "N/A"},
