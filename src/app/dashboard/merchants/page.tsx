@@ -12,7 +12,7 @@ import useMerchantStore from "@/stores/merchant";
 import useMerchantData from "@/api/hooks/useMerchantData";
 import type {IRow, ITable} from "@/utils/types/table";
 import type {Merchant, PaginatedResponse} from "@/utils/types/dto";
-import MerchantSkeleton from "@/app/dashboard/merchants/loading";
+import MerchantsSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import {useRouter} from "next/navigation";
 import ButtonWithIcon from "@/components/ButtonWithIcon";
@@ -43,8 +43,7 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
             else if (key === 'country') rowData[key] = item.address?.country
             else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
             else if (key === 'icon') rowData[key] = <LinkIcon href={`/merchants/${externalId}`} icon={CaretRight}/>
-            // @ts-ignore
-            else rowData[key] = item[key]
+            else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;
@@ -92,7 +91,7 @@ const MerchantsPage = () => {
     }, [data])
 
 
-    if (isLoading) return <MerchantSkeleton/>;
+    if (isLoading) return <MerchantsSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
 
     //if empty row

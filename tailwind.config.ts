@@ -22,8 +22,10 @@ const config: Config = {
             colors: {
                 grey: {
                     800: "#808191",
+                    850: "#FCFCFC",
                     900: "#4F4F4F",
                     950: "#E6E6E6"
+
                 },
                 orange: {
                     900: "#FFEDED",

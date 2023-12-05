@@ -50,6 +50,7 @@ export interface Merchant {
     phoneNumber?: string;
     address?: Address;
     merchantAccountHolders?: MerchantAccountHolder[];
+    directorNationalIds?: DirectorNationalId[];
     certificateOfRegistration?: string;
     certificateOfIncorporation?: string;
     taxClearanceCertificate?: string;
@@ -106,7 +107,35 @@ export interface MetaData {
 
 export interface CustomersResponse {
     data: Customer[];
-    metaData?: MetaData;
+    metaData: MetaData;
 }
+
+
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    externalId: string;
+    phoneNumber: string;
+    userExternalId: string;
+    nationalId?: string;
+    dateOfBirth?: string
+    roles: string[];
+    accountType: string;
+    merchant: Merchant;
+}
+
+interface DirectorNationalId {
+    nationalIdType: string;
+    nationalIdPhoto: string;
+}
+
+export interface Balance {
+    actualBalance: string,
+    availableBalance: string
+
+}
+
+
 
 

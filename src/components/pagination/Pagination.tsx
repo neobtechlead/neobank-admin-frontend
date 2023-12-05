@@ -4,12 +4,12 @@ import {Flex} from "@radix-ui/themes";
 import CaretRight from "@/assets/svgs/CaretRight.svg";
 import CaretLeft from "@/assets/svgs/CaretLeft.svg";
 import {PaginationButton, PaginationPageRange} from "@/components/pagination";
-import type {PageInfo} from "@/utils/types/select";
+import type PaginationInfo from "@/utils/types/paginationInfo";
 
 interface Props {
     decrementPageNumber: () => void
     incrementPageNumber: () => void
-    pagination: PageInfo
+    pagination: PaginationInfo
 }
 
 const Pagination = ({

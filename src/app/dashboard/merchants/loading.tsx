@@ -3,7 +3,7 @@ import {Box, Flex} from "@radix-ui/themes";
 import SkeletonTable from "@/components/skeleton/SkeletonTable";
 import SkeletonText from "@/components/skeleton/SkeletonText";
 
-const MerchantSkeleton = () => {
+const MerchantsSkeleton = () => {
     return (
         <Box p="5">
             <Flex direction="column" gap="5">
@@ -25,4 +25,4 @@ const MerchantSkeleton = () => {
     );
 };
 
-export default MerchantSkeleton;
+export default MerchantsSkeleton;
