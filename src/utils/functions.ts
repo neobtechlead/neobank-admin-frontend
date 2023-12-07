@@ -1,3 +1,5 @@
+import {AxiosError} from "axios";
+
 export function formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-GH', {
         style: 'decimal',
@@ -28,5 +30,12 @@ export function generateAvatarFallBack(name: string): string {
         .join('')
         .toUpperCase()
 }
+
+
+// Helper function to check if an error is an AxiosError
+export const isAxiosError = (error: any): error is AxiosError => {
+    return error.isAxiosError === true;
+};
+
 
 

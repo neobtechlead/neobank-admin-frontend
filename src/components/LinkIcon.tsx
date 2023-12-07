@@ -6,13 +6,13 @@ import Image from "next/image";
 interface Props {
     href: string
     icon: string
-    className?: string
+    overrideClassName?: string
 }
 
-const LinkIcon = ({href, icon, className = ""}: Props) => {
+const LinkIcon = ({href, icon, overrideClassName = ""}: Props) => {
     return (
         <Container>
-            <Link href={href} className={className}><Image priority={true} src={icon} alt=""/></Link>
+            <Link href={href} className={overrideClassName}><Image priority={true} src={icon} alt=""/></Link>
         </Container>
     );
 };

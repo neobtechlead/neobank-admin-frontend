@@ -10,7 +10,6 @@ export interface DocInfoItem {
     value: string,
     href: string,
     field: string,
-    canDownload?: boolean
 }
 
 export interface MappedDataMerchantInfo {
@@ -21,4 +20,11 @@ export interface MappedDataMerchantInfo {
         name?: string,
         businessName?: string
     }
+}
+
+
+export interface ICustomerInfo {
+    label: string,
+    value: string,
+    icon: string,
 }

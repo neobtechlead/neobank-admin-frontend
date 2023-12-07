@@ -13,7 +13,7 @@ const UserSkeleton = () => {
                     <AvatarSkeleton/>
                 </Flex>
                 <Box className="py-6 px-14">
-                    <BasicInfoSkeleton/>
+                    <BasicInfoSkeleton cols={3}/>
                 </Box>
 
             </Flex>

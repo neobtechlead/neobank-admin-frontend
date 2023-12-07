@@ -4,6 +4,8 @@ import React from 'react'
 import type {Metadata} from 'next'
 import {Theme} from "@radix-ui/themes";
 import RQueryProvider from "@/api/RQueryProvider";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer} from "react-toastify";
 
 
 export const metadata: Metadata = {
@@ -24,7 +26,7 @@ export default function RootLayout({
                 {children}
             </Theme>
         </RQueryProvider>
-
+        <ToastContainer/>
 
         </body>
         </html>

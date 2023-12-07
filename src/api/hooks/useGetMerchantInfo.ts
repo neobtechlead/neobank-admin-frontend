@@ -56,34 +56,30 @@ export const mapDataToDocInfo = (data: Merchant): DocInfoItem[] => {
             value: data.certificateOfRegistration ?? "",
             href: data.certificateOfRegistration ?? "",
             field: 'certificateOfRegistration',
-            canDownload: true,
         },
         {
             label: 'Certificate of incorporation',
             value: data.certificateOfIncorporation ?? "",
             href: data.certificateOfIncorporation ?? "",
             field: 'certificateOfIncorporation',
-            canDownload: true,
         },
         {
             label: 'Tax clearance certificate',
             value: data.taxClearanceCertificate ?? "",
             href: data.taxClearanceCertificate ?? "",
             field: 'taxClearanceCertificate',
-            canDownload: true,
+
         },
         {
             label: "Director's National ID",
             value: data.directorNationalIds?.[0]?.nationalIdPhoto ?? "",
             href: data.directorNationalIds?.[0]?.nationalIdPhoto ?? "",
             field: 'nationalIdPhoto',
-            canDownload: true,
         },
         {
-            label: 'Id Type',
+            label: 'ID Type',
             value: data.directorNationalIds?.[0]?.nationalIdType ?? "",
             href: "",
-            canDownload: false,
             field: 'nationalIdType',
         },
         {
@@ -91,7 +87,6 @@ export const mapDataToDocInfo = (data: Merchant): DocInfoItem[] => {
             value: data.constitutionByeLaws ?? "",
             href: data.constitutionByeLaws ?? "",
             field: 'constitutionByeLaws',
-            canDownload: true,
         },
     ];
 };
@@ -103,6 +98,7 @@ export const mapDataToHeaderInfo = (data: Merchant) => {
     }
 
 }
+
 
 
 

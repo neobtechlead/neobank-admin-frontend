@@ -30,10 +30,10 @@ export default useCustomerData;
 
 
 export const mapDataToCustomerTable = (data: CustomersResponse): ITable => {
-    const {data: customers, metaData} = data
+    const {data: customers} = data
     const rows: IRow[] = customers.map((item: Customer) => {
-
-        const rowData: IRow = {};
+        const externalId = item.externalId
+        const rowData: IRow = {externalId};
 
         const columnKeys = columns.map(item => item.key)
 

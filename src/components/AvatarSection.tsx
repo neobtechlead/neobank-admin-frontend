@@ -8,18 +8,18 @@ import {generateAvatarFallBack} from "@/utils/functions";
 interface Props {
     name: string;
     email: string;
+    onEditClick: () => void
 
 }
 
-const AvatarSection = ({name, email}: Props) => {
+const AvatarSection = ({name, email, onEditClick}: Props) => {
     return (
         <Flex gap="4">
             <Avatar fallback={generateAvatarFallBack(name)} size="6"/>
             <Flex direction="column" justify="center" gap="2">
                 <Box className="flex items-center gap-3">
                     <Text className="font-black">{name}</Text>
-                    <EditButton onClick={() => {
-                    }}/>
+                    <EditButton onClick={onEditClick}/>
                 </Box>
 
                 <Flex gap="2" align="center">
@@ -27,8 +27,7 @@ const AvatarSection = ({name, email}: Props) => {
 
                     <Box className="flex items-center gap-3">
                         <Text>{email}</Text>
-                        <EditButton onClick={() => {
-                        }}/>
+                        <EditButton onClick={onEditClick}/>
                     </Box>
                 </Flex>
             </Flex>

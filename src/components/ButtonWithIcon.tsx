@@ -6,13 +6,13 @@ interface Props {
     label: string;
     icon?: string;
     onClick: () => void;
-    className?: string;
+    overrideClassName?: string;
 }
 
-const ButtonWithIcon = ({label, icon, onClick, className}: Props) => {
+const ButtonWithIcon = ({label, icon, onClick, overrideClassName}: Props) => {
     return (
         <button
-            className={`flex items-center  font-black px-4 py-2 bg-darkPurple-900 hover:bg-purple-800 text-white rounded-sm ${className}`}
+            className={`flex items-center  font-black px-4 py-2 bg-darkPurple-900 hover:bg-purple-800 text-white rounded-sm ${overrideClassName}`}
             onClick={onClick}
         >
             {icon && (

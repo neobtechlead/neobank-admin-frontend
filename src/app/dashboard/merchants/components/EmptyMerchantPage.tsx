@@ -25,7 +25,7 @@ const EmptyMerchantPage = () => {
                     </Flex>
                     <Box>
                         <ButtonWithIcon label="Create New Merchant" onClick={() => router.push("/merchants")}
-                                        icon={PlusIcon} className="!py-4"/>
+                                        icon={PlusIcon} overrideClassName="!py-4"/>
                     </Box>
                 </Flex>
             </Box>

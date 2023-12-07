@@ -1,13 +1,15 @@
 'use client'
-import React, {useMemo} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import TitledHeader from "@/components/TitledHeader";
 import AvatarSection from "@/components/AvatarSection";
-import BasicInfoSection from "@/app/users/components/BasicInfoSection";
 import {MappedDataMerchantInfo} from "@/utils/types/misc";
 import useGetUserInfo, {mapDataToBasicUserInfo, mapDataToHeaderUserInfo} from "@/api/hooks/useGetUserInfo";
 import ErrorPage from "@/app/error";
 import UserSkeleton from "@/app/users/loading";
+import BasicInfoSection from "@/components/BasicInfoSection";
+import ModalDialog from "@/components/ModalDialog";
+import UserModificationForm from "@/app/users/components/UserModificationForm";
 
 
 interface Props {
@@ -21,6 +23,9 @@ interface Props {
 
 
 const User = ({params: {id}}: Props) => {
+
+    const [isEditModalOpen, setEditModalOpen] = useState(false)
+    const handleEditClick = () => setEditModalOpen(true)
 
     const {data, isLoading, error} = useGetUserInfo(id)
 
@@ -40,18 +45,35 @@ const User = ({params: {id}}: Props) => {
 
 
     return (
-        <Box>
-            <TitledHeader title="User Information"/>
-            <Flex direction="column">
-                <Flex justify="between" align="center" className="py-6 px-14 bg-grey-850 border-b">
-                    <AvatarSection name={mappedData.headerInfo?.name!} email={mappedData.headerInfo?.email!}/>
-                </Flex>
-                <Box className="py-6 px-14">
-                    <BasicInfoSection data={mappedData.basicInfo!}/>
-                </Box>
+        <>
+            <ModalDialog
+                isOpen={isEditModalOpen}
+                onRequestClose={() => setEditModalOpen(false)}
+            >
+                <UserModificationForm
+                    userId={id}
+                    onModalClose={() => setEditModalOpen(false)}
+                    defaultValues={{
+                        email: mappedData.headerInfo?.email,
+                        name: mappedData.headerInfo?.name,
+                    }}/>
+            </ModalDialog>
 
-            </Flex>
-        </Box>
+            <Box>
+                <TitledHeader title="User Information"/>
+                <Flex direction="column">
+                    <Flex justify="between" align="center" className="py-6 px-14 bg-grey-850 border-b">
+                        <AvatarSection onEditClick={handleEditClick} name={mappedData.headerInfo?.name!}
+                                       email={mappedData.headerInfo?.email!}/>
+                    </Flex>
+                    <Box className="py-6 px-14">
+                        <BasicInfoSection columns={3} onEditClick={handleEditClick} data={mappedData.basicInfo!}/>
+                    </Box>
+
+                </Flex>
+            </Box>
+        </>
+
     );
 };
 

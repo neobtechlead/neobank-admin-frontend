@@ -6,10 +6,12 @@ import {BasicInfoItem} from "@/utils/types/misc";
 import ContainerCard from "@/components/ContainerCard";
 
 interface BasicInfoCardProps {
+    onEditClick: () => void
     data: BasicInfoItem[][];
+    columns: number
 }
 
-const BasicInfoSection = ({data}: BasicInfoCardProps) => {
+const BasicInfoSection = ({data, onEditClick, columns}: BasicInfoCardProps) => {
     return (
         <ContainerCard>
             <Flex direction="column">
@@ -18,15 +20,14 @@ const BasicInfoSection = ({data}: BasicInfoCardProps) => {
                 </Box>
                 <Flex direction="column" className="p-5 bg-white">
                     {data.map((item, index) => (
-                        <Box key={index} className="grid grid-cols-2">
+                        <Flex key={index} className={`grid grid-cols-${columns}`}>
                             {item.map((el) => (
                                 <Flex key={el.value} className="py-5" align="start" gap="2">
                                     <VStackLabelWithText label={el.label} description={el.value}/>
-                                    {el.editable ? <EditButton onClick={() => {
-                                    }}/> : null}
+                                    {el.editable ? <EditButton onClick={onEditClick}/> : null}
                                 </Flex>
                             ))}
-                        </Box>
+                        </Flex>
                     ))}
                 </Flex>
             </Flex>
