@@ -11,10 +11,10 @@ import useGetMerchantInfo, {
     mapDataToBasicInfo,
     mapDataToDocInfo,
     mapDataToHeaderInfo
-} from "@/api/hooks/useGetMerchantInfo";
+} from "@/api/hooks/queries/useGetMerchantInfo";
 import MerchantSkeleton from "@/app/merchants/loading";
 import ErrorPage from "@/app/error";
-import useGetAccountBalance from "@/api/hooks/useGetAccountBalance";
+import useGetAccountBalance from "@/api/hooks/queries/useGetAccountBalance";
 import ModalDialog from "@/components/ModalDialog";
 import MerchantModificationForm from "@/app/merchants/components/MerchantModificationForm";
 

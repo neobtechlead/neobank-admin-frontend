@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, DashBoardStats} from "@/utils/types/dto";
+import type {ApiResponse, DashBoardStats} from "@/utils/types/dto";
 import StoreFront from "@/assets/svgs/BadgeStoreFront.svg";
 import UserThree from "@/assets/svgs/BadgeUserThree.svg";
 import EllipseGreen from "@/assets/svgs/EllipseG.svg";
@@ -15,7 +15,7 @@ const useDashBoardStats = () => {
     return useQuery({
         queryKey: ["dashBoardStats"],
         queryFn: async () => {
-            const response = await http.get<APIResponse<DashBoardStats>>(`${BASE_URL}/reports/stats`)
+            const response = await http.get<ApiResponse<DashBoardStats>>(`${BASE_URL}/reports/stats`)
             return response.data?.data
         },
     })

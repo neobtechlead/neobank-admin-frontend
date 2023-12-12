@@ -3,7 +3,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import {useRouter} from "next/navigation";
 import ErrorPage from "@/app/error";
-import useCustomerData, {mapDataToCustomerTable} from "@/api/hooks/useCustomerData";
+import useCustomerData, {mapDataToCustomerTable} from "@/api/hooks/queries/useCustomerData";
 import useCustomerStore from "@/stores/customer";
 import CustomerSkeleton from "@/app/dashboard/customers/loading";
 import CustomSelect from "@/components/CustomSelect";
@@ -15,6 +15,8 @@ import {calculatePageInfo} from "@/utils/functions";
 import SearchFilter from "@/components/SearchFilter";
 import DrawerContainer from "@/components/DrawerContainer";
 import CustomerDetails from "@/app/dashboard/customers/components/CustomerDetails";
+import EmptyPlaceholder from "@/assets/images/emptyplaceholdercust.png";
+import NoActivityWrapper from "@/components/NoActivityWrapper";
 
 const CustomerPage = () => {
 
@@ -66,6 +68,14 @@ const CustomerPage = () => {
 
     if (isLoading) return <CustomerSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
+
+
+    // mappedData.rows = []
+    if (mappedData.rows.length === 0) return <NoActivityWrapper btnLabel=""
+                                                                item="customer"
+                                                                path=""
+                                                                description="You have no customers yet. This section will display information when customers come onboard."
+                                                                iconPlaceHolder={EmptyPlaceholder}/>
 
 
     return (

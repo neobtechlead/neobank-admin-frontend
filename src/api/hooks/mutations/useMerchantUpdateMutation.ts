@@ -1,15 +1,15 @@
 import {useMutation, useQueryClient} from "@tanstack/react-query";
 import {MerchantFormValues} from "@/utils/types/form";
 import http from "@/api/http";
-import {APIResponse, Merchant} from "@/utils/types/dto";
+import {ApiResponse, Merchant} from "@/utils/types/dto";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`;
 
-const useMerchantMutation = (id: string) => {
+const useMerchantUpdateMutation = (id: string) => {
     const queryClient = useQueryClient();
 
     return useMutation({
-        mutationFn: async ({id, data}: { id: string; data: MerchantFormValues }) =>
+        mutationFn: ({id, data}: { id: string; data: MerchantFormValues }) =>
             patchMerchant(id, data),
         onSuccess: () => queryClient.invalidateQueries({queryKey: ['merchants', id]}),
     });
@@ -22,7 +22,7 @@ const patchMerchant = async (id: string, data: MerchantFormValues) => {
         formData.append(key, value as string | Blob);
     });
 
-    await http.patch<APIResponse<Merchant>>(`${BASE_URL}/merchants/${id}`, formData);
+    await http.patch<ApiResponse<Merchant>>(`${BASE_URL}/merchants/${id}`, formData);
 };
 
-export default useMerchantMutation;
+export default useMerchantUpdateMutation;

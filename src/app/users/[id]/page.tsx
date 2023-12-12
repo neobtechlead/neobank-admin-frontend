@@ -4,7 +4,7 @@ import {Box, Flex} from "@radix-ui/themes";
 import TitledHeader from "@/components/TitledHeader";
 import AvatarSection from "@/components/AvatarSection";
 import {MappedDataMerchantInfo} from "@/utils/types/misc";
-import useGetUserInfo, {mapDataToBasicUserInfo, mapDataToHeaderUserInfo} from "@/api/hooks/useGetUserInfo";
+import useGetUserInfo, {mapDataToBasicUserInfo, mapDataToHeaderUserInfo} from "@/api/hooks/queries/useGetUserInfo";
 import ErrorPage from "@/app/error";
 import UserSkeleton from "@/app/users/loading";
 import BasicInfoSection from "@/components/BasicInfoSection";

@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
+import type {ApiResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
 import type {IRow, ITable} from "@/utils/types/table";
 
 
@@ -20,7 +20,7 @@ const useMerchantData = (page = 0, size = 10, order = "desc") => {
     return useQuery({
         queryKey: ["merchants", page, size, order],
         queryFn: async () => {
-            const response = await http.get<APIResponse<PaginatedResponse<Merchant>>>(`${BASE_URL}/merchants`, {
+            const response = await http.get<ApiResponse<PaginatedResponse<Merchant>>>(`${BASE_URL}/merchants`, {
                 params: {page, size, order}
             })
             return response.data?.data

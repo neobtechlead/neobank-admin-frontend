@@ -13,7 +13,7 @@ interface Props {
 const TextInputWithLabelSlot = ({label, name, error, placeholder = "", register}: Props) => {
     return (
         <div className="flex flex-col gap-1">
-            <label htmlFor={label} className="block text-xs font-medium text-gray-600">{label}</label>
+            <label htmlFor={label} className="block text-xs font-bold text-gray-600">{label}</label>
             <div className="flex">
                 <span
                     className="p-2 rounded-l-lg font-bold border bg-neutral-200">GHS</span>

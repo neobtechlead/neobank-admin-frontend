@@ -1,5 +1,5 @@
 import React from 'react';
-import {Box, Flex, Text} from "@radix-ui/themes";
+import {Flex, Text} from "@radix-ui/themes";
 
 interface Props {
     label: string,

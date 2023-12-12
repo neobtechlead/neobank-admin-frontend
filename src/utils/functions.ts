@@ -1,4 +1,5 @@
 import {AxiosError} from "axios";
+import _ from 'lodash'
 
 export function formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-GH', {
@@ -36,6 +37,15 @@ export function generateAvatarFallBack(name: string): string {
 export const isAxiosError = (error: any): error is AxiosError => {
     return error.isAxiosError === true;
 };
+
+
+export const extractErrorMessage = (name: string, errors: Record<string, any>) => {
+    const error = _.get(errors, name);
+    return _.get(error, 'message', '');
+
+};
+
+
 
 
 

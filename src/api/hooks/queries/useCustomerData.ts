@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, Customer, CustomersResponse} from "@/utils/types/dto";
+import type {ApiResponse, Customer, CustomersResponse} from "@/utils/types/dto";
 import type {IRow, ITable} from "@/utils/types/table";
 
 
@@ -18,7 +18,7 @@ const useCustomerData = (pageNumber = 0, pageSize = 10) => {
     return useQuery({
         queryKey: ["customers", pageNumber, pageSize],
         queryFn: async () => {
-            const response = await http.get<APIResponse<CustomersResponse>>(`${BASE_URL}/customers`, {
+            const response = await http.get<ApiResponse<CustomersResponse>>(`${BASE_URL}/customers`, {
                 params: {pageNumber, pageSize}
             })
             return response.data?.data

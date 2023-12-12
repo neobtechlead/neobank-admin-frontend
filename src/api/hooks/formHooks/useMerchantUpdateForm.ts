@@ -1,4 +1,4 @@
-import useMerchantMutation from "@/api/hooks/mutations/useMerchantMutation";
+import useMerchantUpdateMutation from "@/api/hooks/mutations/useMerchantUpdateMutation";
 import {useForm} from "react-hook-form";
 import {MerchantFormValues} from "@/utils/types/form";
 import {zodResolver} from "@hookform/resolvers/zod";
@@ -8,7 +8,7 @@ import {isAxiosError} from "axios";
 
 const useMerchantUpdateForm = (defaultValues: MerchantFormValues, merchantId: string) => {
 
-    const {mutateAsync, isPending} = useMerchantMutation(merchantId);
+    const {mutateAsync, isPending} = useMerchantUpdateMutation(merchantId);
 
     const {
         formState: {isDirty, dirtyFields, isSubmitting, isValid, errors},

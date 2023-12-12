@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, Merchant} from "@/utils/types/dto";
+import type {ApiResponse, Merchant} from "@/utils/types/dto";
 import {BasicInfoItem, DocInfoItem} from "@/utils/types/misc";
 
 
@@ -11,7 +11,7 @@ const useGetMerchantInfo = (id: string) => {
     return useQuery({
         queryKey: ["merchants", id],
         queryFn: async () => {
-            const response = await http.get<APIResponse<Merchant>>(`${BASE_URL}/merchants/${id}`)
+            const response = await http.get<ApiResponse<Merchant>>(`${BASE_URL}/merchants/${id}`)
             return response.data?.data
         },
     })

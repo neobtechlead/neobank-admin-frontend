@@ -1,13 +1,19 @@
+'use client'
 import React from 'react';
-import {Box, Heading} from "@radix-ui/themes";
+import {Box} from "@radix-ui/themes";
+import TitledHeader from "@/components/TitledHeader";
+import UserCreationForm from "@/app/users/components/UserCreationForm";
+
 
 const UserPage = () => {
     return (
-        <Box className="flex flex-col items-center justify-center min-h-screen">
-            <Box className="bg-darkPurple-900 text-white p-4">
-                <Heading className="font-bold">User Form HERE</Heading>
-            </Box>
+        <Box>
+            <TitledHeader title="User Creation"/>
+            <UserCreationForm/>
+
         </Box>
+
+
     );
 };
 

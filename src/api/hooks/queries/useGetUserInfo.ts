@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, User} from "@/utils/types/dto";
+import type {ApiResponse, User} from "@/utils/types/dto";
 import {BasicInfoItem} from "@/utils/types/misc";
 
 
@@ -11,7 +11,7 @@ const useGetUserInfo = (id: string) => {
     return useQuery({
         queryKey: ["users", id],
         queryFn: async () => {
-            const response = await http.get<APIResponse<User>>(`${BASE_URL}/merchants/users/${id}`)
+            const response = await http.get<ApiResponse<User>>(`${BASE_URL}/merchants/users/${id}`)
             return response.data?.data
         },
     })

@@ -1,7 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {APIResponse, Customer, CustomersResponse, User} from "@/utils/types/dto";
-import {BasicInfoItem} from "@/utils/types/misc";
+import type {ApiResponse, Customer} from "@/utils/types/dto";
 import UserCircle from "@/assets/svgs/UserCircle.svg";
 import Phone from "@/assets/svgs/Phone.svg";
 
@@ -13,7 +12,7 @@ const useGetCustomerInfo = (id: string) => {
     return useQuery({
         queryKey: ["customers", id],
         queryFn: async () => {
-            const response = await http.get<APIResponse<Customer>>(`${BASE_URL}/customers/${id}`)
+            const response = await http.get<ApiResponse<Customer>>(`${BASE_URL}/customers/${id}`)
             return response.data?.data
         },
     })

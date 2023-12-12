@@ -1,5 +1,4 @@
-
-export interface APIResponse<T> {
+export interface ApiResponse<T> {
     httpStatusCode: number,
     message: string
     data?: T
@@ -134,6 +133,11 @@ export interface Balance {
     actualBalance: string,
     availableBalance: string
 
+}
+
+export interface MerchantsRoles {
+    merchants: string[];
+    roles: string[];
 }
 
 

@@ -9,14 +9,15 @@ import CustomSelect from "@/components/CustomSelect";
 import {color} from "@/utils/constants";
 import {Pagination} from "@/components/pagination";
 import useMerchantStore from "@/stores/merchant";
-import useMerchantData from "@/api/hooks/useMerchantData";
+import useMerchantData from "@/api/hooks/queries/useMerchantData";
 import type {IRow, ITable} from "@/utils/types/table";
 import type {Merchant, PaginatedResponse} from "@/utils/types/dto";
 import MerchantsSkeleton from "@/app/dashboard/merchants/loading";
 import ErrorPage from "@/app/error";
 import {useRouter} from "next/navigation";
 import ButtonWithIcon from "@/components/ButtonWithIcon";
-import EmptyMerchantPage from "@/app/dashboard/merchants/components/EmptyMerchantPage";
+import NoActivityWrapper from "@/components/NoActivityWrapper";
+import EmptyPlaceholder from "@/assets/images/emptyplaceholder.png"
 
 
 const columns = [
@@ -74,7 +75,6 @@ const MerchantsPage = () => {
     const orderBy = selectedOrderBy.value
     const {data, isLoading, error} = useMerchantData(pageNumber, pageSize, orderBy);
 
-
     const mappedData = useMemo(() => {
         if (!data) return {columns, rows: []};
 
@@ -94,8 +94,13 @@ const MerchantsPage = () => {
     if (isLoading) return <MerchantsSkeleton/>;
     if (error) return <ErrorPage onRetry={() => router.refresh()}/>;
 
-    //if empty row
-    if (mappedData.rows.length === 0) return <EmptyMerchantPage/>
+    // mappedData.rows = []
+    // if empty row
+    if (mappedData.rows.length === 0) return <NoActivityWrapper btnLabel="Create New Merchant"
+                                                                item="merchant"
+                                                                path="/merchants"
+                                                                iconPlaceHolder={EmptyPlaceholder}
+    />
 
 
     return (

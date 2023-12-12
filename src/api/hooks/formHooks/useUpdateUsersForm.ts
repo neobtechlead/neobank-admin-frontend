@@ -1,13 +1,13 @@
 import {useForm} from "react-hook-form";
-import {MerchantFormValues, UserFormValues} from "@/utils/types/form";
+import {UserFormValues} from "@/utils/types/form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {toast} from "react-toastify";
 import {isAxiosError} from "axios";
-import useUserMutation from "@/api/hooks/mutations/useUserMutation";
+import useUserUpdateMutation from "@/api/hooks/mutations/useUserUpdateMutation";
 import {UserModificationSchema} from "@/utils/validations/schema/users";
 
-const useUpdateUsersForm = (defaultValues: MerchantFormValues, merchantId: string) => {
-    const {mutateAsync, isPending} = useUserMutation(merchantId);
+const useUpdateUsersForm = (defaultValues: UserFormValues, userId: string) => {
+    const {mutateAsync, isPending} = useUserUpdateMutation(userId);
     const {
         formState: {isDirty, dirtyFields, isSubmitting, isValid, errors},
         handleSubmit,
@@ -26,7 +26,7 @@ const useUpdateUsersForm = (defaultValues: MerchantFormValues, merchantId: strin
                 ...(dirtyFields.email && {email: values.email}),
             };
 
-            await mutateAsync({id: merchantId, data: payload});
+            await mutateAsync({id: userId, data: payload});
         } catch (error) {
             if (isAxiosError(error) && error.response?.status && error.response.status >= 400 && error.response.status < 500) {
                 const errorData: any = error.response.data

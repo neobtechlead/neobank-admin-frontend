@@ -7,6 +7,7 @@ interface Props {
     contentWidth?: string
     children: React.ReactNode;
     shouldCloseOverlayClick?: boolean
+    padding?: string
 }
 
 interface CustomStyles {
@@ -20,13 +21,14 @@ const ModalDialog = ({
                          onRequestClose,
                          children,
                          shouldCloseOverlayClick = true,
-                         contentWidth = "33%"
+                         contentWidth = "33%",
+                         padding = "0"
                      }: Props) => {
     const customStyles: CustomStyles = {
         content: {
             width: contentWidth,
             margin: "0 auto",
-            padding: "0"
+            padding: padding
 
 
         },

@@ -1,10 +1,11 @@
 import React, {useMemo} from 'react';
-import {Box, Flex, Heading, Text} from "@radix-ui/themes";
+import {Box, Flex} from "@radix-ui/themes";
 import IconWithStackedTextLabels from "@/components/IconWithStackedTextLabels";
 import SimpleButton from "@/components/SimpleButton";
-import useGetCustomerInfo, {mapToCustomerDetailsView} from "@/api/hooks/useGetCustomerInfo";
+import useGetCustomerInfo, {mapToCustomerDetailsView} from "@/api/hooks/queries/useGetCustomerInfo";
 import ErrorPage from "@/app/error";
 import CustomerDetailsHeader from "@/app/dashboard/customers/components/CustomerDetailsHeader";
+import useCustomerPinReset from "@/api/hooks/mutations/useCustomerPinReset";
 
 
 interface Props {
@@ -13,6 +14,10 @@ interface Props {
 
 const CustomerDetails = ({id}: Props) => {
     const {data, isLoading, error} = useGetCustomerInfo(id)
+    const {onPinReset, isPending} = useCustomerPinReset()
+
+
+
 
 
     const mappedData = useMemo(() => {
@@ -37,8 +42,9 @@ const CustomerDetails = ({id}: Props) => {
                 </Flex>
                 <Box className="my-10">
                     <SimpleButton
-                        onClick={() => {
-                        }}
+                        isLoading={isPending}
+                        disabled={isPending}
+                        onClick={() => onPinReset(id)}
                         type="button"
                         overrideClassName="!w-full"
                     >
