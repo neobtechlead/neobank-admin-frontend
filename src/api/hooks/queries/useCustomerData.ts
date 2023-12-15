@@ -11,7 +11,7 @@ const columns = [
     {key: 'firstName', label: 'First Name'},
     {key: 'lastName', label: 'Last Name'},
     {key: 'phoneNumber', label: 'Phone Number'},
-    {key: 'mobileNetwork', label: 'Mobile Network'},
+    {key: 'accountIssuer', label: 'Mobile Network'},
 ]
 
 const useCustomerData = (pageNumber = 0, pageSize = 10) => {
@@ -38,8 +38,7 @@ export const mapDataToCustomerTable = (data: CustomersResponse): ITable => {
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            if (key === 'mobileNetwork') rowData[key] = "MTN" //To be removed awaiting backend changes
-            else rowData[key] = (item as any)[key] ?? ""
+            rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;

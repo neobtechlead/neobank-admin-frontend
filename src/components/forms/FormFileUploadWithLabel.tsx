@@ -97,7 +97,7 @@ const FormFileUploadWithLabel = ({label, name, required = false}: Props) => {
     return (
         <div className="flex flex-col gap-1">
             <label htmlFor={name} className="text-xs font-bold text-gray-600">
-                {label}
+                {label} {required && <span className="text-red-500 font-black">*</span>}
             </label>
             <div {...getRootProps({style})}>
                 <input id={name} {...getInputProps()} />

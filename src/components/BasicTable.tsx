@@ -36,7 +36,8 @@ const BasicTable = ({data, isTableRowClickable = false, onRowClick}: Props) => {
                     }`}
                 >
                     {data.columns.map((column, columnIndex) => (
-                        <Table.Cell justify="center" key={column.key}>{row[column.key]}</Table.Cell>
+                        <Table.Cell className="lowercase first-letter:uppercase" justify="center"
+                                    key={column.key}>{row[column.key]}</Table.Cell>
                     ))}
                 </Table.Row>
             ))}

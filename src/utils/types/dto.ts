@@ -91,6 +91,7 @@ export interface Customer {
     firstName?: string;
     lastName?: string;
     phoneNumber?: string;
+    accountIssuer?: string | null
     accountNumber?: string | null;
     email?: string | null;
     status?: string;

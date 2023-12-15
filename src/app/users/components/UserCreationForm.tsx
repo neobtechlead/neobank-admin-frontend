@@ -54,6 +54,7 @@ const UserCreationForm = () => {
                                     <React.Fragment key={index}>
                                         {item.type === 'input' ? (
                                             <TextInputWithLabel
+                                                required={item.required}
                                                 error={extractErrorMessage(item.name, errors)}
                                                 label={item.label}
                                                 name={item.name}
@@ -61,9 +62,11 @@ const UserCreationForm = () => {
                                                 overrideClassName="!py-3"
                                             />
                                         ) : item.type === 'date' ? (
-                                            <FormDatePickerWithLabel name={item.name} label={item.label}/>
+                                            <FormDatePickerWithLabel name={item.name} label={item.label}
+                                                                     required={item.required}/>
                                         ) : item.type === 'select' ? (
                                             <FormSelectWithLabel name={item.name}
+                                                                 required={item.required}
                                                                  isLoading={isLoading}
                                                                  defaultValue={item.defaultValue!}
                                                                  options={item.options!}

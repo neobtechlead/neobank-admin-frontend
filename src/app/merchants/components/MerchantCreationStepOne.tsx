@@ -7,9 +7,10 @@ import {FormFields, MerchantCreationFormOneValues} from "@/utils/types/form";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {MerchantCreationFormOneSchema} from "@/utils/validations/schema/merchants";
 import CountrySelect from "@/components/forms/CountrySelect";
-import RegionSelect from "@/components/forms/RegionSelect";
+
 import useFormStores from "@/stores/form/merchant";
 import {extractErrorMessage} from "@/utils/functions";
+import RegionSelect from "@/components/forms/RegionSelect";
 
 
 interface Props {
@@ -52,6 +53,7 @@ const MerchantCreationStepOne = ({data, onNextClick}: Props) => {
                         <React.Fragment key={index}>
                             {item.type === 'input' ? (
                                 <TextInputWithLabel
+                                    required={item.required}
                                     error={extractErrorMessage(item.name, errors)}
                                     label={item.label}
                                     name={item.name}
@@ -59,15 +61,15 @@ const MerchantCreationStepOne = ({data, onNextClick}: Props) => {
                                     overrideClassName="!py-3"
                                 />
                             ) : item.type === 'select' && item.name === 'country' ? (
-                                <CountrySelect name={item.name} label={item.label}/>
+                                <CountrySelect name={item.name} label={item.label} required={item.required}/>
                             ) : item.type === 'select' && item.name === 'state' ? (
-                                <RegionSelect name={item.name} label={item.label}/>
+                                <RegionSelect name={item.name} label={item.label} required={item.required}/>
                             ) : null}
                         </React.Fragment>
                     ))}
                 </Box>
                 <Box className="mt-20">
-                    <SimpleButton disabled={!isValid || !isDirty || isSubmitting} type="submit"
+                    <SimpleButton disabled={!isValid || isSubmitting} type="submit"
                                   overrideClassName="!w-full">Next</SimpleButton>
                 </Box>
             </form>

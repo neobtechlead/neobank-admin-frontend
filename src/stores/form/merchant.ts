@@ -23,7 +23,7 @@ const useFormStores = create<IMerchantCreationStore>()(
             firstName: '',
             lastName: '',
             zipCode: '',
-            state: '',
+            state: 'Greater Accra',
             city: '',
             streetAddress: '',
             phoneNumber: '',

@@ -27,7 +27,6 @@ const useUserCreationForm = () => {
 
     const onSubmit = async (values: UserCreationFormValues) => {
         try {
-            console.log(values)
             await mutateAsync({data: values});
             methods.reset() //reset form after successful creation
         } catch (error) {

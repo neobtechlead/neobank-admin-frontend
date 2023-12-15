@@ -1,32 +1,43 @@
 import React from 'react';
+import {Controller, useFormContext} from "react-hook-form";
 import {CountryDropdown} from "react-country-region-selector";
-import {useFormContext} from "react-hook-form";
-import useFormStores from "@/stores/form/merchant";
 import {extractErrorMessage} from "@/utils/functions";
+import useFormStores from "@/stores/form/merchant";
+import FormLabel from "@/components/forms/FormLabel";
+
 
 interface Props {
     name: string,
     label: string
+    required?: boolean
 }
 
-const CountrySelect = ({name, label}: Props) => {
-    const {setValue, formState: {errors}} = useFormContext()
-    const {updateSelectedCountry, selectedCountry} = useFormStores()
+const CountrySelect = ({name, label, required}: Props) => {
 
-
-    const handleOnChange = (value: string) => {
-        updateSelectedCountry(value)
-        setValue(name, value, {shouldValidate: true, shouldTouch: true, shouldDirty: true})
-
-    }
+    const {updateSelectedCountry} = useFormStores()
+    const {control, setValue, formState: {errors}} = useFormContext();
     return (
         <div className="flex flex-col gap-1">
-            <label htmlFor={name} className="text-xs font-bold text-gray-600">{label}</label>
-            <CountryDropdown
-                value={selectedCountry}
-                onChange={handleOnChange}
-                classes="p-3 w-full border border-gray-300 rounded-lg"/>
-            {<span className="text-xs text-red-700 text-left ">{extractErrorMessage(name, errors)}</span>}
+            <FormLabel name={name} label={label} required={required}/>
+            <Controller
+                name={name}
+                control={control}
+                render={({field: {onChange, onBlur, name, value, ref}}) => (
+                    <CountryDropdown
+                        onChange={(value) => {
+                            updateSelectedCountry(value)
+                            onChange(value)
+                        }}
+                        id={name}
+                        value={value}
+                        name={name}
+                        onBlur={onBlur}
+                        ref={ref}
+                        classes="p-3 w-full border border-gray-300 rounded-lg"
+                    />
+                )}
+            />
+            <span className="text-xs text-red-500 text-left">{extractErrorMessage(name, errors)}</span>
         </div>
     );
 };

@@ -1,5 +1,6 @@
 import React from 'react';
 import {UseFormRegister} from "react-hook-form";
+import FormLabel from "@/components/forms/FormLabel";
 
 
 interface Props {
@@ -8,14 +9,15 @@ interface Props {
     name: string;
     placeholder?: string;
     register: UseFormRegister<any>
+    required?: boolean
     overrideClassName?: string
 
 }
 
-const TextInputWithLabel = ({label, name, error, overrideClassName, placeholder = "", register}: Props) => {
+const TextInputWithLabel = ({label, name, required, error, overrideClassName, placeholder = "", register}: Props) => {
     return (
         <div className="flex flex-col gap-1">
-            <label htmlFor={name} className="text-xs font-bold text-gray-600">{label}</label>
+            <FormLabel name={name} label={label} required={required}/>
             <input id={name}
                    {...register(name)}
                    placeholder={placeholder}

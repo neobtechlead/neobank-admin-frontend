@@ -5,17 +5,17 @@ import {Box} from "@radix-ui/themes";
 import MerchantFormHeader from "@/app/merchants/components/MerchantFormHeader";
 
 const formOneFields = [
-    {label: 'Business Name', name: 'businessName', type: 'input'},
-    {label: 'Trading Name', name: 'tradingName', type: 'input'},
-    {label: 'First Name', name: 'firstName', type: 'input'},
-    {label: 'Last Name', name: 'lastName', type: 'input'},
-    {label: 'Residential Address', name: 'city', type: 'input'},
-    {label: 'Country', name: 'country', type: 'select'},
-    {label: 'Region', name: 'state', type: 'select'},
+    {label: 'Business Name', name: 'businessName', type: 'input', required: true,},
+    {label: 'Trading Name', name: 'tradingName', type: 'input', required: true,},
+    {label: 'First Name', name: 'firstName', type: 'input', required: true,},
+    {label: 'Last Name', name: 'lastName', type: 'input', required: true,},
+    {label: 'Residential Address', name: 'city', type: 'input', required: true,},
+    {label: 'Country', name: 'country', type: 'select', required: true,},
+    {label: 'Region', name: 'state', type: 'select', required: true,},
     {label: 'Zip Code', name: 'zipCode', type: 'input'},
-    {label: 'Street', name: 'streetAddress', type: 'input'},
-    {label: 'Phone Number', name: 'phoneNumber', type: 'input'},
-    {label: 'Email Address', name: 'email', type: 'input'},
+    {label: 'Street', name: 'streetAddress', type: 'input', required: true,},
+    {label: 'Phone Number', name: 'phoneNumber', type: 'input', required: true,},
+    {label: 'Email Address', name: 'email', type: 'input', required: true,},
     {label: 'Description', name: 'description', type: 'input'},
 ];
 const formTwoFields = [
@@ -33,6 +33,7 @@ const formTwoFields = [
     {
         label: 'Tax Clearance Certificate',
         name: 'taxClearanceCertificate',
+        required: true,
         type: 'file',
     },
     {
