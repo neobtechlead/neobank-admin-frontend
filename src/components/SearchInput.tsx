@@ -8,9 +8,9 @@ interface Props {
     onChange: (value: any) => void
 }
 
-const SearchFilter = ({placeholder, onChange}: Props) => {
+const SearchInput = ({placeholder, onChange}: Props) => {
     return (
-        <TextField.Root size="3" radius="large" className="py-1">
+        <TextField.Root size="3" radius="large" className="py-2 px-4">
             <TextField.Slot>
                 <Image src={MagnifyingGlassIcon} alt="" width={16} height={16}/>
             </TextField.Slot>
@@ -19,4 +19,4 @@ const SearchFilter = ({placeholder, onChange}: Props) => {
     );
 };
 
-export default SearchFilter;
+export default SearchInput;

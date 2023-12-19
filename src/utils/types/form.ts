@@ -6,6 +6,7 @@ export interface MerchantFormValues {
     businessName?: string
     email?: string,
     balance?: number
+    accountName?: string
 
 }
 
@@ -56,6 +57,12 @@ export interface MerchantCreationFormValues {
 }
 
 export type UserCreationFormValues = z.input<typeof UserCreationFormSchema>
+
+
+export interface CustomerBalanceValues {
+    currentBalance: number,
+    newBalance: number
+}
 
 
 

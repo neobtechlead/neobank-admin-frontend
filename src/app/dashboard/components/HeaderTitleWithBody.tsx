@@ -8,7 +8,7 @@ interface Props {
 
 const HeaderTitleWithBody = ({title, body}: Props) => {
     return (
-        <Flex direction="column" justify="center" className="ml-24 h-36">
+        <Flex direction="column" justify="center" className="ml-24 h-32">
             <Heading>{title}</Heading>
             <Text>{body}</Text>
         </Flex>

@@ -12,13 +12,18 @@ import {Pagination} from "@/components/pagination";
 import CustomerTable from "@/app/dashboard/customers/components/CustomerTable";
 import {CustomersResponse} from "@/utils/types/dto";
 import {calculatePageInfo} from "@/utils/functions";
-import SearchFilter from "@/components/SearchFilter";
+import SearchInput from "@/components/SearchInput";
 import DrawerContainer from "@/components/DrawerContainer";
 import CustomerDetails from "@/app/dashboard/customers/components/CustomerDetails";
 import EmptyPlaceholder from "@/assets/images/emptyplaceholdercust.png";
 import NoActivityWrapper from "@/components/NoActivityWrapper";
+import ModalDialog from "@/components/ModalDialog";
+import MerchantModificationForm from "@/app/merchants/components/MerchantModificationForm";
+import CustomerBalanceAdjustmentForm from "@/app/dashboard/customers/components/CustomerBalanceAdjustmentForm";
 
 const CustomerPage = () => {
+
+    const router = useRouter()
 
     const {
         pageSizeChange,
@@ -31,16 +36,25 @@ const CustomerPage = () => {
         pageSizes,
     } = useCustomerStore();
 
+
     const [isOpen, setIsOpen] = useState(false)
     const [selectedCustomerId, setSelectCustomerId] = useState("")
+    const [isBalanceEditModalOpen, setBalanceEditModalOpen] = useState(false);
+
+
+
     const toggleDrawer = () => {
         setIsOpen(prevState => !prevState)
     }
 
-    const router = useRouter()
+    const handleBalanceEditModalClose = () => {
+        setBalanceEditModalOpen(false)
+    }
+
 
     const pageSize = parseInt(selectedPageSize.value)
     const {data, isLoading, error} = useCustomerData(pageNumber, pageSize);
+
 
 
     const mappedData = useMemo(() => {
@@ -81,13 +95,21 @@ const CustomerPage = () => {
     return (
         <>
             {selectedCustomerId && <DrawerContainer isOpen={isOpen} onClose={toggleDrawer}>
-                <CustomerDetails id={selectedCustomerId}/>
+                <CustomerDetails id={selectedCustomerId} onBalanceModify={() => setBalanceEditModalOpen(true)}/>
             </DrawerContainer>}
+
+            <ModalDialog isOpen={isBalanceEditModalOpen} onRequestClose={handleBalanceEditModalClose}>
+                <CustomerBalanceAdjustmentForm
+                    defaultValues={{currentBalance: 45666, newBalance: 45666}} //To be removed
+                    onModalClose={handleBalanceEditModalClose}
+                    customerId={selectedCustomerId}/>
+            </ModalDialog>
+
             <Box p="5">
                 <Flex direction="column" gap="5">
                     <Flex justify="end">
                         <Flex gap="3" align="stretch">
-                            <SearchFilter onChange={(value) => console.log(value)}/>
+                            <SearchInput onChange={(value) => console.log(value)}/>
                         </Flex>
                     </Flex>
                     <CustomerTable onRowClick={handleRowClick} data={mappedData}/>

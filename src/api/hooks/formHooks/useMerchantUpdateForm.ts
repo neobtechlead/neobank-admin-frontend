@@ -27,8 +27,8 @@ const useMerchantUpdateForm = (defaultValues: MerchantFormValues, merchantId: st
                 ...(dirtyFields.balance && {balance: values.balance}),
                 ...(dirtyFields.businessName && {businessName: values.businessName}),
                 ...(dirtyFields.email && {email: values.email}),
+                accountName: "Login Name" // To be removed
             };
-
             await mutateAsync({id: merchantId, data: payload});
         } catch (error) {
             if (isAxiosError(error) && error.response?.status && error.response.status >= 400 && error.response.status < 500) {

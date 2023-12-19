@@ -6,13 +6,15 @@ import useGetCustomerInfo, {mapToCustomerDetailsView} from "@/api/hooks/queries/
 import ErrorPage from "@/app/error";
 import CustomerDetailsHeader from "@/app/dashboard/customers/components/CustomerDetailsHeader";
 import useCustomerPinReset from "@/api/hooks/mutations/useCustomerPinReset";
+import CustomerInfoLoader from "@/app/dashboard/customers/components/CustomerInfoLoader";
 
 
 interface Props {
-    id: string
+    id: string,
+    onBalanceModify: () => void
 }
 
-const CustomerDetails = ({id}: Props) => {
+const CustomerDetails = ({id, onBalanceModify}: Props) => {
     const {data, isLoading, error} = useGetCustomerInfo(id)
     const {onPinReset, isPending} = useCustomerPinReset()
 
@@ -26,7 +28,7 @@ const CustomerDetails = ({id}: Props) => {
 
     }, [data]);
 
-    if (isLoading) return <Box>Loading</Box>
+    if (isLoading) return <CustomerInfoLoader/>
     if (error) return <ErrorPage onRetry={() => {
     }}/>
 
@@ -41,15 +43,29 @@ const CustomerDetails = ({id}: Props) => {
                     </Box>)}
                 </Flex>
                 <Box className="my-10">
-                    <SimpleButton
-                        isLoading={isPending}
-                        disabled={isPending}
-                        onClick={() => onPinReset(id)}
-                        type="button"
-                        overrideClassName="!w-full"
-                    >
-                        Reset customer pin
-                    </SimpleButton>
+                    <Flex direction="column" gap="5">
+                        <SimpleButton
+                            isLoading={isPending}
+                            disabled={isPending}
+                            onClick={() => onPinReset(id)}
+                            type="button"
+                            overrideClassName="!w-full"
+                        >
+                            Reset customer pin
+                        </SimpleButton>
+
+                        <SimpleButton
+                            isLoading={isPending}
+                            disabled={isPending}
+                            onClick={onBalanceModify}
+                            type="button"
+                            styleType="tertiary"
+                            overrideClassName="!w-full"
+                        >
+                            Modify Customer Balance
+                        </SimpleButton>
+                    </Flex>
+
                 </Box>
 
 

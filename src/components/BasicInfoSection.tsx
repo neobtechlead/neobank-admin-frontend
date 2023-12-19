@@ -21,8 +21,8 @@ const BasicInfoSection = ({data, onEditClick, columns}: BasicInfoCardProps) => {
                 <Flex direction="column" className="p-5 bg-white">
                     {data.map((item, index) => (
                         <Flex key={index} className={`grid grid-cols-${columns}`}>
-                            {item.map((el) => (
-                                <Flex key={el.value} className="py-5" align="start" gap="2">
+                            {item.map((el, rowIndex) => (
+                                <Flex key={rowIndex} className="py-5" align="start" gap="2">
                                     <VStackLabelWithText label={el.label} description={el.value}/>
                                     {el.editable ? <EditButton onClick={onEditClick}/> : null}
                                 </Flex>

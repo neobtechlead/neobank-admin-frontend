@@ -7,15 +7,22 @@ export interface ApiResponse<T> {
 }
 
 export interface DashBoardStats {
-    totalTransactionsValue: number;
-    totalDisbursementsValue: number;
-    totalCollectionsValue: number;
-    failedDisbursementsValue: number;
-    failedCollectionsValue: number;
-    successfulDisbursementsValue: number;
-    successfulCollectionsValue: number;
-    totalMerchants: number;
-    totalCustomers: number;
+    totalSuccessfulCollectionVolume: number;
+    totalFailedDisbursementValue: number;
+    totalDisbursementVolume: number;
+    totalFailedCollectionVolume: number;
+    totalDisbursementValue: number;
+    totalSuccessfulDisbursementValue: number;
+    totalSuccessfulCollectionValue: number;
+    totalSuccessfulDisbursementVolume: number;
+    totalCollectionValue: number;
+    totalFailedCollectionValue: number;
+    totalCollectionVolume: number;
+    totalAccounts: {
+        CUSTOMER: number;
+        MERCHANT: number;
+    };
+    totalFailedDisbursementVolume: number;
 }
 
 

@@ -9,7 +9,7 @@ import {color} from "@/utils/constants";
 import {Pagination} from "@/components/pagination";
 import usersStore from "@/stores/user";
 import useGetUsersData, {mapDataToUsersTable} from "@/api/hooks/queries/useGetUsersData";
-import SearchFilter from "@/components/SearchFilter";
+import SearchInput from "@/components/SearchInput";
 import UserTable from "@/app/dashboard/users/components/UserTable";
 import UsersSkeleton from "@/app/dashboard/users/loading";
 import EmptyPlaceholder from "@/assets/images/emptyplaceholderuser.png"
@@ -67,8 +67,8 @@ const UserPage = () => {
             <Flex direction="column" gap="5">
                 <Flex justify="end">
                     <Flex gap="3" align="stretch">
-                        <Flex gap="3" align="stretch">
-                            <SearchFilter onChange={(value) => console.log(value)}/>
+                        <Flex gap="3">
+                            <SearchInput onChange={(value) => console.log(value)}/>
                             <SimpleButton
                                 onClick={() => router.push("/users")}
                                 overrideClassName="!px-6">

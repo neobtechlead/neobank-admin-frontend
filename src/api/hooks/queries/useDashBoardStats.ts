@@ -24,10 +24,10 @@ const useDashBoardStats = () => {
 export default useDashBoardStats;
 
 
-export const mapDataToCard = ({totalCustomers, totalMerchants}: DashBoardStats) => {
+export const mapDataToCard = ({totalAccounts: {CUSTOMER, MERCHANT}}: DashBoardStats) => {
     return [
-        {label: "Merchants", totalCounts: `${totalMerchants}`, icon: StoreFront},
-        {label: "Customers", totalCounts: `${totalCustomers}`, icon: UserThree}
+        {label: "Merchants", totalCounts: `${MERCHANT ?? 0}`, icon: StoreFront},
+        {label: "Customers", totalCounts: `${CUSTOMER ?? 0}`, icon: UserThree}
     ]
 
 }
@@ -36,27 +36,27 @@ export const mapDataToCard = ({totalCustomers, totalMerchants}: DashBoardStats) 
 export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats) => {
 
 
-    const {
-        successfulDisbursementsValue,
-        failedDisbursementsValue,
-        successfulCollectionsValue,
-        failedCollectionsValue,
-        totalTransactionsValue,
-        totalDisbursementsValue,
-        totalCollectionsValue
+    let {
+        totalSuccessfulDisbursementValue: successfulDisbursementsValue,
+        totalFailedDisbursementValue: failedDisbursementsValue,
+        totalSuccessfulCollectionValue: successfulCollectionsValue,
+        totalFailedCollectionValue: failedCollectionsValue,
+        totalDisbursementValue: totalDisbursementsValue,
+        totalCollectionValue: totalCollectionsValue
     } = stats
+
 
     const map = {
         disbursements: {
             legendData: [
                 {
                     title: "Successful",
-                    content: `GHS ${formatCurrency(successfulDisbursementsValue)}`,
+                    content: `GHS ${formatCurrency(successfulDisbursementsValue ?? 0)}`,
                     icon: EllipseGreen
                 },
                 {
                     title: "Failed",
-                    content: `GHS ${formatCurrency(failedDisbursementsValue)}`,
+                    content: `GHS ${formatCurrency(failedDisbursementsValue ?? 0)}`,
                     icon: EllipseRed
                 },
             ],
@@ -66,7 +66,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 datasets: [
                     {
                         label: '',
-                        data: [successfulDisbursementsValue, failedDisbursementsValue],
+                        data: [successfulDisbursementsValue ?? 0, failedDisbursementsValue ?? 0],
                         backgroundColor: [color.chartGreen, color.chartRed],
                         borderColor: [color.white, color.white],
                         borderWidth: 1,
@@ -74,7 +74,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 ],
             },
 
-            metaData: {label: "Total Disbursements", value: `GHS ${formatCurrency(totalDisbursementsValue)}`}
+            metaData: {label: "Total Disbursements", value: `GHS ${formatCurrency(totalDisbursementsValue ?? 0)}`}
 
 
         },
@@ -83,12 +83,12 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
             legendData: [
                 {
                     title: "Successful",
-                    content: `GHS ${formatCurrency(successfulCollectionsValue)}`,
+                    content: `GHS ${formatCurrency(successfulCollectionsValue ?? 0)}`,
                     icon: EllipseGreen
                 },
                 {
                     title: "Failed",
-                    content: `GHS ${formatCurrency(failedCollectionsValue)}`,
+                    content: `GHS ${formatCurrency(failedCollectionsValue ?? 0)}`,
                     icon: EllipseRed
                 },
             ],
@@ -98,7 +98,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 datasets: [
                     {
                         label: '',
-                        data: [successfulCollectionsValue, failedCollectionsValue],
+                        data: [successfulCollectionsValue ?? 0, failedCollectionsValue ?? 0],
                         backgroundColor: [color.chartGreen, color.chartRed],
                         borderColor: [color.white, color.white],
                         borderWidth: 1,
@@ -107,7 +107,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
 
                 ],
             },
-            metaData: {label: "Total Collections", value: `GHS ${formatCurrency(totalCollectionsValue)}`}
+            metaData: {label: "Total Collections", value: `GHS ${formatCurrency(totalCollectionsValue ?? 0)}`}
 
         },
 

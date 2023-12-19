@@ -66,7 +66,7 @@ const Merchant = ({params: {id}}: Props) => {
                     defaultValues={{
                         email: mappedData.headerInfo?.email ?? "",
                         businessName: mappedData.headerInfo?.businessName ?? "",
-                        balance: parseInt(balanceData?.actualBalance!)
+                        balance: parseInt(balanceData?.actualBalance ?? "0")
                     }}
                     onModalClose={handleModalClose}
                     merchantId={id}
@@ -79,7 +79,7 @@ const Merchant = ({params: {id}}: Props) => {
                     <Flex justify="between" align="center" className="py-6 px-14 bg-grey-850 border-b">
                         <AvatarSection onEditClick={handleEditClick} name={mappedData.headerInfo?.businessName!}
                                        email={mappedData.headerInfo?.email!}/>
-                        <BalanceSection balance={balanceData?.actualBalance!}/>
+                        <BalanceSection balance={balanceData?.availableBalance ?? "0"} onClick={handleEditClick}/>
                     </Flex>
                     <Box className="py-6 px-14">
                         <BasicInfoSection columns={2} onEditClick={handleEditClick} data={mappedData.basicInfo!}/>

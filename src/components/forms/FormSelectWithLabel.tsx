@@ -3,6 +3,7 @@ import Select from 'react-select';
 import {Controller, useFormContext} from 'react-hook-form';
 import {extractErrorMessage} from '@/utils/functions';
 import FormLabel from "@/components/forms/FormLabel";
+import {defaultStyles} from "react-modal";
 
 interface Props {
     name: string;
@@ -20,6 +21,7 @@ const FormSelectWithLabel = ({
                                  label,
                                  isLoading,
                                  required,
+
                              }: Props) => {
     const {control, setValue, formState: {errors}} = useFormContext();
 
@@ -34,11 +36,34 @@ const FormSelectWithLabel = ({
     const borderStyle = '1px solid #ccc';
 
     const customStyles = {
-        // your custom styles...
+        option: (defaultStyles: any, state: any) => ({
+            ...defaultStyles,
+            color: state.isSelected ? '#fff' : '#652D90',
+            backgroundColor: state.isSelected ? '#652D90' : '#fff',
+
+        }),
+        dropdownIndicator: (defaultStyles: any) => ({
+            color: "#000"
+        }),
+
+        control: (defaultStyles: any, state: any) => ({
+            ...defaultStyles,
+            color: '#652D90',
+            border: `${borderStyle}`,
+            borderRadius: "8px",
+            padding: "6px 0px",
+            boxShadow: 'none',
+            '&:hover': {
+                border: `${borderStyle}`
+            },
+            backgroundColor: '#fff',
+            outline: 'none',
+        }),
+        singleValue: (defaultStyles: any) => ({...defaultStyles, color: "#000"}),
     };
 
     return (
-        <div>
+        <div className="flex flex-col gap-1">
             <FormLabel name={name} label={label} required={required}/>
             <Controller
                 name={name}

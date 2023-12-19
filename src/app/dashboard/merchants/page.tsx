@@ -23,7 +23,7 @@ import EmptyPlaceholder from "@/assets/images/emptyplaceholder.png"
 const columns = [
     {key: 'businessName', label: 'Merchant Business Name'},
     {key: 'tradingName', label: 'Merchant Trading Name'},
-    {key: 'externalId', label: 'Merchant ID'},
+    {key: 'neobankAccountNumber', label: 'Merchant ID'},
     {key: 'address', label: 'Merchant Address'},
     {key: 'country', label: 'Country'},
     {key: 'icon', label: ''}
@@ -42,7 +42,6 @@ const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
         columnKeys.forEach((key) => {
             if (key === 'address') rowData[key] = item.address?.city
             else if (key === 'country') rowData[key] = item.address?.country
-            else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
             else if (key === 'icon') rowData[key] = <LinkIcon href={`/merchants/${externalId}`} icon={CaretRight}/>
             else rowData[key] = (item as any)[key] ?? ""
         });

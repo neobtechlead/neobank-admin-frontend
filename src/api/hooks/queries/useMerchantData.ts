@@ -10,7 +10,7 @@ const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 const columns = [
     {key: 'businessName', label: 'Merchant Business Name'},
     {key: 'tradingName', label: 'Merchant Trading Name'},
-    {key: 'externalId', label: 'Merchant ID'},
+    {key: 'neobankAccountNumber', label: 'Merchant ID'},
     {key: 'address', label: 'Merchant Address'},
     {key: 'country', label: 'Country'},
 
@@ -34,15 +34,15 @@ export default useMerchantData;
 export const mapDataToMerchantTable = (data: PaginatedResponse<Merchant>): ITable => {
     const {content} = data
     const rows: IRow[] = content.map((item: Merchant) => {
+        const externalId = item.externalId ?? ""
 
-        const rowData: IRow = {};
+        const rowData: IRow = {externalId};
 
         const columnKeys = columns.map(item => item.key)
 
         columnKeys.forEach((key) => {
             if (key === 'address') rowData[key] = item.address?.city
             else if (key === 'country') rowData[key] = item.address?.country
-            else if (key === 'externalId') rowData[key] = item[key]?.substring(0, 7)
             else rowData[key] = (item as any)[key] ?? ""
         });
 

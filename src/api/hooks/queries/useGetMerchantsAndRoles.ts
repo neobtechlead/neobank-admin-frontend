@@ -73,7 +73,36 @@ export const mapApiDataToFormFields = (data: MerchantsRoles | undefined, isLoadi
         ];
 
     }
+};
 
+
+export const mapApiDataToReportFormFields = (data: MerchantsRoles | undefined, isLoading: boolean): FormFields[] => {
+    const {merchants} = data ?? {}
+    return [
+        {
+            label: 'Merchant Name',
+            name: 'merchants',
+            type: 'select',
+            required: true,
+            defaultValue: {label: "Select Merchant", value: ""},
+            options: !isLoading && merchants && merchants.length > 0 ? merchants.map((merchant) => ({
+                label: merchant,
+                value: merchant
+            })) : [{label: "Select Merchant", value: ""}],
+        },
+        {label: 'Start Date', name: 'startDate', type: 'date'},
+        {label: 'End Date', name: 'endDate', type: 'date'},
+        {
+            label: 'Transaction Status',
+            name: 'status', type: 'select',
+            required: true,
+            defaultValue: {label: "Select Status", value: ""},
+            options: [
+                {label: "In-Progress", value: "PENDING"},
+                {label: "Successful", value: "COMPLETED"},
+                {label: "Failed", value: "FAILED"}
+            ]
+        }]
 
 };
 
