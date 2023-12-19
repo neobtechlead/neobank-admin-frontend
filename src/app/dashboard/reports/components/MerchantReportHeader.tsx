@@ -37,8 +37,8 @@ const MerchantReportHeader = () => {
                                 {item.type === 'select' ? <FormSelectWithLabel
                                     name={item.name}
                                     label={item.label}
-                                    defaultValue={item.defaultValue}
-                                    options={item.options}
+                                    defaultValue={item.defaultValue!}
+                                    options={item.options!}
                                 /> : (
                                     item.type === 'date' ? <FormDatePickerWithLabel
                                         name={item.name}

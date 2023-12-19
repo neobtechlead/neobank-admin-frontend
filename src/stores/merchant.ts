@@ -1,11 +1,9 @@
 import {create} from 'zustand'
-import {persist} from 'zustand/middleware'
 import type ISelect from "@/utils/types/select";
 import type {IPageStore} from "@/utils/types/storeInterface";
 
 
 const useMerchantStore = create<IPageStore>()(
-        persist(
             (set, get) => ({
                 pageSizes: [
                     {label: '10', value: '10'},
@@ -39,8 +37,6 @@ const useMerchantStore = create<IPageStore>()(
 
 
             }),
-            {name: 'merchantStore'},
-        )
 )
 
 export default useMerchantStore
