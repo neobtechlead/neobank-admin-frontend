@@ -4,12 +4,13 @@ import {Box, Flex, Text} from "@radix-ui/themes";
 
 interface Props {
     label: string,
-    value: string,
-    icon: string
+    value: string | number,
+    icon: string,
+    overrideClassValue?: string
 
 }
 
-const IconWithStackedTextLabels = ({label, value, icon}: Props) => {
+const IconWithStackedTextLabels = ({label, value, overrideClassValue, icon}: Props) => {
     return (
         <Flex align="center" gap="3">
             <Box>
@@ -17,7 +18,7 @@ const IconWithStackedTextLabels = ({label, value, icon}: Props) => {
             </Box>
             <Flex direction="column" gap="1">
                 <Text className="text-xs text-grey-900 font-semibold leading-4">{label}</Text>
-                <Text className="text-sm">{value}</Text>
+                <Text className={`text-sm ${overrideClassValue}`}>{value}</Text>
             </Flex>
 
         </Flex>

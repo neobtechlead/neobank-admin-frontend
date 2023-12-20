@@ -4,9 +4,9 @@ import useReportStores from "@/stores/reports";
 
 const ReportTabs = () => {
 
-    const {selectReportTab, updateSelectedReportTab} = useReportStores()
+    const {selectedReportTab, updateSelectedReportTab} = useReportStores()
 
-    const btnClasses = (tabName: string) => `p-2 ${selectReportTab === tabName ? 'border-b-[3px] border-purple-900 font-bold' : ''}`
+    const btnClasses = (tabName: string) => `p-2 transition duration-300 ease-in-out ${selectedReportTab === tabName ? 'border-b-[3px] border-purple-900 font-bold' : ''}`
 
     return (
         <Flex gap="6">

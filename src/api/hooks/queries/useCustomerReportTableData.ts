@@ -20,7 +20,7 @@ const columns = [
 
 const fakeData = [
     {
-        "updatedAt": "2023-12-15T10:23:45",
+        "updatedAt": "2023-12-15",
         "externalId": "T123456789",
         "senderName": "John Doe",
         "recipientName": "Jane Smith",
@@ -30,7 +30,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-14T15:45:30",
+        "updatedAt": "2023-12-14",
         "externalId": "T987654321",
         "senderName": "Alice Johnson",
         "recipientName": "Bob Williams",
@@ -40,7 +40,7 @@ const fakeData = [
         "balanceAfter": 400,
     },
     {
-        "updatedAt": "2023-12-13T08:12:15",
+        "updatedAt": "2023-12-13",
         "externalId": "T555555555",
         "senderName": "Eva Davis",
         "recipientName": "Mark Wilson",
@@ -50,7 +50,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-12T14:30:00",
+        "updatedAt": "2023-12-12",
         "externalId": "T111122223",
         "senderName": "Chris Taylor",
         "recipientName": "Lily Brown",
@@ -60,7 +60,7 @@ const fakeData = [
         "balanceAfter": 1000,
     },
     {
-        "updatedAt": "2023-12-11T20:01:45",
+        "updatedAt": "2023-12-115",
         "externalId": "T999988887",
         "senderName": "Samuel Clark",
         "recipientName": "Emily White",
@@ -70,7 +70,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-15T10:23:45",
+        "updatedAt": "2023-12-15",
         "externalId": "T123456789",
         "senderName": "John Doe",
         "recipientName": "Jane Smith",
@@ -80,7 +80,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-14T15:45:30",
+        "updatedAt": "2023-12-14",
         "externalId": "T987654321",
         "senderName": "Alice Johnson",
         "recipientName": "Bob Williams",
@@ -90,7 +90,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-13T08:12:15",
+        "updatedAt": "2023-12-13",
         "externalId": "T555555555",
         "senderName": "Eva Davis",
         "recipientName": "Mark Wilson",
@@ -100,7 +100,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-12T14:30:00",
+        "updatedAt": "2023-12-12",
         "externalId": "T111122223",
         "senderName": "Chris Taylor",
         "recipientName": "Lily Brown",
@@ -110,7 +110,7 @@ const fakeData = [
         "balanceAfter": 200,
     },
     {
-        "updatedAt": "2023-12-11T20:01:45",
+        "updatedAt": "2023-12-11",
         "externalId": "T999988887",
         "senderName": "Samuel Clark",
         "recipientName": "Emily White",

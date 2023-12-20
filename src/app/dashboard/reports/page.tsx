@@ -12,7 +12,7 @@ import {mapDataToCustomerReportTable} from "@/api/hooks/queries/useCustomerRepor
 
 const ReportPage = () => {
 
-    const {selectReportTab} = useReportStores()
+    const {selectedReportTab} = useReportStores()
 
     const mappedData = useMemo(() => {
         const merchantData = mapDataToMerchantReportTable({})
@@ -27,7 +27,7 @@ const ReportPage = () => {
     />
 
     const showReportContent = () => {
-        return selectReportTab === 'merchants' ?
+        return selectedReportTab === 'merchants' ?
             <MerchantReport
                 data={mappedData.merchantData}
             /> : <CustomerReport

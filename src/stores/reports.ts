@@ -1,7 +1,9 @@
 import {create} from 'zustand'
 
 interface IReportStore {
-    selectReportTab: string
+    selectedReportTab: string
+    selectMerchantReportType: string,
+    updateSelectedMerchantReportType: (tabName: string) => void
     updateSelectedReportTab: (tabName: string) => void
 
 
@@ -10,10 +12,14 @@ interface IReportStore {
 
 const useReportStores = create<IReportStore>()(
     (set, get) => ({
-        selectReportTab: "merchants",
+        selectedReportTab: "merchants",
+        selectMerchantReportType: "collections",
         updateSelectedReportTab: (tabName: string) => set(() => ({
-            selectReportTab: tabName
-        }))
+            selectedReportTab: tabName
+        })),
+        updateSelectedMerchantReportType: (tabName: string) => set(() => ({
+            selectMerchantReportType: tabName
+        })),
 
     }),
 )

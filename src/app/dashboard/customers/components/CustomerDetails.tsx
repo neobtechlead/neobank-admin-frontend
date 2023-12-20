@@ -55,8 +55,6 @@ const CustomerDetails = ({id, onBalanceModify}: Props) => {
                         </SimpleButton>
 
                         <SimpleButton
-                            isLoading={isPending}
-                            disabled={isPending}
                             onClick={onBalanceModify}
                             type="button"
                             styleType="tertiary"

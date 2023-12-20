@@ -19,7 +19,7 @@ const columns = [
 
 const fakeData = [
     {
-        "updatedAt": "2023-12-10T12:45:30",
+        "updatedAt": "2023-12-10",
         "businessName": "JKL Furniture",
         "tradingName": "JKL Home Decor",
         "neobankAccountNumber": "777766665",
@@ -27,7 +27,7 @@ const fakeData = [
         "balanceAfter": "$9,300.00"
     },
     {
-        "updatedAt": "2023-12-09T18:20:15",
+        "updatedAt": "2023-12-09",
         "businessName": "RST Sports",
         "tradingName": "RST Sportswear",
         "neobankAccountNumber": "444433332",
@@ -35,7 +35,7 @@ const fakeData = [
         "balanceAfter": "$4,800.00"
     },
     {
-        "updatedAt": "2023-12-08T09:10:00",
+        "updatedAt": "2023-12-08",
         "businessName": "UVW Pharmacy",
         "tradingName": "UVW Health Solutions",
         "neobankAccountNumber": "888877776",
@@ -43,7 +43,7 @@ const fakeData = [
         "balanceAfter": "$7,200.00"
     },
     {
-        "updatedAt": "2023-12-07T14:55:45",
+        "updatedAt": "2023-12-07",
         "businessName": "GHI Automotive",
         "tradingName": "GHI Auto Services",
         "neobankAccountNumber": "222211110",
@@ -51,7 +51,7 @@ const fakeData = [
         "balanceAfter": "$10,500.00"
     },
     {
-        "updatedAt": "2023-12-06T21:30:30",
+        "updatedAt": "2023-12-06",
         "businessName": "NOP Cosmetics",
         "tradingName": "NOP Beauty Emporium",
         "neobankAccountNumber": "666655554",
@@ -59,7 +59,7 @@ const fakeData = [
         "balanceAfter": "$2,500.00"
     },
     {
-        "updatedAt": "2023-12-15T10:23:45",
+        "updatedAt": "2023-12-15",
         "businessName": "ABC Electronics",
         "tradingName": "ABC Tech Solutions",
         "neobankAccountNumber": "123456789",
@@ -67,7 +67,7 @@ const fakeData = [
         "balanceAfter": "$5,000.00"
     },
     {
-        "updatedAt": "2023-12-14T15:45:30",
+        "updatedAt": "2023-12-14",
         "businessName": "XYZ Clothing",
         "tradingName": "XYZ Fashion Outlet",
         "neobankAccountNumber": "987654321",
@@ -75,7 +75,7 @@ const fakeData = [
         "balanceAfter": "$8,500.00"
     },
     {
-        "updatedAt": "2023-12-13T08:12:15",
+        "updatedAt": "2023-12-13",
         "businessName": "PQR Appliances",
         "tradingName": "PQR Electronics",
         "neobankAccountNumber": "555555555",
@@ -83,7 +83,7 @@ const fakeData = [
         "balanceAfter": "$3,200.00"
     },
     {
-        "updatedAt": "2023-12-12T14:30:00",
+        "updatedAt": "2023-12-12",
         "businessName": "LMN Books",
         "tradingName": "LMN Bookstore",
         "neobankAccountNumber": "111122223",
@@ -91,7 +91,7 @@ const fakeData = [
         "balanceAfter": "$12,000.00"
     },
     {
-        "updatedAt": "2023-12-11T20:01:45",
+        "updatedAt": "2023-12-11",
         "businessName": "EFG Groceries",
         "tradingName": "EFG Supermart",
         "neobankAccountNumber": "999988887",
