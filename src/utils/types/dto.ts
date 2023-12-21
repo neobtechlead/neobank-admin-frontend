@@ -149,5 +149,54 @@ export interface MerchantsRoles {
 }
 
 
+export interface Transaction {
+    externalId: string;
+    transactionId: string;
+    internalId: string;
+    type: string;
+    status: string;
+    businessName: string;
+    tradingName: string;
+    issuerId: string;
+    address: Address;
+    balanceBefore: number;
+    balanceAfter: number;
+    createdAt: string;
+    updatedAt: string;
+}
+
+export interface PaginationMeta {
+    pageNumber: number;
+    pageSize: number;
+    sort: {
+        empty: boolean;
+        unsorted: boolean;
+        sorted: boolean;
+    };
+    offset: number;
+    paged: boolean;
+    unpaged: boolean;
+}
+
+export interface Pagination {
+    size: number;
+    lastPage: boolean;
+    firstPage: boolean;
+    sorting: {
+        empty: boolean;
+        unsorted: boolean;
+        sorted: boolean;
+    };
+    totalPages: number;
+    totalElements: number;
+}
+
+export interface PaginatedTransactionsData<T> {
+    pagination: Pagination;
+    meta: PaginationMeta;
+    transactions: T[];
+}
+
+
 
 

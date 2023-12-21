@@ -1,111 +1,39 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {ApiResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
-import type {ITable} from "@/utils/types/table";
+import type {ApiResponse, PaginatedTransactionsData, Transaction} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
+import {format, parseISO} from "date-fns";
+import {convertPesewasToCedis, formatCurrencyAlt} from "@/utils/functions";
 
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
-const columns = [
-    {key: 'updatedAt', label: 'Date'},
-    {key: 'businessName', label: 'Merchant Business Name'},
-    {key: 'tradingName', label: 'Merchant Trading Name'},
-    {key: 'neobankAccountNumber', label: 'Merchant ID'},
-    {key: 'address', label: 'Merchant Address'},
-    {key: 'balanceAfter', label: 'Balance'},
+const COLUMNS = [
+    {key: "updatedAt", label: "Date"},
+    {key: "businessName", label: "Merchant Business Name"},
+    {key: "tradingName", label: "Merchant Trading Name"},
+    {key: "issuerId", label: "Merchant ID"},
+    {key: "address", label: "Merchant Address"},
+    {key: "balanceAfter", label: "Balance"},
+];
 
-]
 
-const fakeData = [
-    {
-        "updatedAt": "2023-12-10",
-        "businessName": "JKL Furniture",
-        "tradingName": "JKL Home Decor",
-        "neobankAccountNumber": "777766665",
-        "address": "202 Oakwood Lane, Homestead, State, 34567",
-        "balanceAfter": "$9,300.00"
-    },
-    {
-        "updatedAt": "2023-12-09",
-        "businessName": "RST Sports",
-        "tradingName": "RST Sportswear",
-        "neobankAccountNumber": "444433332",
-        "address": "567 Stadium Drive, Sportstown, State, 78901",
-        "balanceAfter": "$4,800.00"
-    },
-    {
-        "updatedAt": "2023-12-08",
-        "businessName": "UVW Pharmacy",
-        "tradingName": "UVW Health Solutions",
-        "neobankAccountNumber": "888877776",
-        "address": "303 Wellness Avenue, Pharmatown, State, 23456",
-        "balanceAfter": "$7,200.00"
-    },
-    {
-        "updatedAt": "2023-12-07",
-        "businessName": "GHI Automotive",
-        "tradingName": "GHI Auto Services",
-        "neobankAccountNumber": "222211110",
-        "address": "404 Mechanic Street, Autoville, State, 56789",
-        "balanceAfter": "$10,500.00"
-    },
-    {
-        "updatedAt": "2023-12-06",
-        "businessName": "NOP Cosmetics",
-        "tradingName": "NOP Beauty Emporium",
-        "neobankAccountNumber": "666655554",
-        "address": "909 Glamour Lane, Beautytown, State, 89012",
-        "balanceAfter": "$2,500.00"
-    },
-    {
-        "updatedAt": "2023-12-15",
-        "businessName": "ABC Electronics",
-        "tradingName": "ABC Tech Solutions",
-        "neobankAccountNumber": "123456789",
-        "address": "123 Main Street, Cityville, State, 12345",
-        "balanceAfter": "$5,000.00"
-    },
-    {
-        "updatedAt": "2023-12-14",
-        "businessName": "XYZ Clothing",
-        "tradingName": "XYZ Fashion Outlet",
-        "neobankAccountNumber": "987654321",
-        "address": "456 Oak Avenue, Townsville, State, 54321",
-        "balanceAfter": "$8,500.00"
-    },
-    {
-        "updatedAt": "2023-12-13",
-        "businessName": "PQR Appliances",
-        "tradingName": "PQR Electronics",
-        "neobankAccountNumber": "555555555",
-        "address": "789 Pine Road, Villagetown, State, 67890",
-        "balanceAfter": "$3,200.00"
-    },
-    {
-        "updatedAt": "2023-12-12",
-        "businessName": "LMN Books",
-        "tradingName": "LMN Bookstore",
-        "neobankAccountNumber": "111122223",
-        "address": "101 Library Street, Booksville, State, 45678",
-        "balanceAfter": "$12,000.00"
-    },
-    {
-        "updatedAt": "2023-12-11",
-        "businessName": "EFG Groceries",
-        "tradingName": "EFG Supermart",
-        "neobankAccountNumber": "999988887",
-        "address": "789 Market Avenue, Shopville, State, 23456",
-        "balanceAfter": "$6,750.00"
-    },
-]
+const DEFAULT_ROWS = 10;
 
-const useMerchantReportTableData = (page = 0, size = 10, order = "desc") => {
+const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "") => {
+    const params: any = {
+        rows,
+        ...(startDate && {"start-date": startDate}),
+        ...(endDate && {"end-date": endDate}),
+        ...(type && {type}),
+        ...(status && {status}),
+    };
     return useQuery({
-        queryKey: ["transactions", page, size, order],
+        queryKey: ["merchant-reports", startDate, endDate, type, status],
         queryFn: async () => {
-            const response = await http.get<ApiResponse<PaginatedResponse<Merchant>>>(`${BASE_URL}/transactions`, {
-                params: {page, size, order}
+            const response = await http.get<ApiResponse<PaginatedTransactionsData<Transaction>>>(`${BASE_URL}/reports/merchants`, {
+                params
             })
             return response.data?.data
         },
@@ -115,24 +43,26 @@ const useMerchantReportTableData = (page = 0, size = 10, order = "desc") => {
 export default useMerchantReportTableData;
 
 
-export const mapDataToMerchantReportTable = (data: any): ITable => {
-    /*const {content} = data
-    const rows: IRow[] = content.map((item: Merchant) => {
+export const mapDataToMerchantReportTable = (data: PaginatedTransactionsData<Transaction>): ITable => {
+    const {transactions} = data
+    const rows: IRow[] = transactions.map((item: Transaction) => {
         const externalId = item.externalId ?? ""
 
         const rowData: IRow = {externalId};
 
-        const columnKeys = columns.map(item => item.key)
+        const columnKeys = COLUMNS.map(item => item.key)
 
         columnKeys.forEach((key) => {
             if (key === 'address') rowData[key] = item.address?.city
+            else if (key === 'updatedAt') rowData[key] = format(parseISO(item.updatedAt), 'dd-MM-yyyy')
+            else if (key === 'balanceAfter') rowData[key] = formatCurrencyAlt(convertPesewasToCedis(item.balanceAfter))
             else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;
-    });*/
+    });
 
-    return {columns, rows: fakeData};
+    return {columns: COLUMNS, rows};
 };
 
 

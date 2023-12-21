@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import MerchantFormHeaderItem from "@/app/merchants/components/MerchantFormHeaderItem";
 import useFormStores from "@/stores/form/merchant";

@@ -45,6 +45,11 @@ export const extractErrorMessage = (name: string, errors: Record<string, any>) =
 
 };
 
+export const convertPesewasToCedis = (pesewas: number): number => {
+    return (pesewas / 100)
+
+}
+
 
 
 

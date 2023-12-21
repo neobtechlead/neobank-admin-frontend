@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useMemo, useState} from 'react';
 import {FormProvider} from "react-hook-form";
 import {Box} from "@radix-ui/themes";

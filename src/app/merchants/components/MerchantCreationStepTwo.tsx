@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect, useState} from 'react';
 import {Box} from "@radix-ui/themes";
 import SimpleButton from "@/components/SimpleButton";

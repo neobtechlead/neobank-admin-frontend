@@ -1,3 +1,4 @@
+'use client'
 import React, {useEffect} from 'react';
 import {Box} from '@radix-ui/themes';
 import TextInputWithLabel from '@/components/forms/TextInputWithLabel';

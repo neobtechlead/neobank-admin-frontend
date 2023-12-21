@@ -1,3 +1,4 @@
+'use client'
 import React from 'react';
 import Ellipse from "@/app/merchants/components/Ellipse";
 

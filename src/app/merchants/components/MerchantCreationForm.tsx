@@ -1,3 +1,4 @@
+'use client'
 import React, {useState} from 'react';
 import MerchantCreationStepOne from "@/app/merchants/components/MerchantCreationStepOne";
 import MerchantCreationStepTwo from "@/app/merchants/components/MerchantCreationStepTwo";

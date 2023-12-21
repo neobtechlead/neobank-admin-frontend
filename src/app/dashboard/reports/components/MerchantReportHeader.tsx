@@ -33,7 +33,7 @@ const MerchantReportHeader = () => {
                 <form noValidate>
                     <Flex direction="column" gap="5" className="border rounded-lg shadow-sm px-8 py-10">
                         <Flex gap="4">
-                            {formFields.map(item => <Box className="flex-1">
+                            {formFields.map(item => <Box key={item.name} className="flex-1">
                                 {item.type === 'select' ? <FormSelectWithLabel
                                     name={item.name}
                                     label={item.label}
