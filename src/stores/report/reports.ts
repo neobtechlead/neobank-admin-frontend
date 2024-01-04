@@ -13,7 +13,7 @@ interface IReportStore {
 const useReportStores = create<IReportStore>()(
     (set, get) => ({
         selectedReportTab: "merchants",
-        selectMerchantReportType: "collections",
+        selectMerchantReportType: "COLLECTION",
         updateSelectedReportTab: (tabName: string) => set(() => ({
             selectedReportTab: tabName
         })),

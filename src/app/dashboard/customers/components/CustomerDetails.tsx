@@ -6,12 +6,12 @@ import useGetCustomerInfo, {mapToCustomerDetailsView} from "@/api/hooks/queries/
 import ErrorPage from "@/app/error";
 import CustomerDetailsHeader from "@/app/dashboard/customers/components/CustomerDetailsHeader";
 import useCustomerPinReset from "@/api/hooks/mutations/useCustomerPinReset";
-import CustomerInfoLoader from "@/app/dashboard/customers/components/CustomerInfoLoader";
+import LoadingSpinner from "@/components/LoadingSpinner";
 
 
 interface Props {
-    id: string,
-    onBalanceModify: () => void
+    id: string
+    onBalanceModify: (id: string) => void
 }
 
 const CustomerDetails = ({id, onBalanceModify}: Props) => {
@@ -23,12 +23,12 @@ const CustomerDetails = ({id, onBalanceModify}: Props) => {
 
 
     const mappedData = useMemo(() => {
-        if (!data) return [];
+        if (!data) return {info: [], issuerId: ""};
         return mapToCustomerDetailsView(data)
 
     }, [data]);
 
-    if (isLoading) return <CustomerInfoLoader/>
+    if (isLoading) return <LoadingSpinner/>
     if (error) return <ErrorPage onRetry={() => {
     }}/>
 
@@ -38,7 +38,7 @@ const CustomerDetails = ({id, onBalanceModify}: Props) => {
             <CustomerDetailsHeader/>
             <Box className="flex flex-col  px-8 my-4">
                 <Flex direction="column" gap="3">
-                    {mappedData.map(item => <Box key={item.label} className="py-4">
+                    {mappedData?.info.map(item => <Box key={item.label} className="py-4">
                         <IconWithStackedTextLabels {...item} />
                     </Box>)}
                 </Flex>
@@ -55,7 +55,7 @@ const CustomerDetails = ({id, onBalanceModify}: Props) => {
                         </SimpleButton>
 
                         <SimpleButton
-                            onClick={onBalanceModify}
+                            onClick={() => onBalanceModify(mappedData?.issuerId ?? "")}
                             type="button"
                             styleType="tertiary"
                             overrideClassName="!w-full"

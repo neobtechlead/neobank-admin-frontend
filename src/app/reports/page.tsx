@@ -1,6 +1,5 @@
 import React from 'react';
 import {Box} from "@radix-ui/themes";
-import TitledHeader from "@/components/TitledHeader";
 import ReportContent from "@/app/reports/components/ReportContent";
 
 
@@ -16,8 +15,7 @@ const Page = ({searchParams: {id}}: Props) => {
 
     return (
         <Box>
-            <TitledHeader title="Reports"/>
-            <ReportContent/>
+            <ReportContent id={id}/>
         </Box>
     );
 };

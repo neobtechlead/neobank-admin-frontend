@@ -13,7 +13,7 @@ const MerchantsSkeleton = () => {
                         <SkeletonText/>
                     </Flex>
                 </Flex>
-                <SkeletonTable columns={[1, 2, 3, 4, 5]} rows={[1, 2, 3, 4, 5]}/>
+                <SkeletonTable columns={5} rows={5}/>
                 <Flex justify="between" align="center">
                     <Box>
                         <SkeletonText/>

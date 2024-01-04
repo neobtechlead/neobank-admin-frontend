@@ -14,9 +14,10 @@ import useGetMerchantInfo, {
 } from "@/api/hooks/queries/useGetMerchantInfo";
 import MerchantSkeleton from "@/app/merchants/loading";
 import ErrorPage from "@/app/error";
-import useGetAccountBalance from "@/api/hooks/queries/useGetAccountBalance";
+import useMerchantAccountBalance from "@/api/hooks/queries/useMerchantAccountBalance";
 import ModalDialog from "@/components/ModalDialog";
 import MerchantModificationForm from "@/app/merchants/components/MerchantModificationForm";
+import {CEDIS_CONVERTER} from "@/utils/constants";
 
 interface Props {
     params: {
@@ -34,7 +35,7 @@ const Merchant = ({params: {id}}: Props) => {
 
 
     const {data, isLoading, error} = useGetMerchantInfo(id);
-    const {data: balanceData, isLoading: isBalanceLoading, error: balanceError} = useGetAccountBalance(id);
+    const {data: balanceData, isLoading: isBalanceLoading, error: balanceError} = useMerchantAccountBalance(id);
 
 
     const mappedData: MappedDataMerchantInfo = useMemo(() => {
@@ -66,7 +67,7 @@ const Merchant = ({params: {id}}: Props) => {
                     defaultValues={{
                         email: mappedData.headerInfo?.email ?? "",
                         businessName: mappedData.headerInfo?.businessName ?? "",
-                        balance: parseInt(balanceData?.actualBalance ?? "0")
+                        balance: parseInt(balanceData?.availableBalance ?? "0") * CEDIS_CONVERTER
                     }}
                     onModalClose={handleModalClose}
                     merchantId={id}

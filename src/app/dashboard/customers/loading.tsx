@@ -12,7 +12,7 @@ const CustomerSkeleton = () => {
                         <SkeletonText/>
                     </Flex>
                 </Flex>
-                <SkeletonTable columns={[1, 2, 3, 4]} rows={[1, 2, 3, 4]}/>
+                <SkeletonTable columns={4} rows={4}/>
                 <Flex justify="between" align="center">
                     <Box>
                         <SkeletonText/>

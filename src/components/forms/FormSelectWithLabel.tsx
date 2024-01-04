@@ -3,7 +3,6 @@ import Select from 'react-select';
 import {Controller, useFormContext} from 'react-hook-form';
 import {extractErrorMessage} from '@/utils/functions';
 import FormLabel from "@/components/forms/FormLabel";
-import {defaultStyles} from "react-modal";
 
 interface Props {
     name: string;
@@ -76,8 +75,8 @@ const FormSelectWithLabel = ({
                         options={options}
                         defaultValue={defaultValue}
                         onChange={(selectedOption) => {
-                            handleOnChange(selectedOption?.label);
-                            onChange(selectedOption?.label)
+                            handleOnChange(selectedOption?.value);
+                            onChange(selectedOption?.value)
                         }}
                         onBlur={onBlur}
                         name={name}

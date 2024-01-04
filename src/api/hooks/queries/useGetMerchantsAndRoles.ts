@@ -2,6 +2,7 @@ import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
 import {ApiResponse, MerchantsRoles} from "@/utils/types/dto";
 import {FormFields} from "@/utils/types/form";
+import {TRANSACTION_STATUS} from "@/utils/constants";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
@@ -81,7 +82,7 @@ export const mapApiDataToReportFormFields = (data: MerchantsRoles | undefined, i
     return [
         {
             label: 'Merchant Name',
-            name: 'merchants',
+            name: 'merchant',
             type: 'select',
             required: true,
             defaultValue: {label: "Select Merchant", value: ""},
@@ -97,11 +98,7 @@ export const mapApiDataToReportFormFields = (data: MerchantsRoles | undefined, i
             name: 'status', type: 'select',
             required: true,
             defaultValue: {label: "Select Status", value: ""},
-            options: [
-                {label: "In-Progress", value: "PENDING"},
-                {label: "Successful", value: "COMPLETED"},
-                {label: "Failed", value: "FAILED"}
-            ]
+            options: [{label: "Select Status", value: ""}, ...TRANSACTION_STATUS]
         }]
 
 };

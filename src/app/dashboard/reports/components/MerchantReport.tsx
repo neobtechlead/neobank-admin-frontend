@@ -1,9 +1,9 @@
 import React from 'react';
 import {Flex} from "@radix-ui/themes";
 import MerchantReportHeader from "@/app/dashboard/reports/components/MerchantReportHeader";
-import SearchInput from "@/components/SearchInput";
 import MerchantReportTable from "@/app/dashboard/reports/components/MerchantReportTable";
 import {ITable} from "@/utils/types/table";
+import SkeletonTableWithPagination from "@/components/skeleton/SkeletonTableWithPagination";
 
 interface Props {
 
@@ -15,11 +15,11 @@ interface Props {
 const MerchantReport = ({data, isLoading}: Props) => {
     return (
         <Flex direction="column" gap="6">
-            <MerchantReportHeader/>
+            <MerchantReportHeader isLoading={isLoading}/>
             <Flex justify="end">
-                <SearchInput onChange={(value) => console.log(value)}/>
+                {/*<SearchInput onChange={(value) => console.log(value)}/>*/}
             </Flex>
-            <MerchantReportTable data={data} isLoading={isLoading}/>
+            {isLoading ? <SkeletonTableWithPagination columns={6} rows={6}/> : <MerchantReportTable data={data}/>}
         </Flex>
     );
 };

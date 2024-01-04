@@ -3,6 +3,7 @@ import Image from "next/image";
 import {Box, Flex, Heading, Text} from "@radix-ui/themes";
 import NotePencil from "@/assets/svgs/NotePencil.svg";
 import {formatCurrencyAlt} from "@/utils/functions";
+import {CEDIS_CONVERTER} from "@/utils/constants";
 
 interface BalanceSectionProps {
     balance: string;
@@ -17,7 +18,8 @@ const BalanceSection = ({balance, onClick}: BalanceSectionProps) => {
             </Box>
             <button onClick={onClick}>
                 <Flex gap="3">
-                    <Heading>{`GHS ${formatCurrencyAlt(parseInt(balance))}`}</Heading>
+                    <Heading>{`GHS ${formatCurrencyAlt(parseInt(balance) * CEDIS_CONVERTER)}`}</Heading>
+
                     <Image src={NotePencil} alt=""/>
                 </Flex>
             </button>

@@ -1,132 +1,41 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {ApiResponse, Merchant, PaginatedResponse} from "@/utils/types/dto";
-import type {ITable} from "@/utils/types/table";
+import type {ApiResponse, PaginatedTransactionsData, Transaction} from "@/utils/types/dto";
+import type {IRow, ITable} from "@/utils/types/table";
+import {format, parseISO} from "date-fns";
+import {convertPesewasToCedis, formatCurrencyAlt} from "@/utils/functions";
 
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
-const columns = [
+const COLUMNS = [
     {key: 'updatedAt', label: 'Date'},
-    {key: 'externalId', label: 'Transaction ID'},
-    {key: 'senderName', label: 'Sender Name'},
-    {key: 'recipientName', label: 'Recipient Name'},
+    {key: 'internalId', label: 'Transaction ID'},
+    {key: 'initiatorName', label: 'Sender Name'},
+    {key: 'accountName', label: 'Recipient Name'},
     {key: 'amount', label: 'Amount'},
     {key: 'type', label: 'Type'},
     {key: 'status', label: 'Status'},
     {key: 'balanceAfter', label: 'Post Balance'},
 ]
 
-const fakeData = [
-    {
-        "updatedAt": "2023-12-15",
-        "externalId": "T123456789",
-        "senderName": "John Doe",
-        "recipientName": "Jane Smith",
-        "amount": 500,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-14",
-        "externalId": "T987654321",
-        "senderName": "Alice Johnson",
-        "recipientName": "Bob Williams",
-        "amount": 800,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 400,
-    },
-    {
-        "updatedAt": "2023-12-13",
-        "externalId": "T555555555",
-        "senderName": "Eva Davis",
-        "recipientName": "Mark Wilson",
-        "amount": 320,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-12",
-        "externalId": "T111122223",
-        "senderName": "Chris Taylor",
-        "recipientName": "Lily Brown",
-        "amount": 1200,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 1000,
-    },
-    {
-        "updatedAt": "2023-12-115",
-        "externalId": "T999988887",
-        "senderName": "Samuel Clark",
-        "recipientName": "Emily White",
-        "amount": 675,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-15",
-        "externalId": "T123456789",
-        "senderName": "John Doe",
-        "recipientName": "Jane Smith",
-        "amount": 500,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-14",
-        "externalId": "T987654321",
-        "senderName": "Alice Johnson",
-        "recipientName": "Bob Williams",
-        "amount": 800,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-13",
-        "externalId": "T555555555",
-        "senderName": "Eva Davis",
-        "recipientName": "Mark Wilson",
-        "amount": 320,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-12",
-        "externalId": "T111122223",
-        "senderName": "Chris Taylor",
-        "recipientName": "Lily Brown",
-        "amount": 1200,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-    {
-        "updatedAt": "2023-12-11",
-        "externalId": "T999988887",
-        "senderName": "Samuel Clark",
-        "recipientName": "Emily White",
-        "amount": 675,
-        "type": "Collection",
-        "status": "Successful",
-        "balanceAfter": 200,
-    },
-]
 
-const useCustomerReportTableData = (page = 0, size = 10, order = "desc") => {
+const DEFAULT_ROWS = 10;
+const useCustomerReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", phoneNumber = "") => {
+    const params: any = {
+        rows,
+        ...(startDate && {"start-date": startDate}),
+        ...(endDate && {"end-date": endDate}),
+        ...(type && {type}),
+        ...(status && {status}),
+        ...(phoneNumber && {phoneNumber}),
+    };
     return useQuery({
-        queryKey: ["transactions", page, size, order],
+        queryKey: ["customer-reports", rows, startDate, endDate, type, status, phoneNumber],
         queryFn: async () => {
-            const response = await http.get<ApiResponse<PaginatedResponse<Merchant>>>(`${BASE_URL}/transactions`, {
-                params: {page, size, order}
+            const response = await http.get<ApiResponse<PaginatedTransactionsData<Transaction>>>(`${BASE_URL}/reports/customers`, {
+                params
             })
             return response.data?.data
         },
@@ -136,24 +45,26 @@ const useCustomerReportTableData = (page = 0, size = 10, order = "desc") => {
 export default useCustomerReportTableData;
 
 
-export const mapDataToCustomerReportTable = (data: any): ITable => {
-    /*const {content} = data
-    const rows: IRow[] = content.map((item: Merchant) => {
+export const mapDataToCustomerReportTable = (data: PaginatedTransactionsData<Transaction>): ITable => {
+    const {transactions} = data
+    const rows: IRow[] = transactions?.map((item: Transaction) => {
         const externalId = item.externalId ?? ""
 
         const rowData: IRow = {externalId};
 
-        const columnKeys = columns.map(item => item.key)
+        const columnKeys = COLUMNS.map(item => item.key)
 
         columnKeys.forEach((key) => {
-            if (key === 'address') rowData[key] = item.address?.city
+            if (key === 'updatedAt') rowData[key] = format(parseISO(item.updatedAt), 'dd-MM-yyyy')
+            else if (key === 'amount') rowData[key] = formatCurrencyAlt(convertPesewasToCedis(item.amount))
+            else if (key === 'balanceAfter') rowData[key] = formatCurrencyAlt(convertPesewasToCedis(item.balanceAfter))
             else rowData[key] = (item as any)[key] ?? ""
         });
 
         return rowData;
-    });*/
+    });
 
-    return {columns, rows: fakeData};
+    return {columns: COLUMNS, rows: rows ?? []};
 };
 
 

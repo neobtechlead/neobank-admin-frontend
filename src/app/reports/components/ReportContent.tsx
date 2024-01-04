@@ -1,41 +1,60 @@
 'use client'
-import React, {useMemo} from 'react';
+import React from 'react';
 import {Box} from "@radix-ui/themes";
 import ReportLogoSection from "@/app/reports/components/ReportLogoSection";
 import ReportStatSection from "@/app/reports/components/ReportStatSection";
 import ReportTableInfo from "@/app/reports/components/ReportTableInfo";
-import useReportStores from "@/stores/reports";
 import ReportCollectionsTable from "@/app/reports/components/ReportCollectionsTable";
 import ReportDisbursementTable from "@/app/reports/components/ReportDisbursementTable";
-import {mapDataToCustomerReportTable} from "@/api/hooks/queries/useCustomerReportTableData";
+import useMerchantReport from "@/app/reports/hooks/useMerchantReport";
+import ReportLoaderSkeleton from "@/app/reports/loading";
+import TitledHeader from "@/components/TitledHeader";
 
-const ReportContent = () => {
+interface Props {
+    id: string
+}
 
-    const {selectMerchantReportType} = useReportStores()
+const ReportContent = ({id}: Props) => {
+    const {
+        isLoading,
+        mappedData,
+        selectMerchantReportType,
+        isStatsLoading,
+        mappedDataBasicInfo,
+        isBasicInfoLoading,
+        mappedStatsData
+    } = useMerchantReport(id)
 
-    const mappedData = useMemo(() => {
-        const customerData = mapDataToCustomerReportTable({})
-        return {customerData}
-    }, [])
+
+    if (isLoading && isStatsLoading && isBasicInfoLoading) return <ReportLoaderSkeleton/>
+
 
 
     const showReportTableContent = () => {
-        return selectMerchantReportType === 'collections' ?
-            <ReportCollectionsTable data={mappedData?.customerData ?? []}/> :
-            <ReportDisbursementTable data={mappedData?.customerData ?? []}/>
+        return selectMerchantReportType === 'COLLECTION' ?
+            <ReportCollectionsTable
+                data={mappedData?.customerData}
+                isLoading={isLoading}
+            /> :
+            <ReportDisbursementTable
+                data={mappedData?.customerData}
+                isLoading={isLoading}
+            />
 
     }
 
     return (
         <Box>
-            <ReportLogoSection/>
-            <ReportStatSection/>
+            <TitledHeader title="Reports"/>
+            <ReportLogoSection data={mappedDataBasicInfo} isLoading={isBasicInfoLoading}/>
+            <ReportStatSection data={mappedStatsData ?? {}} isLoading={isStatsLoading}/>
             <ReportTableInfo/>
             <Box className="m-12">
                 {
                     showReportTableContent()
 
                 }
+
             </Box>
 
 

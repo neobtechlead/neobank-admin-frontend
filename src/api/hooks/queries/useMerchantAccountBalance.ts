@@ -5,7 +5,7 @@ import type {ApiResponse, Balance} from "@/utils/types/dto";
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
 
 
-const useGetAccountBalance = (id: string) => {
+const useMerchantAccountBalance = (id: string) => {
     return useQuery({
         queryKey: ["merchant", id],
         queryFn: async () => {
@@ -15,7 +15,7 @@ const useGetAccountBalance = (id: string) => {
     })
 };
 
-export default useGetAccountBalance;
+export default useMerchantAccountBalance;
 
 
 

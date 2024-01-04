@@ -1,6 +1,6 @@
 'use client'
 import React from 'react';
-import useReportStores from "@/stores/reports";
+import useReportStores from "@/stores/report/reports";
 import {Flex, Text} from "@radix-ui/themes";
 import Image from "next/image";
 import Coins from "@/assets/svgs/HandCoins.svg"
@@ -14,16 +14,16 @@ const ReportTableInfo = () => {
 
     return (
         <Flex gap="4" className="border-t border-b px-10">
-            <button className={btnClasses('collections')}
-                    onClick={() => updateSelectedMerchantReportType("collections")}>
+            <button className={btnClasses('COLLECTION')}
+                    onClick={() => updateSelectedMerchantReportType("COLLECTION")}>
                 <div className="flex gap-2  ">
                     <Image src={Coins} alt=""/>
                     <Text>Collections</Text>
                 </div>
             </button>
 
-            <button className={btnClasses('disbursements')}
-                    onClick={() => updateSelectedMerchantReportType("disbursements")}>
+            <button className={btnClasses('DISBURSEMENT')}
+                    onClick={() => updateSelectedMerchantReportType("DISBURSEMENT")}>
                 <div className="flex gap-2">
                     <Image src={Upload} alt=""/>
                     <Text>Disbursements</Text>

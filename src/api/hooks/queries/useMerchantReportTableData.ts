@@ -1,6 +1,6 @@
 import {useQuery} from "@tanstack/react-query";
 import http from "@/api/http";
-import type {ApiResponse, PaginatedTransactionsData, Transaction} from "@/utils/types/dto";
+import type {ApiResponse, PaginatedTransactionsData, TransactionReport} from "@/utils/types/dto";
 import type {IRow, ITable} from "@/utils/types/table";
 import {format, parseISO} from "date-fns";
 import {convertPesewasToCedis, formatCurrencyAlt} from "@/utils/functions";
@@ -21,18 +21,19 @@ const COLUMNS = [
 
 const DEFAULT_ROWS = 10;
 
-const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "") => {
+const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", merchant = "") => {
     const params: any = {
         rows,
         ...(startDate && {"start-date": startDate}),
         ...(endDate && {"end-date": endDate}),
         ...(type && {type}),
+        ...(merchant && {merchant}),
         ...(status && {status}),
     };
     return useQuery({
-        queryKey: ["merchant-reports", startDate, endDate, type, status],
+        queryKey: ["merchant-reports", rows, startDate, endDate, type, status, merchant],
         queryFn: async () => {
-            const response = await http.get<ApiResponse<PaginatedTransactionsData<Transaction>>>(`${BASE_URL}/reports/merchants`, {
+            const response = await http.get<ApiResponse<PaginatedTransactionsData<TransactionReport>>>(`${BASE_URL}/reports/merchants`, {
                 params
             })
             return response.data?.data
@@ -43,9 +44,9 @@ const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate
 export default useMerchantReportTableData;
 
 
-export const mapDataToMerchantReportTable = (data: PaginatedTransactionsData<Transaction>): ITable => {
+export const mapDataToMerchantReportTable = (data: PaginatedTransactionsData<TransactionReport>): ITable => {
     const {transactions} = data
-    const rows: IRow[] = transactions.map((item: Transaction) => {
+    const rows: IRow[] = transactions?.map((item: TransactionReport) => {
         const externalId = item.externalId ?? ""
 
         const rowData: IRow = {externalId};
@@ -62,7 +63,7 @@ export const mapDataToMerchantReportTable = (data: PaginatedTransactionsData<Tra
         return rowData;
     });
 
-    return {columns: COLUMNS, rows};
+    return {columns: COLUMNS, rows: rows ?? []};
 };
 
 

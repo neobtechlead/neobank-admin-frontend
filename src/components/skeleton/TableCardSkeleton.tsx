@@ -39,7 +39,7 @@ const TableCardSkeleton = () => (
                 <SkeletonText/>
                 <SkeletonText/>
             </Flex>
-            <SkeletonTable columns={[1, 2, 3, 4]} rows={[1, 2, 3, 4, 5]}/>
+            <SkeletonTable columns={4} rows={5}/>
         </ContainerCard>
     </Flex>
 );

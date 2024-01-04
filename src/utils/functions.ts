@@ -1,5 +1,7 @@
 import {AxiosError} from "axios";
 import _ from 'lodash'
+import {format} from "date-fns";
+import parseDate from "date-fns/parse";
 
 export function formatCurrency(amount: number): string {
     return new Intl.NumberFormat('en-GH', {
@@ -47,6 +49,25 @@ export const extractErrorMessage = (name: string, errors: Record<string, any>) =
 
 export const convertPesewasToCedis = (pesewas: number): number => {
     return (pesewas / 100)
+
+}
+
+
+export const generateArray = (arrayLength: number): number[] => {
+    let temp: number[] = []
+    for (let i = 0; i < arrayLength; i++) {
+        temp.push(i)
+    }
+    return temp
+}
+
+export const formatDateAsISO = (dateString: string) => {
+    const parsedDate = parseDate(dateString, 'yyyy-MM-dd', new Date());
+    return format(parsedDate, "yyyy-MM-dd'T'HH:mm:ss.SSS");
+}
+
+export const formatAsIssuerId = (phoneNumber: string) => {
+    return "0" + phoneNumber.slice(3)
 
 }
 

@@ -149,7 +149,7 @@ export interface MerchantsRoles {
 }
 
 
-export interface Transaction {
+export interface TransactionReport {
     externalId: string;
     transactionId: string;
     internalId: string;
@@ -195,6 +195,42 @@ export interface PaginatedTransactionsData<T> {
     pagination: Pagination;
     meta: PaginationMeta;
     transactions: T[];
+}
+
+
+export interface Transaction {
+    externalId: string;
+    internalId: string;
+    amount: number;
+    narration: string;
+    clientReference: string;
+    accountIssuer: string;
+    accountNumber: string;
+    accountName: string;
+    callbackUrl: string;
+    processAt: string | null;
+    type: string;
+    status: string;
+    createdAt: string;
+    updatedAt: string;
+    balanceBefore: number;
+    balanceAfter: number;
+    issuerId: string;
+    accountType: string;
+    initiatorName: string;
+    batchExternalId: string | null;
+}
+
+export interface MerchantStats {
+    recentTransactions: Transaction[];
+    actualBalance: number;
+    disbursementCount: number;
+    collectionCount: number;
+    collectionValue: number;
+    disbursementValue: number;
+    availableBalance: number;
+    users: number;
+    transactionCount: number;
 }
 
 

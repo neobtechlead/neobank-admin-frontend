@@ -60,7 +60,6 @@ export type UserCreationFormValues = z.input<typeof UserCreationFormSchema>
 
 
 export interface CustomerBalanceValues {
-    currentBalance: number,
     newBalance: number
 }
 

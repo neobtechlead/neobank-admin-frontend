@@ -1,6 +1,6 @@
 import React from 'react';
 import {Flex} from "@radix-ui/themes";
-import useReportStores from "@/stores/reports";
+import useReportStores from "@/stores/report/reports";
 
 const ReportTabs = () => {
 

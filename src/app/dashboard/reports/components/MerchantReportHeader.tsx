@@ -1,40 +1,35 @@
 'use client'
-import React, {useMemo} from 'react';
+import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
-import FormSelectWithLabel from "@/components/forms/FormSelectWithLabel";
 import FormDatePickerWithLabel from "@/components/forms/FormDatePickerWithLabel";
-import {FormProvider, useForm} from "react-hook-form";
+import {FormProvider} from "react-hook-form";
 import SimpleButton from "@/components/SimpleButton";
-import {format} from "date-fns";
-import useGetMerchantsAndRoles, {mapApiDataToReportFormFields} from "@/api/hooks/queries/useGetMerchantsAndRoles";
-import {FormFields} from "@/utils/types/form";
+import useMerchantReportFilter from "@/app/dashboard/reports/hooks/useMerchantReportFilter";
+import SelectWithLabel from "@/components/forms/SelectWithLabel";
 
-const MerchantReportHeader = () => {
-    const {data, isLoading} = useGetMerchantsAndRoles()
+interface Props {
+    isLoading: boolean
 
-    const methods = useForm({
-        defaultValues: {
-            merchant: "",
-            startDate: format(new Date(), "yyyy-MM-dd"),
-            endDate: format(new Date(), "yyyy-MM-dd"),
-            status: ""
-        }
-    })
+}
 
-    const formFields: FormFields[] = useMemo(() => {
-        return mapApiDataToReportFormFields(data, isLoading)
+const MerchantReportHeader = ({isLoading}: Props) => {
+    const {
+        methods,
+        handleSubmit,
+        onSubmit,
+        formFields
+    } = useMerchantReportFilter()
 
-    }, [data]);
-
+    const {formState: {isValid, isSubmitting}, reset} = methods
 
     return (
         <Box>
             <FormProvider {...methods}>
-                <form noValidate>
+                <form noValidate onSubmit={handleSubmit(onSubmit)}>
                     <Flex direction="column" gap="5" className="border rounded-lg shadow-sm px-8 py-10">
                         <Flex gap="4">
                             {formFields.map(item => <Box key={item.name} className="flex-1">
-                                {item.type === 'select' ? <FormSelectWithLabel
+                                {item.type === 'select' ? <SelectWithLabel
                                     name={item.name}
                                     label={item.label}
                                     defaultValue={item.defaultValue!}
@@ -50,11 +45,20 @@ const MerchantReportHeader = () => {
 
                         </Flex>
                         <Flex justify="end" gap="3">
-                            <SimpleButton type="reset"
-                                          overrideClassName="!bg-white !text-darkPurple-900">Reset</SimpleButton>
-                            <SimpleButton type="submit" overrideClassName="!px-8 !font-semibold">Apply
-                                Filters</SimpleButton>
-
+                            <SimpleButton
+                                type="reset"
+                                onClick={() => reset()}
+                                overrideClassName="!bg-white !text-darkPurple-900"
+                            >
+                                Reset
+                            </SimpleButton>
+                            <SimpleButton
+                                type="submit"
+                                disabled={!isValid || isSubmitting || isLoading}
+                                overrideClassName="!px-8 !font-semibold"
+                            >
+                                Apply Filters
+                            </SimpleButton>
                         </Flex>
                     </Flex>
                 </form>

@@ -17,12 +17,14 @@ const columns = [
 
 ]
 
-const useGetUsersData = (page = 0, size = 10) => {
+const useGetUsersData = (page = 0, size = 10, merchantName = '') => {
+
+
     return useQuery({
-        queryKey: ["merchants", page, size],
+        queryKey: ["users", page, size, merchantName],
         queryFn: async () => {
             const response = await http.get<ApiResponse<PaginatedResponse<User>>>(`${BASE_URL}/merchants/users`, {
-                params: {page, size}
+                params: {page, size, ...(merchantName && {merchantName})}
             })
             return response.data?.data
         },

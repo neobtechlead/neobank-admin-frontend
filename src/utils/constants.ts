@@ -4,6 +4,8 @@ import User from "@/assets/svgs/UserCircle.svg";
 import UserThree from "@/assets/svgs/UserThree.svg";
 import Report from "@/assets/svgs/Report.svg";
 
+export const CEDIS_CONVERTER = 0.01
+
 export const navBarItems = [
     {
         label: "Overview",
@@ -53,3 +55,23 @@ export const color = {
     "chartRed": "#EB2F2F",
     "white": "#fff"
 }
+
+
+export const TRANSACTION_STATUS = [
+    {label: "Successful", value: "COMPLETED"},
+    {label: "Failed", value: "FAILED"},
+    {label: "Cancelled", value: "CANCELLED"},
+    {label: "Pending", value: "QUEUED"},
+    {label: "Initiated", value: "INITIATED"},
+    {label: "Suspended", value: "SUSPENDED"},
+]
+
+
+export const TRANSACTION_TYPES = [
+    {label: "Disbursement", value: "DISBURSEMENT"},
+    {label: "Collection", value: "COLLECTION"},
+
+]
+
+
+

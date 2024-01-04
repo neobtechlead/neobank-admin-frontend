@@ -1,24 +1,24 @@
 import React from 'react';
-import {Box, Flex} from "@radix-ui/themes";
-import MerchantReportHeader from "@/app/dashboard/reports/components/MerchantReportHeader";
-import SearchInput from "@/components/SearchInput";
-import MerchantReportTable from "@/app/dashboard/reports/components/MerchantReportTable";
+import {Flex} from "@radix-ui/themes";
 import CustomerReportHeader from "@/app/dashboard/reports/components/CustomerReportHeader";
 import {ITable} from "@/utils/types/table";
 import CustomerReportTable from "@/app/dashboard/reports/components/CustomerReportTable";
+import SkeletonTableWithPagination from "@/components/skeleton/SkeletonTableWithPagination";
 
 interface Props {
     data: ITable
+    isLoading: boolean
 }
 
-const CustomerReport = ({data}: Props) => {
+const CustomerReport = ({data, isLoading}: Props) => {
     return (
         <Flex direction="column" gap="6">
-            <CustomerReportHeader/>
+            <CustomerReportHeader isLoading={isLoading}/>
             <Flex justify="end">
-                <SearchInput onChange={(value) => console.log(value)}/>
+                {/*<SearchInput onChange={(value) => console.log(value)}/>*/}
             </Flex>
-            <CustomerReportTable data={data}/>
+            {isLoading ? <SkeletonTableWithPagination columns={6} rows={6}/> : <CustomerReportTable data={data}/>}
+
         </Flex>
     );
 };

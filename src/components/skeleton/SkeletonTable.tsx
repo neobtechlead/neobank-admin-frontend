@@ -1,29 +1,32 @@
 import React from 'react';
 import {Table} from "@radix-ui/themes";
 import Skeleton from "@/components/skeleton/Skeleton";
+import {generateArray} from "@/utils/functions";
 
 interface Props {
-    columns: number[]
-    rows: number[]
+    columns: number
+    rows: number
 
 }
 
 const SkeletonTable = ({columns, rows}: Props) => {
+    const columnArray = generateArray(columns)
+    const rowsArray = generateArray(rows)
     return (
         <Table.Root>
             <Table.Header>
                 <Table.Row>
-                    {columns.map((column) => (
+                    {columnArray.map((column) => (
                         <Table.ColumnHeaderCell key={column}><Skeleton/></Table.ColumnHeaderCell>
                     ))}
                 </Table.Row>
             </Table.Header>
             <Table.Body>
-                {rows.map((row) => (
+                {rowsArray.map((row) => (
                     <Table.Row
                         key={row}
                     >
-                        {columns.map((column) => (
+                        {columnArray.map((column) => (
                             <Table.Cell key={column}><Skeleton/></Table.Cell>
                         ))}
                     </Table.Row>

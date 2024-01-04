@@ -24,12 +24,15 @@ export default useGetCustomerInfo;
 export const mapToCustomerDetailsView = (data: Customer) => {
     const {firstName, lastName, phoneNumber} = data
 
-    return [
-        {label: "First Name", value: firstName ?? "N/A", icon: UserCircle},
-        {label: "Last Name", value: lastName ?? "N/A", icon: UserCircle},
-        {label: "Phone Number", value: phoneNumber ?? "N/A", icon: Phone},
-        {label: "Mobile Network", value: "MTN", icon: Phone},
-    ]
+    return {
+        info: [
+            {label: "First Name", value: firstName ?? "N/A", icon: UserCircle},
+            {label: "Last Name", value: lastName ?? "N/A", icon: UserCircle},
+            {label: "Phone Number", value: phoneNumber ?? "N/A", icon: Phone},
+            {label: "Mobile Network", value: "MTN", icon: Phone},
+        ],
+        issuerId: phoneNumber
+    }
 
 }
 

@@ -4,17 +4,20 @@ import ModalCloseBtn from "@/components/ModalCloseBtn";
 import TextInputWithLabelSlot from "@/components/forms/TextInputWithLabelSlot";
 import SimpleButton from "@/components/SimpleButton";
 import useCustomerBalanceUpdate from "@/api/hooks/mutations/useCustomerBalanceUpdate";
-import {CustomerBalanceValues} from "@/utils/types/form";
+import CurrentBalanceInput from "@/app/dashboard/customers/components/CurrentBalanceInput";
+import useCustomerAccountBalance from "@/api/hooks/queries/useCustomerAccountBalance";
+import {isEmpty} from "lodash";
+import LoadingSpinner from "@/components/LoadingSpinner";
+import {extractErrorMessage, formatCurrency} from "@/utils/functions";
+import {CEDIS_CONVERTER} from "@/utils/constants";
 
 interface Props {
-    customerId: string;
-    defaultValues: CustomerBalanceValues
     onModalClose: () => void,
 
 }
 
-const CustomerBalanceAdjustmentForm = ({onModalClose, defaultValues, customerId}: Props) => {
-
+const CustomerBalanceAdjustmentForm = ({onModalClose}: Props) => {
+    const {data, isLoading} = useCustomerAccountBalance()
     const {
         onSubmit,
         handleSubmit,
@@ -24,7 +27,14 @@ const CustomerBalanceAdjustmentForm = ({onModalClose, defaultValues, customerId}
         isSubmitting,
         isValid,
         errors
-    } = useCustomerBalanceUpdate(customerId, defaultValues)
+    } = useCustomerBalanceUpdate()
+
+    if (isLoading) return <LoadingSpinner/>
+
+    const getCurrentBalance = () => {
+        return !isEmpty(data) && data.availableBalance ? parseInt(data.availableBalance) : 0
+    }
+
 
     return (
         <form noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -33,18 +43,16 @@ const CustomerBalanceAdjustmentForm = ({onModalClose, defaultValues, customerId}
                 <Box className="px-4 pt-8">
                     <Text as="p" className="font-bold text-center mb-10 mt-4">Modify Customer Balance</Text>
                     <Box className="flex flex-col gap-7 px-2">
-                        <TextInputWithLabelSlot
+                        <CurrentBalanceInput
                             label="Current Customer Balance"
                             name="currentBalance"
-                            disabled={true}
-                            register={register}
-                            error={errors.currentBalance?.message}
+                            value={formatCurrency(getCurrentBalance() * CEDIS_CONVERTER)}
                         />
 
                         <TextInputWithLabelSlot
                             label="New Customer Balance"
                             name="newBalance"
-                            error={errors.newBalance?.message}
+                            error={extractErrorMessage("newBalance", errors)}
                             register={register}
                         />
                         <SimpleButton

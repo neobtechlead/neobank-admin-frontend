@@ -14,12 +14,12 @@ const columns = [
     {key: 'accountIssuer', label: 'Mobile Network'},
 ]
 
-const useCustomerData = (pageNumber = 0, pageSize = 10) => {
+const useCustomerData = (pageNumber = 0, pageSize = 10, phoneNumber = '') => {
     return useQuery({
-        queryKey: ["customers", pageNumber, pageSize],
+        queryKey: ["customers", pageNumber, pageSize, phoneNumber],
         queryFn: async () => {
             const response = await http.get<ApiResponse<CustomersResponse>>(`${BASE_URL}/customers`, {
-                params: {pageNumber, pageSize}
+                params: {pageNumber, pageSize, ...(phoneNumber && {phoneNumber})}
             })
             return response.data?.data
         },
