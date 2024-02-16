@@ -21,9 +21,10 @@ const COLUMNS = [
 
 const DEFAULT_ROWS = 10;
 
-const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", merchant = "") => {
+const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", merchant = "", pageNumber: number) => {
     const params: any = {
         rows,
+        pageNumber,
         ...(startDate && {"start-date": startDate}),
         ...(endDate && {"end-date": endDate}),
         ...(type && {type}),
@@ -31,7 +32,7 @@ const useMerchantReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate
         ...(status && {status}),
     };
     return useQuery({
-        queryKey: ["merchant-reports", rows, startDate, endDate, type, status, merchant],
+        queryKey: ["merchant-reports", rows, startDate, endDate, type, status, merchant, pageNumber],
         queryFn: async () => {
             const response = await http.get<ApiResponse<PaginatedTransactionsData<TransactionReport>>>(`${BASE_URL}/reports/merchants`, {
                 params

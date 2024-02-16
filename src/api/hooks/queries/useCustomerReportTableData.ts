@@ -22,9 +22,10 @@ const COLUMNS = [
 
 
 const DEFAULT_ROWS = 10;
-const useCustomerReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", phoneNumber = "") => {
+const useCustomerReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate = "", type = "", status = "", phoneNumber = "", pageNumber: number) => {
     const params: any = {
         rows,
+        pageNumber,
         ...(startDate && {"start-date": startDate}),
         ...(endDate && {"end-date": endDate}),
         ...(type && {type}),
@@ -32,7 +33,7 @@ const useCustomerReportTableData = (rows = DEFAULT_ROWS, startDate = "", endDate
         ...(phoneNumber && {phoneNumber}),
     };
     return useQuery({
-        queryKey: ["customer-reports", rows, startDate, endDate, type, status, phoneNumber],
+        queryKey: ["customer-reports", rows, startDate, endDate, type, status, phoneNumber, pageNumber],
         queryFn: async () => {
             const response = await http.get<ApiResponse<PaginatedTransactionsData<Transaction>>>(`${BASE_URL}/reports/customers`, {
                 params

@@ -11,8 +11,8 @@ import {RobotoFont} from "@/fonts";
 
 
 export const metadata: Metadata = {
-    title: 'NEO BANK ADMIN',
-    description: 'Neobank Admin',
+    title: 'CF Transact ADMIN',
+    description: 'CF Transact Admin',
 }
 
 export default function RootLayout({

@@ -30,14 +30,13 @@ const ReportDisbursementTable = ({data, isLoading}: Props) => {
             <ContainerCard>
                 <BasicTable data={data}/>
             </ContainerCard>
-            <PaginationContainer
+            {data.rows.length > 0 && <PaginationContainer
                 pageSizes={pageSizes}
                 selectedPageSize={selectedPageSize}
                 pagination={pagination}
                 pageSizeChange={onPageSizeChange}
                 incrementPageNumber={incrementPageNumber} decrementPageNumber={decrementPageNumber}
-            />
-
+            />}
 
         </Flex>
     );

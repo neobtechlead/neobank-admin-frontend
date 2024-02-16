@@ -86,10 +86,13 @@ export const mapApiDataToReportFormFields = (data: MerchantsRoles | undefined, i
             type: 'select',
             required: true,
             defaultValue: {label: "Select Merchant", value: ""},
-            options: !isLoading && merchants && merchants.length > 0 ? merchants.map((merchant) => ({
+            options: !isLoading && merchants && merchants.length > 0 ? [{
+                label: "Select Merchant",
+                value: ""
+            }, ...merchants.map((merchant) => ({
                 label: merchant,
                 value: merchant
-            })) : [{label: "Select Merchant", value: ""}],
+            }))] : [{label: "Select Merchant", value: ""}],
         },
         {label: 'Start Date', name: 'startDate', type: 'date'},
         {label: 'End Date', name: 'endDate', type: 'date'},
