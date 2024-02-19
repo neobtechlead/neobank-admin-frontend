@@ -14,14 +14,14 @@ node {
             //Copy .env file from workspace to project
 
             sh 'cp ../cf_neobank_admin_frontend.env .'
-            sh 'mv cf_neobank_admin_frontend.env  .env.development.local'
+            sh 'mv cf_neobank_admin_frontend.env  .env.local'
 
             if(env.BRANCH_NAME == 'develop'){
                 
                 withCredentials([
                     string(credentialsId: 'admin-api-base-url-staging', variable: 'API_BASE_URL')
                 ]) {
-                     sh ('sed -i "s|API_BASE_URL|${API_BASE_URL}|" .env.development.local')
+                     sh ('sed -i "s|ADMIN_URL|${API_BASE_URL}|" .env.local')
                 }
 
             } else if(env.BRANCH_NAME == 'main') {
@@ -29,7 +29,7 @@ node {
                  withCredentials([
                     string(credentialsId: 'admin-api-base-url-prod', variable: 'API_BASE_URL')
                 ]) {
-                    sh ('sed -i "s|API_BASE_URL|${API_BASE_URL}|" .env.development.local')
+                    sh ('sed -i "s|ADMIN_URL|${API_BASE_URL}|" .env.local')
                 }
             }
        
@@ -54,6 +54,26 @@ node {
                 
             }   
         }
+        
+        stage('SonarQube Analysis') {
+            withSonarQubeEnv('Sonarqube') {
+                sh "sonar-scanner \
+                    -Dsonar.projectKey=cf-neobank-admin-frontend \
+                    -Dsonar.sources=. \
+                    -Dsonar.host.url=${env.SONARQUBE_URL} \
+                    -Dsonar.login=${env.NEOBANK_ADMIN_FRONTEND_SONARQUBE_TOKEN}"
+            }
+        }
+
+        stage('Quality Gateway') {
+            timeout(time: 1, unit: 'HOURS') {
+                def qualityGate = waitForQualityGate()
+                if (qualityGate.status != 'OK') {
+                    error "Pipeline aborted due to quality gate failure: ${qualityGate.status}"
+                }
+            }
+        }
+
         if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main'){
             stage('Push image') {
                 /* Finally, we'll push the image with tag of the current build number
