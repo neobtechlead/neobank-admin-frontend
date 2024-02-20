@@ -37,7 +37,7 @@ export const createIPaginationStore = (set: any) => ({
         {label: '20', value: '20'},
         {label: '30', value: '30'},
     ],
-    pageNumber: 0,
+    pageNumber: 1,
     pagination: {
         last: false,
         first: false,

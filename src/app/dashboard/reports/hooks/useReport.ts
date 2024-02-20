@@ -25,8 +25,16 @@ const useReport = () => {
             status: status_c
         }
     } = useCustomerReportFilterStore()
-    const {selectedPageSize: merchantRows, updatePagination: updateMerchantPagination} = useMerchantReportStore()
-    const {selectedPageSize: customerRows, updatePagination: updateCustomerPagination} = useCustomerReportStore()
+    const {
+        selectedPageSize: merchantRows,
+        updatePagination: updateMerchantPagination,
+        pageNumber: merchantPageNumber
+    } = useMerchantReportStore()
+    const {
+        selectedPageSize: customerRows,
+        updatePagination: updateCustomerPagination,
+        pageNumber: customerPageNumber
+    } = useCustomerReportStore()
 
 
     startDate = startDate ? formatDateAsISO(startDate) : ""
@@ -39,16 +47,16 @@ const useReport = () => {
     const {
         data: merchantData,
         isLoading: isMerchantDataLoading
-    } = useMerchantReportTableData(parseInt(merchantRows.value), startDate, endDate, "", status?.value, merchant?.value)
+    } = useMerchantReportTableData(parseInt(merchantRows.value), startDate, endDate, "", status?.value, merchant?.value, merchantPageNumber)
     const {
         data: customerData,
         isLoading: isCustomerDataLoading
-    } = useCustomerReportTableData(parseInt(customerRows.value), startDate_c, endDate_c, type?.value, status_c?.value, phoneNumber)
+    } = useCustomerReportTableData(parseInt(customerRows.value), startDate_c, endDate_c, type?.value, status_c?.value, phoneNumber, customerPageNumber)
 
 
     //update pagination info in store
     useEffect(() => {
-        if (!isEmpty(merchantData)) {
+        if (!isEmpty(merchantData) && merchantData.meta && merchantData.pagination && merchantData.transactions) {
             const {
                 meta: {offset},
                 pagination: {totalElements, firstPage, lastPage},
@@ -59,7 +67,7 @@ const useReport = () => {
 
         }
 
-        if (!isEmpty(customerData)) {
+        if (!isEmpty(customerData) && customerData.meta && customerData.transactions && customerData.pagination) {
             const {
                 meta: {offset},
                 pagination: {totalElements, firstPage, lastPage, size},

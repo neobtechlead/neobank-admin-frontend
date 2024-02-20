@@ -48,7 +48,7 @@ const useMerchantReport = (id: string) => {
 
 
     useEffect(() => {
-        if (data) {
+        if (data && data.transactions && data.pagination && data.meta) {
             const {
                 meta: {offset},
                 pagination: {totalElements, firstPage, lastPage, size},
