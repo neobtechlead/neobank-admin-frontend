@@ -30,7 +30,7 @@ const SimpleButton = ({
         buttonClasses = 'bg-white border-2 border-darkPurple-900 text-darkPurple-900 hover:bg-neutral-200';
     }
 
-    const disabledClasses = disabled ? 'disabled:bg-gray-300' : '';
+    const disabledClasses = disabled ? 'disabled:bg-darkPurple-800' : '';
 
     return (
         <button

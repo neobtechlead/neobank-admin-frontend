@@ -3,6 +3,7 @@ import React from 'react';
 import {Box} from "@radix-ui/themes";
 import TitledHeader from "@/components/TitledHeader";
 import UserCreationForm from "@/app/users/components/UserCreationForm";
+import withAuth from "@/hoc/withAuth";
 
 
 const UserPage = () => {
@@ -17,4 +18,4 @@ const UserPage = () => {
     );
 };
 
-export default UserPage;
+export default withAuth(UserPage);

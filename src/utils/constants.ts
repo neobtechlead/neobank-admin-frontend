@@ -1,8 +1,11 @@
 import Home from "@/assets/icons/home.svg";
 import StoreFront from "@/assets/svgs/StoreFront.svg";
 import User from "@/assets/svgs/UserCircle.svg";
+import UserCircle from "@/assets/svgs/UserCircle.svg";
 import UserThree from "@/assets/svgs/UserThree.svg";
 import Report from "@/assets/svgs/Report.svg";
+import Settings from "@/assets/svgs/Settings.svg";
+import LogOut from "@/assets/svgs/Logout.svg";
 
 export const CEDIS_CONVERTER = 0.01
 
@@ -44,6 +47,34 @@ export const navBarItems = [
 
 
 ]
+
+
+export const profileMenuItems = [
+    {
+        icon: UserCircle,
+        label: 'Profile',
+        color: '',
+        name: 'profile',
+        title: 'Account Information',
+        description: 'Put content for account information here. Put content for account information here. Put content for account information here'
+    },
+    {
+        icon: Settings,
+        label: 'Settings',
+        color: '',
+        name: 'settings',
+        title: 'Account Information',
+        description: 'Put content for account information here. Put content for account information here. Put content for account information here'
+    },
+    {
+        icon: LogOut,
+        label: 'Logout',
+        color: 'brown',
+        name: 'logout',
+        title: 'Account Information',
+        description: 'Put content for account information here. Put content for account information here. Put content for account information here'
+    },
+];
 
 
 export const color = {

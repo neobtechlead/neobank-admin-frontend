@@ -1,7 +1,11 @@
+'use client'
 import React, {PropsWithChildren} from 'react';
 import Header from "@/app/dashboard/components/Header";
+import withAuth from "@/hoc/withAuth";
 
 const DashBoardLayout = ({children}: PropsWithChildren) => {
+
+
     return (
         < >
             <Header/>
@@ -13,4 +17,4 @@ const DashBoardLayout = ({children}: PropsWithChildren) => {
     );
 };
 
-export default DashBoardLayout;
+export default withAuth(DashBoardLayout);

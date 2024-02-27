@@ -9,12 +9,12 @@ import ReportDisbursementTable from "@/app/reports/components/ReportDisbursement
 import useMerchantReport from "@/app/reports/hooks/useMerchantReport";
 import ReportLoaderSkeleton from "@/app/reports/loading";
 import TitledHeader from "@/components/TitledHeader";
+import {useSearchParams} from "next/navigation";
 
-interface Props {
-    id: string
-}
+const ReportContent = () => {
 
-const ReportContent = ({id}: Props) => {
+    const searchParams = useSearchParams()
+    const id = searchParams.get("id") as string
     const {
         isLoading,
         mappedData,

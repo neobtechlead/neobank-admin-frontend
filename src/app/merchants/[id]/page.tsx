@@ -18,6 +18,7 @@ import useMerchantAccountBalance from "@/api/hooks/queries/useMerchantAccountBal
 import ModalDialog from "@/components/ModalDialog";
 import MerchantModificationForm from "@/app/merchants/components/MerchantModificationForm";
 import {CEDIS_CONVERTER} from "@/utils/constants";
+import withAuth from "@/hoc/withAuth";
 
 interface Props {
     params: {
@@ -95,4 +96,4 @@ const Merchant = ({params: {id}}: Props) => {
     );
 };
 
-export default Merchant;
+export default withAuth(Merchant);

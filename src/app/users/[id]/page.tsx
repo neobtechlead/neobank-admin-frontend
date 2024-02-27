@@ -10,6 +10,7 @@ import UserSkeleton from "@/app/users/loading";
 import BasicInfoSection from "@/components/BasicInfoSection";
 import ModalDialog from "@/components/ModalDialog";
 import UserModificationForm from "@/app/users/components/UserModificationForm";
+import withAuth from "@/hoc/withAuth";
 
 
 interface Props {
@@ -77,4 +78,4 @@ const User = ({params: {id}}: Props) => {
     );
 };
 
-export default User;
+export default withAuth(User);

@@ -12,10 +12,13 @@ const useMerchantReport = (id: string) => {
     const {selectMerchantReportType} = useReportStores()
 
     const reportTypeStore = selectMerchantReportType === 'COLLECTION' ? useCollectionReportStore() : useDisbursementReportStore();
-    const {selectedPageSize, updatePagination} = reportTypeStore;
+    const {selectedPageSize, updatePagination, pageNumber} = reportTypeStore;
 
 
-    const {data, isLoading} = useMerchantTransactions(id, parseInt(selectedPageSize.value), selectMerchantReportType)
+    const {
+        data,
+        isLoading
+    } = useMerchantTransactions(id, parseInt(selectedPageSize.value), selectMerchantReportType, pageNumber)
     const {data: statsData, isLoading: isStatsLoading} = useMerchantStats(id)
 
     const {data: merchantBasicInfo, isLoading: isBasicInfoLoading,} = useGetMerchantInfo(id);

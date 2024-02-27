@@ -35,8 +35,12 @@ const config: Config = {
                     920: "#F29339"
                 },
                 darkPurple: {
-                    900: "#652D90"
+                    900: "#652D90",
+                    800: "#652D90A9"
                 },
+                cyan: {
+                    350: "#EfEfEf"
+                }
 
 
             }

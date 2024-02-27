@@ -1,11 +1,12 @@
 'use client'
 import React from 'react';
-import {Avatar, Box, Container, Flex} from "@radix-ui/themes";
+import {Box, Container, Flex} from "@radix-ui/themes";
 import Logo from "@/app/dashboard/components/Logo";
 import IconWithLabel from "@/components/IconWithLabel";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
 import {navBarItems} from "@/utils/constants";
+import ProfileDropDownList from "@/components/profile/ProfileDropDownList";
 
 
 const NavBar = () => {
@@ -26,8 +27,10 @@ const NavBar = () => {
                 </Link>)}
             </Flex>
             <Box className="py-4">
-                <Avatar fallback="NB" radius="full" color="gray"/>
+                <ProfileDropDownList/>
+
             </Box>
+
         </Flex>
 
 

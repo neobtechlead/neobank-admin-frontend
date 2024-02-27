@@ -1,23 +1,16 @@
+'use client'
 import React from 'react';
 import {Box} from "@radix-ui/themes";
 import ReportContent from "@/app/reports/components/ReportContent";
+import withAuth from "@/hoc/withAuth";
 
 
-interface Props {
-    searchParams: {
-        id: string
-    }
-
-}
-
-
-const Page = ({searchParams: {id}}: Props) => {
-
+const Page = () => {
     return (
         <Box>
-            <ReportContent id={id}/>
+            <ReportContent/>
         </Box>
     );
 };
 
-export default Page;
+export default withAuth(Page);
