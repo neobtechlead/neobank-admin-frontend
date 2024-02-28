@@ -7,18 +7,31 @@ interface Props {
     label: string;
     error?: string
     name: string;
+    type?: string,
     placeholder?: string;
     register: UseFormRegister<any>
     required?: boolean
+    extraLabelClassName?: string
     overrideClassName?: string
 
 }
 
-const TextInputWithLabel = ({label, name, required, error, overrideClassName, placeholder = "", register}: Props) => {
+const TextInputWithLabel = ({
+                                label,
+                                name,
+                                extraLabelClassName,
+                                required,
+                                error,
+                                overrideClassName,
+                                type = "text",
+                                placeholder = "",
+                                register
+                            }: Props) => {
     return (
         <div className="flex flex-col gap-1">
-            <FormLabel name={name} label={label} required={required}/>
+            <FormLabel name={name} label={label} required={required} overrideClassName={extraLabelClassName}/>
             <input id={name}
+                   type={type}
                    {...register(name)}
                    placeholder={placeholder}
                    className={`p-2 w-full border border-gray-300 rounded-lg  focus:outline-none focus:bg-purple-100 ${overrideClassName}`}

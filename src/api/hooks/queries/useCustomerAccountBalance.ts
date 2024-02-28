@@ -14,6 +14,7 @@ const useCustomerAccountBalance = () => {
             const response = await http.get<ApiResponse<Balance>>(`${BASE_URL}/customers/${issuerId}/balance`)
             return response.data?.data
         },
+
     })
 };
 

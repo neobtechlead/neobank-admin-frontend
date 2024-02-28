@@ -52,6 +52,14 @@ export const convertPesewasToCedis = (pesewas: number): number => {
 
 }
 
+export const getInitials = (firstName: string, lastName: string): string => {
+    if (!firstName || !lastName) return "NA"
+    return `${firstName[0].toUpperCase()}${lastName[0].toUpperCase()}`;
+}
+
+
+
+
 
 export const generateArray = (arrayLength: number): number[] => {
     let temp: number[] = []
@@ -70,6 +78,24 @@ export const formatAsIssuerId = (phoneNumber: string) => {
     return "0" + phoneNumber.slice(3)
 
 }
+
+export const getGreeting = (): string => {
+    const currentTime = new Date();
+    const currentHour = currentTime.getHours();
+
+    if (currentHour < 12) {
+        return 'Good Morning';
+    } else if (currentHour < 18) {
+        return 'Good Afternoon';
+    } else {
+        return 'Good Evening';
+    }
+};
+
+
+
+
+
 
 
 

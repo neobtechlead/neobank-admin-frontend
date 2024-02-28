@@ -1,28 +1,48 @@
 import axios, {AxiosError, AxiosResponse} from "axios";
+import useAuthStore from "@/stores/auth";
 
-// Request Interceptor
-axios.interceptors.request.use((request) => {
-    request.headers.set("Authorization", `Bearer ${process.env.NEXT_PUBLIC_TOKEN}`)
-    return request;
+const instance = axios.create();
 
-})
 
-// Response interceptor
-axios.interceptors.response.use(
+instance.interceptors.request.use(
+    (config) => {
+        const token = useAuthStore.getState().user?.token;
+
+        if (token) {
+            config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+    },
+    (error) => Promise.reject(error)
+);
+instance.interceptors.response.use(
     (response: AxiosResponse) => response,
     (error: AxiosError) => {
         // Log errors for 4XX and 5XX responses
         if (error.response && (error.response.status >= 400 && error.response.status < 600)) {
             console.error('Response interceptor error:', error); //To be removed when sentry integrated
         }
+
+        // Handle 401 errors
+        if (error.response && error.response.status === 401) {
+            const originalUrl = error.config?.url;
+            if (!isPublicEndpoint(originalUrl)) window.location.href = "/"
+        }
         return Promise.reject(error);
     }
 );
 
+
+const isPublicEndpoint = (url?: string): boolean => {
+    if (!url) return false;
+    const pathname = new URL(url).pathname.replace("/api/v1", "");
+    return ["/auth/login", "/auth/request-reset-password", "/auth/reset-password"].includes(pathname);
+};
+
 export default {
-    get: axios.get,
-    post: axios.post,
-    patch: axios.patch,
-    put: axios.put,
-    delete: axios.delete
-}
+    get: instance.get,
+    post: instance.post,
+    patch: instance.patch,
+    put: instance.put,
+    delete: instance.delete
+};
