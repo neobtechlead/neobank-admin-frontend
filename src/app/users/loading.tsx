@@ -1,24 +1,27 @@
 import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
-import HeaderSkeleton from "@/components/skeleton/HeaderSkeleton";
-import AvatarSkeleton from "@/components/skeleton/AvatarSkeleton";
-import BasicInfoSkeleton from "@/components/skeleton/BasicInfoSkeleton";
+import SkeletonText from "@/components/skeleton/SkeletonText";
+import SkeletonTable from "@/components/skeleton/SkeletonTable";
 
-const UserSkeleton = () => {
+const UsersSkeleton = () => {
     return (
-        <Box>
-            <HeaderSkeleton/>
-            <Flex direction="column">
-                <Flex justify="between" align="center" className="py-6 px-14 bg-grey-850 border-b">
-                    <AvatarSkeleton/>
+        <Box p="5">
+            <Flex direction="column" gap="5">
+                <Flex justify="end">
+                    <Flex gap="3" align="stretch">
+                        <SkeletonText/>
+                    </Flex>
                 </Flex>
-                <Box className="py-6 px-14">
-                    <BasicInfoSkeleton cols={3}/>
-                </Box>
-
+                <SkeletonTable columns={5} rows={5}/>
+                <Flex justify="between" align="center">
+                    <Box>
+                        <SkeletonText/>
+                    </Box>
+                    <SkeletonText/>
+                </Flex>
             </Flex>
         </Box>
     );
 };
 
-export default UserSkeleton;
+export default UsersSkeleton;

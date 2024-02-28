@@ -6,10 +6,10 @@ import {FormProvider} from "react-hook-form";
 import Link from "next/link";
 import SimpleButton from "@/components/SimpleButton";
 import LoginHeader from "@/components/auth/LoginHeader";
-import CheckboxInput from "@/components/forms/CheckboxInput";
 import PasswordInputWithLabel from "@/components/forms/PasswordInputWithLabel";
 import useLoginForm from "@/api/hooks/formHooks/useLoginForm";
 import {extractErrorMessage} from "@/utils/functions";
+import CheckboxInput from "@/components/forms/CheckBoxInput";
 
 
 const LoginForm = () => {

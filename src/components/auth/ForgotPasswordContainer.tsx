@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from 'react';
 import {Box, Flex} from "@radix-ui/themes";
-import Logo from "@/app/dashboard/components/Logo";
+import Logo from "@/app/overview/components/Logo";
 import Link from "next/link";
 
 const ForgotPasswordContainer = ({children}: PropsWithChildren) => {

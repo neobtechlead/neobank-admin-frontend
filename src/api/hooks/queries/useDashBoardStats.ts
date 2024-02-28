@@ -5,7 +5,7 @@ import StoreFront from "@/assets/svgs/BadgeStoreFront.svg";
 import UserThree from "@/assets/svgs/BadgeUserThree.svg";
 import EllipseGreen from "@/assets/svgs/EllipseG.svg";
 import EllipseRed from "@/assets/svgs/EllipseR.svg";
-import {formatCurrency} from "@/utils/functions";
+import {convertPesewasToCedis, formatCurrency} from "@/utils/functions";
 import {color} from "@/utils/constants"
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_ADMIN_BASE_URL}`
@@ -51,12 +51,12 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
             legendData: [
                 {
                     title: "Successful",
-                    content: `GHS ${formatCurrency(successfulDisbursementsValue ?? 0)}`,
+                    content: `GHS ${formatCurrency(convertPesewasToCedis(successfulDisbursementsValue ?? 0))}`,
                     icon: EllipseGreen
                 },
                 {
                     title: "Failed",
-                    content: `GHS ${formatCurrency(failedDisbursementsValue ?? 0)}`,
+                    content: `GHS ${formatCurrency(convertPesewasToCedis(failedDisbursementsValue ?? 0))}`,
                     icon: EllipseRed
                 },
             ],
@@ -66,7 +66,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 datasets: [
                     {
                         label: '',
-                        data: [successfulDisbursementsValue ?? 0, failedDisbursementsValue ?? 0],
+                        data: [convertPesewasToCedis(successfulDisbursementsValue ?? 0), convertPesewasToCedis(failedDisbursementsValue ?? 0)],
                         backgroundColor: [color.chartGreen, color.chartRed],
                         borderColor: [color.white, color.white],
                         borderWidth: 1,
@@ -74,7 +74,10 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 ],
             },
 
-            metaData: {label: "Total Disbursements", value: `GHS ${formatCurrency(totalDisbursementsValue ?? 0)}`}
+            metaData: {
+                label: "Total Disbursements",
+                value: `GHS ${formatCurrency(convertPesewasToCedis(totalDisbursementsValue ?? 0))}`
+            }
 
 
         },
@@ -83,12 +86,12 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
             legendData: [
                 {
                     title: "Successful",
-                    content: `GHS ${formatCurrency(successfulCollectionsValue ?? 0)}`,
+                    content: `GHS ${formatCurrency(convertPesewasToCedis(successfulCollectionsValue ?? 0))}`,
                     icon: EllipseGreen
                 },
                 {
                     title: "Failed",
-                    content: `GHS ${formatCurrency(failedCollectionsValue ?? 0)}`,
+                    content: `GHS ${formatCurrency(convertPesewasToCedis(failedCollectionsValue ?? 0))}`,
                     icon: EllipseRed
                 },
             ],
@@ -98,7 +101,7 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 datasets: [
                     {
                         label: '',
-                        data: [successfulCollectionsValue ?? 0, failedCollectionsValue ?? 0],
+                        data: [convertPesewasToCedis(successfulCollectionsValue ?? 0), convertPesewasToCedis(failedCollectionsValue ?? 0)],
                         backgroundColor: [color.chartGreen, color.chartRed],
                         borderColor: [color.white, color.white],
                         borderWidth: 1,
@@ -107,7 +110,10 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
 
                 ],
             },
-            metaData: {label: "Total Collections", value: `GHS ${formatCurrency(totalCollectionsValue ?? 0)}`}
+            metaData: {
+                label: "Total Collections",
+                value: `GHS ${formatCurrency(convertPesewasToCedis(totalCollectionsValue ?? 0))}`
+            }
 
         },
 

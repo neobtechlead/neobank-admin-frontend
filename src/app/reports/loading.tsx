@@ -1,30 +1,35 @@
 import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
-import HeaderSkeleton from "@/components/skeleton/HeaderSkeleton";
-import SkeletonLogo from "@/components/skeleton/SkeletonLogo";
 import SkeletonText from "@/components/skeleton/SkeletonText";
-import {generateArray} from "@/utils/functions";
-import SkeletonTableWithPagination from "@/components/skeleton/SkeletonTableWithPagination";
+import SkeletonTable from "@/components/skeleton/SkeletonTable";
 
-const ReportLoaderSkeleton = () => {
+const ReportsLoaderSkeleton = () => {
     return (
         <Box>
-            <HeaderSkeleton/>
-            <SkeletonLogo/>
-            <Box className="flex justify-around items-center py-8">
-                {generateArray(4).map(item => <Box key={item}><SkeletonText/></Box>)}
-            </Box>
-            <Flex gap="4" className="border-t border-b px-10 py-5">
-                <SkeletonText width={150}/>
-                <SkeletonText width={150}/>
+            <Flex gap="8" className="p-8">
+                <SkeletonText/>
+                <SkeletonText/>
             </Flex>
-            <Box className="p-2">
+            <Flex direction="column" gap="6">
+                <Flex direction="column" gap="8" className="border rounded-lg shadow-sm px-8 py-5">
+                    <Flex gap="1">
+                        {[1, 2, 3, 4].map(item => <Box key={item} className="flex-1">
+                            <SkeletonText width={150}/>
+                        </Box>)}
+                    </Flex>
+                    <Flex justify="end" gap="3">
+                        <SkeletonText/>
+                        <SkeletonText/>
 
-                <SkeletonTableWithPagination columns={6} rows={6}/>
-            </Box>
-
+                    </Flex>
+                </Flex>
+                <Flex justify="end" className="px-8">
+                    {/*<SkeletonText width={200}/>*/}
+                </Flex>
+                <SkeletonTable columns={5} rows={5}/>
+            </Flex>
         </Box>
     );
 };
 
-export default ReportLoaderSkeleton;
+export default ReportsLoaderSkeleton;

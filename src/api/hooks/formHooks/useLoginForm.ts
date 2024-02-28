@@ -29,7 +29,7 @@ const useLoginForm = () => {
         try {
             const response = await mutateAsync({data: values});
             login(response as LoginResponse)
-            router.replace("/dashboard")
+            router.replace("/overview")
 
         } catch (error) {
             logout()

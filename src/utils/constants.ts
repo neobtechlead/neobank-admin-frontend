@@ -13,35 +13,35 @@ export const navBarItems = [
     {
         label: "Overview",
         icon: Home,
-        href: "/dashboard",
+        href: "/overview",
         description: ""
     },
 
     {
         label: "Merchants",
         icon: StoreFront,
-        href: "/dashboard/merchants",
+        href: "/merchants",
         description: "Welcome to your dashboard"
     },
 
     {
         label: "Users",
         icon: User,
-        href: "/dashboard/users",
+        href: "/users",
         description: "Welcome to your dashboard"
     },
 
     {
         label: "Customers",
         icon: UserThree,
-        href: "/dashboard/customers",
+        href: "/customers",
         description: "Welcome to your dashboard"
     },
 
     {
         label: "Reports",
         icon: Report,
-        href: "/dashboard/reports",
+        href: "/reports",
         description: "Welcome to your dashboard"
     },
 
