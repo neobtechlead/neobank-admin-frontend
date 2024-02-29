@@ -10,7 +10,8 @@ interface Props {
 
 const Logo = ({width = 200, height = 34}: Props) => {
     return (
-        <Image src={LogoPNG} alt="CF Transact Logo" width={width} height={height} priority={true}/>
+        <Image src={LogoPNG} alt="CF Transact Logo" width={width} height={height} priority={true}
+               style={{width: 'auto'}}/>
     );
 };
 

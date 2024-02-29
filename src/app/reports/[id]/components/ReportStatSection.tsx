@@ -7,7 +7,7 @@ import Coins from "@/assets/svgs/HandCoins.svg"
 import Upload from "@/assets/svgs/Upload.svg"
 import Download from "@/assets/svgs/Download.svg"
 import ButtonWithIcon from "@/components/ButtonWithIcon";
-import {formatCurrencyAlt} from "@/utils/functions";
+import {convertPesewasToCedis, formatCurrencyAlt} from "@/utils/functions";
 import SkeletonText from "@/components/skeleton/SkeletonText";
 import useFileDownloader from "@/api/useFileDownloader";
 
@@ -37,7 +37,7 @@ const ReportStatSection = ({data: {users, collectionValue, disbursementValue}, i
             {
                 isLoading ? <SkeletonText/> : <IconWithStackedTextLabels
                     label="Collections"
-                    value={`GHS ${formatCurrencyAlt(collectionValue ?? 0)}`}
+                    value={`GHS ${formatCurrencyAlt(convertPesewasToCedis(collectionValue ?? 0))}`}
                     icon={Coins}
                     overrideClassValue="!font-bold"
                 />
@@ -45,7 +45,7 @@ const ReportStatSection = ({data: {users, collectionValue, disbursementValue}, i
 
             {isLoading ? <SkeletonText/> : <IconWithStackedTextLabels
                 label="Disbursements"
-                value={`GHS ${formatCurrencyAlt(disbursementValue ?? 0)}`}
+                value={`GHS ${formatCurrencyAlt(convertPesewasToCedis(disbursementValue ?? 0))}`}
                 icon={Upload}
                 overrideClassValue="!font-bold"
             />}

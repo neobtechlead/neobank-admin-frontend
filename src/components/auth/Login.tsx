@@ -6,8 +6,8 @@ import CarouselContainer from "@/components/auth/CarouselContainer";
 const Login = () => {
     return (
         <Flex className="w-full h-full overflow-auto">
-            <Flex className="w-3/5 bg-white justify-center">
-                <Box className="w-3/5">
+            <Flex className="w-3/5 bg-white" justify="center" align="center">
+                <Box className="max-w-sm px-3">
                     <LoginForm/>
                 </Box>
 
