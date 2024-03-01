@@ -38,7 +38,7 @@ const MerchantCreationStepTwo = ({data}: Props) => {
                 title="Merchant Created Successfully"
                 btnLabel="Go to merchant dashboard"
                 description="Your new merchant is successfully created! They can now begin exploring the platform."
-                onClick={() => router.push("/dashboard/merchants")}
+                onClick={() => router.push("/merchants")}
                 isOpen={isSuccessModalOpen}
                 onRequestClose={() => setSuccessModalOpen(false)}
             />

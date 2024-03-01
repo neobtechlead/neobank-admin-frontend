@@ -42,7 +42,7 @@ const UserCreationForm = () => {
                 title="User Created Successfully"
                 btnLabel="Go to user dashboard"
                 description="Your new user is successfully created! They can now begin exploring the platform."
-                onClick={() => router.push("/dashboard/users")}
+                onClick={() => router.push("/users")}
                 isOpen={isSuccessModalOpen}
                 onRequestClose={() => setSuccessModalOpen(false)}
             />

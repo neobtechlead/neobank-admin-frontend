@@ -1,6 +1,6 @@
 import React from 'react';
 import {Flex, Text} from "@radix-ui/themes";
-import Link from "next/link";
+import NextLink from "@/components/auth/NextLink";
 
 const RequestPasswordRequestSuccess = () => {
     return (
@@ -10,7 +10,7 @@ const RequestPasswordRequestSuccess = () => {
                 <Text>Please check your email inbox for a password recovery link</Text>
             </Flex>
             <Flex justify="center" align="center" className="mt-5">
-                <Link href="/" className="text-sm font-semibold text-darkPurple-900 px-5">Back to login</Link>
+                <NextLink to="/" label="Back to login" extraClassNames="!px-5"/>
             </Flex>
 
         </Flex>

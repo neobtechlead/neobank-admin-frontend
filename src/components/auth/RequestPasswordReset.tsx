@@ -7,8 +7,8 @@ import {FormProvider} from "react-hook-form";
 import TextInputWithLabel from "@/components/forms/TextInputWithLabel";
 import {extractErrorMessage} from "@/utils/functions";
 import SimpleButton from "@/components/SimpleButton";
-import Link from "next/link";
 import useRequestPasswordResetForm from "@/api/hooks/formHooks/useRequestPasswordResetForm";
+import NextLink from "@/components/auth/NextLink";
 
 const RequestPasswordReset = () => {
 
@@ -50,8 +50,7 @@ const RequestPasswordReset = () => {
                         </form>
                     </FormProvider>
                         <Flex justify="center" align="center" className="mt-5">
-                            <Link href="/" className="text-sm font-semibold text-darkPurple-900 px-5">Back to
-                                login</Link>
+                            <NextLink to="/" label="Back to login" extraClassNames="!px-5"/>
                         </Flex>
                     </Box>
 

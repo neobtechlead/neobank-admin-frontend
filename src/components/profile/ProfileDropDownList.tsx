@@ -16,7 +16,7 @@ const ProfileDropDownList = () => {
             <Box>
                 <DropdownMenu.Root>
                     <DropdownMenu.Trigger>
-                        <Button variant="ghost" className="outline-none border-0">
+                        <Button variant="ghost" className="outline-none border-0 cursor-pointer">
                             <Avatar fallback={`${getInitials(user?.firstName ?? "", user?.lastName ?? "")}`}
                                     radius="full" color="gray"/>
                         </Button>

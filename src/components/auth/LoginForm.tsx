@@ -3,13 +3,13 @@ import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import TextInputWithLabel from "@/components/forms/TextInputWithLabel";
 import {FormProvider} from "react-hook-form";
-import Link from "next/link";
 import SimpleButton from "@/components/SimpleButton";
 import LoginHeader from "@/components/auth/LoginHeader";
 import PasswordInputWithLabel from "@/components/forms/PasswordInputWithLabel";
 import useLoginForm from "@/api/hooks/formHooks/useLoginForm";
 import {extractErrorMessage} from "@/utils/functions";
 import CheckboxInput from "@/components/forms/CheckBoxInput";
+import NextLink from "@/components/auth/NextLink";
 
 
 const LoginForm = () => {
@@ -19,9 +19,9 @@ const LoginForm = () => {
 
 
     return (
-        <Box className="my-5">
+        <Box>
             <LoginHeader/>
-            <Box className="w-[90%]">
+            <Box>
                 <FormProvider {...methods}>
                     <form onSubmit={handleSubmit(onSubmit)} noValidate>
                         <Flex direction="column" gap="6">
@@ -49,8 +49,7 @@ const LoginForm = () => {
 
                         <Flex justify="between" align="center" className="py-3">
                             <CheckboxInput label="Remember me"/>
-                            <Link href="/forgot-password" className="font-semibold text-sm text-purple-900">Forgot
-                                Password?</Link>
+                            <NextLink to="/forgot-password" label="Forgot Password?"/>
                         </Flex>
 
                         <Box className="mt-5 ">
