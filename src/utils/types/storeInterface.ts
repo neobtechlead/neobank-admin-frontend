@@ -49,7 +49,7 @@ export const createIPaginationStore = (set: any) => ({
     updatePagination: (param: PageInfo) => set((state: IPaginationStore) => ({pagination: {...state.pagination, ...param}})),
     incrementPageNumber: () => set((state: IPaginationStore) => ({pageNumber: state.pageNumber + 1})),
     decrementPageNumber: () => set((state: IPaginationStore) => ({pageNumber: state.pageNumber - 1})),
-    onPageSizeChange: (value: ISelect) => set(() => ({selectedPageSize: value, pageNumber: 0})),
+    onPageSizeChange: (value: ISelect) => set(() => ({selectedPageSize: value, pageNumber: 1})),
 });
 
 
