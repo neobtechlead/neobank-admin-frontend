@@ -57,11 +57,13 @@ node {
         
         stage('SonarQube Analysis') {
             withSonarQubeEnv('Sonarqube') {
+                withCredentials([string(credentialsId: 'transact-admin-frontend-sonar-token', variable: 'SONAR_TOKEN')]) {
                 sh "sonar-scanner \
                     -Dsonar.projectKey=cf-neobank-admin-frontend \
                     -Dsonar.sources=. \
                     -Dsonar.host.url=${env.SONARQUBE_URL} \
-                    -Dsonar.login=${env.NEOBANK_ADMIN_FRONTEND_SONARQUBE_TOKEN}"
+                    -Dsonar.login=\"\$SONAR_TOKEN\""
+                }    
             }
         }
 
