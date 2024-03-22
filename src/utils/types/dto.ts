@@ -233,6 +233,23 @@ export interface MerchantStats {
     transactionCount: number;
 }
 
+export interface ActivityLogsDTO {
+    externalId: string;
+    merchantName: string;
+    merchantId: string;
+    merchantIssuerId: string;
+    adminLoginName: string;
+    adminLoginId: string;
+    channel: string;
+    activityType: string;
+    balanceBefore: string;
+    balanceAfter: string;
+    amount: string;
+    updatedAt: string;
+    createdAt: string;
+
+}
+
 
 
 

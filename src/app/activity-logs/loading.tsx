@@ -4,7 +4,7 @@ import SkeletonText from "@/components/skeleton/SkeletonText";
 import SkeletonTable from "@/components/skeleton/SkeletonTable";
 import Header from "@/app/overview/components/Header";
 
-const UsersSkeleton = () => {
+const ActivityLogSkeleton = () => {
     return (
         <Box>
             <Header/>
@@ -12,7 +12,6 @@ const UsersSkeleton = () => {
                 <Flex direction="column" gap="5">
                     <Flex justify="end">
                         <Flex gap="3" align="stretch">
-                            <SkeletonText/>
                             <SkeletonText/>
                         </Flex>
                     </Flex>
@@ -30,4 +29,4 @@ const UsersSkeleton = () => {
     );
 };
 
-export default UsersSkeleton;
+export default ActivityLogSkeleton;

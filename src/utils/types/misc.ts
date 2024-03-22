@@ -18,6 +18,8 @@ export interface MappedDataMerchantInfo {
     headerInfo?: {
         email?: string,
         name?: string,
+        firstName?: string,
+        lastName?: string,
         businessName?: string
     }
 }

@@ -51,7 +51,8 @@ const User = ({id}: Props) => {
                     onModalClose={() => setEditModalOpen(false)}
                     defaultValues={{
                         email: mappedData.headerInfo?.email,
-                        name: mappedData.headerInfo?.name,
+                        firstName: mappedData.headerInfo?.firstName,
+                        lastName: mappedData.headerInfo?.lastName,
                     }}/>
             </ModalDialog>
 

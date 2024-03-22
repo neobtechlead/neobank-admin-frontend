@@ -2,10 +2,12 @@ import React from 'react';
 import {Box, Flex} from "@radix-ui/themes";
 import SkeletonText from "@/components/skeleton/SkeletonText";
 import SkeletonTable from "@/components/skeleton/SkeletonTable";
+import Header from "@/app/overview/components/Header";
 
 const ReportsLoaderSkeleton = () => {
     return (
         <Box>
+            <Header/>
             <Flex gap="8" className="p-8">
                 <SkeletonText/>
                 <SkeletonText/>
