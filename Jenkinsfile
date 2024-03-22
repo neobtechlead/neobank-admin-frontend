@@ -7,6 +7,8 @@
 node {
     def app
     try {
+
+        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main' || env.BRANCH_NAME.startsWith('PR-')) {
         stage('Clone repository') {
             /* Let's make sure we have the repository cloned to our workspace */
 
@@ -76,7 +78,7 @@ node {
             }
         }
 
-        if (env.BRANCH_NAME == 'develop' || env.BRANCH_NAME == 'main'){
+        
             stage('Push image') {
                 /* Finally, we'll push the image with tag of the current build number
                 * Pushing multiple tags is cheap, as all the layers are reused.
@@ -92,7 +94,7 @@ node {
                             if (env.BRANCH_NAME == 'main'){
                                 tag = 'cf-neobank-admin-frontend-prod-latest'
                                 sh ('sed -i "s|IMAGE_TAG|cf-neobank-admin-frontend-prod-latest|" src/cf-helm/values.yaml')
-                            } else if (env.BRANCH_NAME == 'develop'){
+                            } else if (env.BRANCH_NAME == 'develop'|| env.BRANCH_NAME ==~ /^PR-.*/){
                                 tag = 'cf-neobank-admin-frontend-staging-latest'
                                 sh ('sed -i "s|IMAGE_TAG|cf-neobank-admin-frontend-staging-latest|" src/cf-helm/values.yaml')
                             }
@@ -112,7 +114,7 @@ node {
             def url = ''
             
             switch(env.BRANCH_NAME) {
-                case 'develop':
+                case ~/^PR-.*|^develop$/:
                     deploy_title = 'Staging'
                     ns = 'staging'
                     url = "https://neobank-admin-staging.completefarmer.com" 
