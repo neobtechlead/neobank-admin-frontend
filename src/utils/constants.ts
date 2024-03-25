@@ -6,6 +6,7 @@ import UserThree from "@/assets/svgs/UserThree.svg";
 import Report from "@/assets/svgs/Report.svg";
 import Settings from "@/assets/svgs/Settings.svg";
 import LogOut from "@/assets/svgs/Logout.svg";
+import ActivityLog from "@/assets/svgs/ActivityLog.svg"
 
 export const CEDIS_CONVERTER = 0.01
 
@@ -42,6 +43,13 @@ export const navBarItems = [
         label: "Reports",
         icon: Report,
         href: "/reports",
+        description: "Welcome to your dashboard"
+    },
+
+    {
+        label: "Activity Logs",
+        icon: ActivityLog,
+        href: "/activity-logs",
         description: "Welcome to your dashboard"
     },
 

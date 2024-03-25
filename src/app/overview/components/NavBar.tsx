@@ -17,7 +17,7 @@ const NavBar = () => {
             <Box className="py-4">
                 <Logo/>
             </Box>
-            <Flex justify="between" gap="4">
+            <Flex justify="between">
                 {navBarItems.map(({href, label, icon}) => <Link key={href} href={href}>
                     <Container
                         className={`px-5 h-full pt-6 ${href === pathName ? "border-b-4 border-purple-900 font-black" : ""}`}>

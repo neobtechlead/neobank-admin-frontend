@@ -45,6 +45,8 @@ export const mapDataToHeaderUserInfo = (data: User) => {
     const {firstName, lastName} = data
     return {
         name: `${firstName} ${lastName}`,
+        firstName: firstName,
+        lastName: lastName,
         email: data.email ?? "N/A"
     }
 

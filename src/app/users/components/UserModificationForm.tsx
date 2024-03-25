@@ -37,8 +37,10 @@ const UserModificationForm = ({onModalClose, defaultValues, userId}: Props) => {
                 <Box className="px-4 pt-8">
                     <Text as="p" className="font-bold text-center mb-10 mt-4">User Information</Text>
                     <Box className="flex flex-col gap-7 px-2">
-                        <TextInputWithLabel name="name" label="Name"
-                                            error={errors.name?.message} register={register}/>
+                        <TextInputWithLabel name="firstName" label="First Name"
+                                            error={errors.firstName?.message} register={register}/>
+                        <TextInputWithLabel name="lastName" label="Last Name"
+                                            error={errors.lastName?.message} register={register}/>
                         <TextInputWithLabel name="email" label="Email" error={errors.email?.message}
                                             register={register}/>
                         <SimpleButton

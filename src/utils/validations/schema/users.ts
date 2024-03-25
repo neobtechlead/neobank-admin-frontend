@@ -1,7 +1,8 @@
 import {z} from "zod"
 
 export const UserModificationSchema = z.object({
-    name: z.string().min(2, "Name is required"),
+    firstName: z.string().min(2, "First Name is required"),
+    lastName: z.string().min(2, "Last Name is required"),
     email: z.string().min(3, "Email is required").email("email is invalid"),
 })
 

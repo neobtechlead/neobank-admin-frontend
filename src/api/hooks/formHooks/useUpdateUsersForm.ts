@@ -22,7 +22,8 @@ const useUpdateUsersForm = (defaultValues: UserFormValues, userId: string) => {
     const onSubmit = async (values: UserFormValues) => {
         try {
             const payload: UserFormValues = {
-                ...(dirtyFields.name && {name: values.name}),
+                ...(dirtyFields.firstName && {firstName: values.firstName}),
+                ...(dirtyFields.lastName && {lastName: values.lastName}),
                 ...(dirtyFields.email && {email: values.email}),
             };
 

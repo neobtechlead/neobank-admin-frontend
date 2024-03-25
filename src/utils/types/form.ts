@@ -11,7 +11,8 @@ export interface MerchantFormValues {
 }
 
 export interface UserFormValues {
-    name?: string
+    firstName?: string
+    lastName?: string
     email?: string,
 
 }
