@@ -51,7 +51,8 @@ const formTwoFields = [
         defaultValue: {label: 'Passport', value: 'passport'},
         options: [
             {label: 'Passport', value: 'passport'},
-            {label: 'Ghana Card', value: 'ghanaCard'}
+            {label: 'Ghana Card', value: 'ghanaCard'},
+            {label: 'Driver License', value: 'driverLicense'},
         ]
     },
     {

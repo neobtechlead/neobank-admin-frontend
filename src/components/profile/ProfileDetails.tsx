@@ -36,7 +36,7 @@ const ProfileDetails = () => {
         <Flex justify="between" className="py-10 px-32">
             <Flex direction="column" className="w-1/2" gap="3">
                 <Text className="text-gray-600 font-bold">My Profile</Text>
-                <Text>My name and personal information</Text>
+                <Text>Merchant and User profile information</Text>
             </Flex>
             <Flex direction="column" gap="4" className="w-1/2">
                 {inputFields.map((field) => (

@@ -45,6 +45,9 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
         totalCollectionValue: totalCollectionsValue
     } = stats
 
+    totalDisbursementsValue = (successfulDisbursementsValue ?? 0) + (failedDisbursementsValue ?? 0)
+    totalCollectionsValue = (successfulCollectionsValue ?? 0) + (failedCollectionsValue ?? 0)
+
 
     const map = {
         disbursements: {
@@ -78,7 +81,6 @@ export const mapDataToPieChart = (transactionType: string, stats: DashBoardStats
                 label: "Total Disbursements",
                 value: `GHS ${formatCurrency(convertPesewasToCedis(totalDisbursementsValue ?? 0))}`
             }
-
 
         },
 
