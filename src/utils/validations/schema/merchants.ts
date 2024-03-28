@@ -11,7 +11,7 @@ export const MerchantCreationFormOneSchema = z.object({
     businessName: z.string().trim().min(2, {message: "Business name is required"}),
     tradingName: z.string().trim().min(2, {message: "Trading name is required"}),
     country: z.string().trim().min(2, {message: "Country is required"}),
-    zipCode: z.string().trim().min(2, {message: "Zip Code is required"}),
+    zipCode: z.string().trim(),
     firstName: z.string().trim().min(2, {message: "First Name is required"}),
     lastName: z.string().trim().min(2, {message: "Last Name is required"}),
     state: z.string().trim().min(2, {message: "Region is required"}),

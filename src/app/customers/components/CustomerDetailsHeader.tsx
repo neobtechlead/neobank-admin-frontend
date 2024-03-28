@@ -8,9 +8,6 @@ const CustomerDetailsHeader = () => {
                 <Flex gap="3" direction="column">
                     <Heading>Customer Information</Heading>
                     <Text as="p" className="text-xs text-gray-200 ">
-                        You can see the details of this transaction. Lorem Ipsum lawal You can see the details of this
-                        transaction. Lorem Ipsum lawal You can see the details of this transaction. Lorem Ipsum lawal
-                        You can see the details of this transaction. Lorem Ipsum lawal
                     </Text>
                 </Flex>
 
